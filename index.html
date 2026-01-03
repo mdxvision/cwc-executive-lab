@@ -45,6 +45,16 @@
             transition: all 0.5s ease;
             background: var(--bg);
         }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .slide > * { position: relative; z-index: 1; }
 
         .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
 
@@ -315,7 +325,14 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="9">
+        <div class="slide slide-quote" data-slide="9">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">The ceiling you're hitting isn't made of glass. It's made of stories you've been told—and stories you tell yourself.</p>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="10">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Root Causes</span>
@@ -331,7 +348,7 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="10">
+        <div class="slide" data-slide="11">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
             <div class="slide-content">
                 <span class="section-label">Self-Assessment</span>
@@ -345,7 +362,7 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="11">
+        <div class="slide" data-slide="12">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Pattern Recognition</span>
@@ -362,7 +379,7 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="12">
+        <div class="slide" data-slide="13">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
             <div class="slide-content">
                 <span class="section-label">Reflection</span>
@@ -376,13 +393,13 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="13">
+        <div class="slide" data-slide="14">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Strategic Planning</span>
                 <h2>Your Career Growth Roadmap</h2>
                 <p>A structured approach to move from where you are to where you want to be. This becomes your personal north star.</p>
-                <div class="cards-grid">
+                <div class="cards-grid two-col">
                     <div class="card"><h4>North Star</h4><p>Define your "next best role" and what success looks like</p></div>
                     <div class="card"><h4>Current Reality</h4><p>Honest assessment of where you are and what's blocking progress</p></div>
                     <div class="card"><h4>Strengths & Gaps</h4><p>What to leverage and what to develop for the next level</p></div>
@@ -393,7 +410,7 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="14">
+        <div class="slide" data-slide="15">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
             <div class="slide-content">
                 <span class="section-label">Deep Work</span>
@@ -407,13 +424,13 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="15">
+        <div class="slide" data-slide="16">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Relationship Capital</span>
                 <h2>Map Your Network</h2>
                 <p>Before building, take stock. Who currently influences your growth? This baseline reveals gaps and opportunities.</p>
-                <div class="cards-grid">
+                <div class="cards-grid two-col">
                     <div class="card"><h4>Manager / Direct Leader</h4><p>Who directly influences your development and reviews?</p></div>
                     <div class="card"><h4>Key Stakeholders</h4><p>2-3 people whose opinion shapes your reputation</p></div>
                     <div class="card"><h4>Potential Sponsors</h4><p>Who has power and might advocate for you behind closed doors?</p></div>
@@ -424,7 +441,7 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="16">
+        <div class="slide" data-slide="17">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Momentum</span>
@@ -438,14 +455,14 @@
             </div>
         </div>
 
-        <div class="slide slide-quote" data-slide="17">
+        <div class="slide slide-quote" data-slide="18">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
             <div class="slide-content">
                 <p class="quote-text">You don't have to be ready. You have to be willing to start before you feel prepared.</p>
             </div>
         </div>
 
-        <div class="slide" data-slide="18">
+        <div class="slide" data-slide="19">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Summary</span>
@@ -459,7 +476,7 @@
             </div>
         </div>
 
-        <div class="slide" data-slide="19">
+        <div class="slide" data-slide="20">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 1</span></div>
             <div class="slide-content">
                 <span class="section-label">Before Next Session</span>
@@ -473,7 +490,7 @@
             </div>
         </div>
 
-        <div class="slide slide-dark" data-slide="20">
+        <div class="slide slide-dark" data-slide="21">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);"><span class="module-label" style="color: rgba(255,255,255,0.5);">Module 1 Complete</span></div>
             <div class="slide-content">
                 <span class="section-label">Executive Leadership Lab</span>
@@ -489,7 +506,7 @@
     <div class="keyboard-hint">Press <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
     <div class="nav-controls">
         <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
-        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">20</span></span>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">21</span></span>
         <button class="nav-btn" id="nextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
     </div>
 

@@ -283,11 +283,11 @@ Worksheets are clean and functional. Could be warmer.
 - [x] Add gold/sand secondary accent (#D4A574)
 - [x] Increase card padding (32px → 40px)
 
-### Priority 2 (Next Iteration)
-- [ ] Add subtle paper texture to background
-- [ ] Add 1 more quote/reflection slide
-- [ ] Simplify 6-card grids to 3-card or 2-column
-- [ ] Match worksheets to new color palette
+### Priority 2 (Next Iteration) ✅ COMPLETE
+- [x] Add subtle paper texture to background (3% opacity SVG noise)
+- [x] Add 1 more quote/reflection slide (slide 9: "The ceiling you're hitting...")
+- [x] Simplify 6-card grids to 2-column layouts
+- [x] Match worksheets to new color palette
 
 ### Priority 3 (Polish)
 - [ ] Add abstract photography to 2-3 slides
