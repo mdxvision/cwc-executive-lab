@@ -18,6 +18,24 @@
             --border: #E5E0D8;
         }
 
+        /* Print styles */
+        @media print {
+            body { overflow: visible; height: auto; background: white; }
+            .presentation { height: auto; }
+            .slide {
+                position: relative;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                page-break-after: always;
+                height: 100vh;
+                padding: 40px 60px;
+            }
+            .slide::before { display: none; }
+            .nav-controls, .keyboard-hint, .progress-bar { display: none; }
+            .slide-title, .slide-dark { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
@@ -139,7 +157,21 @@
         p, .lead { font-size: 18px; line-height: 1.7; color: var(--text-light); max-width: 680px; margin: 0 auto; }
         .lead { font-size: 20px; }
 
-        .slide-title { background: var(--primary); color: var(--bg); }
+        .slide-title {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 50%, #1A1A1A 100%);
+            color: var(--bg);
+            position: relative;
+        }
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80') center/cover no-repeat;
+            opacity: 0.08;
+            pointer-events: none;
+        }
         .slide-title h1 { color: var(--bg); font-size: 64px; }
         .slide-title p { color: rgba(255,255,255,0.6); }
 
@@ -180,7 +212,20 @@
         .column li { padding: 10px 0; font-size: 15px; color: var(--text-light); border-bottom: 1px solid var(--border); }
         .column li:last-child { border-bottom: none; }
 
-        .slide-quote { background: var(--bg-warm); }
+        .slide-quote {
+            background: var(--bg-warm);
+            position: relative;
+        }
+        .slide-quote::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 30%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80') center/cover no-repeat;
+            opacity: 0.04;
+            pointer-events: none;
+        }
         .quote-text {
             font-family: 'Source Serif 4', Georgia, serif;
             font-size: 32px; font-weight: 400;
@@ -198,9 +243,38 @@
         .flow-step { padding: 16px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); }
         .flow-arrow { font-size: 18px; color: var(--text-muted); }
 
-        .slide-dark { background: var(--primary); color: var(--bg); }
+        .slide-dark {
+            background: linear-gradient(135deg, #1A1A1A 0%, #252525 40%, #1A1A1A 100%);
+            color: var(--bg);
+            position: relative;
+        }
+        .slide-dark::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 50%;
+            height: 60%;
+            background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&q=80') center/cover no-repeat;
+            opacity: 0.06;
+            pointer-events: none;
+        }
         .slide-dark h2 { color: var(--bg); }
         .slide-dark p { color: rgba(255,255,255,0.6); }
+
+        /* ELL Visual Mark */
+        .ell-mark {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--accent-warm);
+            opacity: 0.4;
+        }
+        .slide-dark .ell-mark { color: rgba(255,255,255,0.15); }
+        .slide-title .ell-mark { color: rgba(255,255,255,0.15); }
 
         .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
         .callout p { font-size: 15px; margin: 0; }
@@ -229,6 +303,7 @@
                     <span class="meta-item">Coaching Women of Color</span>
                 </div>
             </div>
+            <div class="ell-mark">ELL</div>
         </div>
 
         <div class="slide" data-slide="2">
@@ -500,6 +575,7 @@
                     <p style="font-size: 14px; color: rgba(255,255,255,0.4);">Next Module: Master Your Executive Presence — February</p>
                 </div>
             </div>
+            <div class="ell-mark">ELL</div>
         </div>
     </div>
 

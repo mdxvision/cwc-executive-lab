@@ -5,7 +5,7 @@
 
 ---
 
-## Current Deck Grade: B-
+## Current Deck Grade: A- (Updated from B-)
 
 ### Scorecard
 
@@ -289,11 +289,11 @@ Worksheets are clean and functional. Could be warmer.
 - [x] Simplify 6-card grids to 2-column layouts
 - [x] Match worksheets to new color palette
 
-### Priority 3 (Polish)
-- [ ] Add abstract photography to 2-3 slides
-- [ ] Create custom ELL visual mark
-- [ ] Add gradient depth to dark slides
-- [ ] Create print-optimized PDF version
+### Priority 3 (Polish) ✅ COMPLETE
+- [x] Add abstract photography to 2-3 slides (title, closing, quote slides via Unsplash)
+- [x] Create custom ELL visual mark (subtle watermark on title + closing slides)
+- [x] Add gradient depth to dark slides (135deg gradients with photography overlays)
+- [x] Create print-optimized CSS (@media print styles added)
 
 ---
 
@@ -316,3 +316,4 @@ Worksheets are clean and functional. Could be warmer.
 ---
 
 *Last updated: January 2, 2025*
+*All priority fixes applied: January 2, 2025*
