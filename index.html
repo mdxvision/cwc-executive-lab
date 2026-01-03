@@ -215,6 +215,37 @@
 
         .slide-quote {
             background: var(--bg-warm);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 0;
+        }
+        .slide-quote .slide-header {
+            grid-column: 1 / -1;
+            padding: 40px 80px 0;
+        }
+        .slide-quote .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+        }
+        .slide-quote .slide-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+        .slide-quote .slide-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .slide-quote .slide-image-container::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, var(--bg-warm) 0%, transparent 30%);
         }
         .quote-text {
             font-family: 'Source Serif 4', Georgia, serif;
@@ -236,9 +267,21 @@
         .slide-dark {
             background: linear-gradient(135deg, #1A1A1A 0%, #252525 40%, #1A1A1A 100%);
             color: var(--bg);
+            position: relative;
+            overflow: hidden;
         }
         .slide-dark h2 { color: var(--bg); }
         .slide-dark p { color: rgba(255,255,255,0.6); }
+        .slide-dark .slide-bg-image {
+            position: absolute;
+            top: 0; right: 0;
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            mask-image: linear-gradient(90deg, transparent 0%, black 40%);
+            -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 40%);
+        }
 
         /* ELL Visual Mark */
         .ell-mark {
@@ -384,6 +427,9 @@
             <div class="slide-content">
                 <p class="quote-text">The ceiling you're hitting isn't made of glass. It's made of stories you've been told—and stories you tell yourself.</p>
             </div>
+            <div class="slide-image-container">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80" alt="" class="slide-image">
+            </div>
         </div>
 
         <div class="slide" data-slide="10">
@@ -514,6 +560,9 @@
             <div class="slide-content">
                 <p class="quote-text">You don't have to be ready. You have to be willing to start before you feel prepared.</p>
             </div>
+            <div class="slide-image-container">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="" class="slide-image">
+            </div>
         </div>
 
         <div class="slide" data-slide="19">
@@ -545,6 +594,7 @@
         </div>
 
         <div class="slide slide-dark" data-slide="21">
+            <img src="https://images.unsplash.com/photo-1519834785169-98be25ec3f84?w=1200&q=80" alt="" class="slide-bg-image">
             <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);"><span class="module-label" style="color: rgba(255,255,255,0.5);">Module 1 Complete</span></div>
             <div class="slide-content">
                 <span class="section-label">Executive Leadership Lab</span>
