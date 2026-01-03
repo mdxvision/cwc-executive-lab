@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-Day Momentum Planner | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-teal: #3EBCE8;
+            --primary-teal-dark: #2A9BC4;
+            --gold: #FFC425;
+            --lime: #C4D82E;
+            --magenta: #E91E8C;
+            --purple: #9333EA;
+            --dark: #1A1A1A;
+            --medium: #525252;
+            --light: #F8FAFC;
+            --white: #FFFFFF;
+            --border: #E5E7EB;
+            --success: #10B981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.5;
+            padding: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media print {
+            body { padding: 20px; background: white; font-size: 11px; }
+            table { font-size: 11px; }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 3px solid var(--primary-teal);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--dark);
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: var(--medium);
+        }
+
+        .logo { height: 50px; }
+
+        .intro {
+            background: linear-gradient(135deg, rgba(62, 188, 232, 0.1), rgba(255, 196, 37, 0.1));
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--primary-teal);
+        }
+
+        .intro p {
+            font-size: 15px;
+            color: var(--medium);
+        }
+
+        .intro strong { color: var(--dark); }
+
+        .date-range {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 32px;
+            align-items: center;
+            background: white;
+            padding: 20px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .date-range label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .date-range input {
+            padding: 10px 14px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        .date-range input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 4px rgba(62, 188, 232, 0.15);
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
+            color: white;
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        th:first-child { padding-left: 20px; }
+        th:last-child { padding-right: 20px; }
+
+        td {
+            padding: 14px 12px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        td:first-child { padding-left: 20px; }
+        td:last-child { padding-right: 20px; }
+
+        tr:nth-child(even) { background: var(--light); }
+
+        tr:hover { background: rgba(62, 188, 232, 0.05); }
+
+        tr:last-child td { border-bottom: none; }
+
+        .date-cell { width: 100px; }
+        .action-cell { width: 25%; }
+        .time-cell { width: 80px; text-align: center; }
+        .who-cell { width: 15%; }
+        .evidence-cell { width: 20%; }
+        .status-cell { width: 100px; text-align: center; }
+
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(62, 188, 232, 0.15);
+        }
+
+        input::placeholder { color: #9CA3AF; }
+
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: inherit;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            margin-top: 32px;
+            border: 1px solid var(--border);
+        }
+
+        .summary-section h3 {
+            color: var(--primary-teal);
+            margin-bottom: 24px;
+            font-size: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .summary-item label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .summary-item textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: inherit;
+            min-height: 80px;
+            resize: vertical;
+            transition: all 0.2s ease;
+        }
+
+        .summary-item textarea:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 4px rgba(62, 188, 232, 0.15);
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            color: var(--medium);
+            font-size: 12px;
+        }
+
+        /* Row number indicator */
+        .row-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--primary-teal), var(--gold));
+            color: var(--dark);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div>
+        <h1>14-Day Momentum Planner</h1>
+        <p>Executive Leadership Lab | Module 1 | January</p>
+    </div>
+    <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC Logo" class="logo">
+</div>
+
+<div class="intro">
+    <p><strong>Purpose:</strong> Momentum starts with small, visible moves. Use this planner to schedule your "first moves" from your Career Growth Roadmap and track your progress over the next 14 days.</p>
+</div>
+
+<div class="date-range">
+    <label>Start Date:</label>
+    <input type="date">
+    <label>End Date:</label>
+    <input type="date">
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th class="action-cell">Action / Task</th>
+                <th class="time-cell">Time</th>
+                <th class="who-cell">Who It Impacts</th>
+                <th class="evidence-cell">Evidence / Win</th>
+                <th class="status-cell">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="date-cell"><input type="date"></td>
+                <td><input type="text" placeholder="What will you do?"></td>
+                <td class="time-cell"><input type="text" placeholder="30 min"></td>
+                <td><input type="text" placeholder="Who?"></td>
+                <td><input type="text" placeholder="What's the win?"></td>
+                <td class="status-cell">
+                    <select>
+                        <option value="">Select</option>
+                        <option value="planned">Planned</option>
+                        <option value="in-progress">In Progress</option>
+                        <option value="done">Done</option>
+                        <option value="moved">Moved</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="summary-section">
+    <h3>📊 14-Day Reflection</h3>
+    <div class="summary-grid">
+        <div class="summary-item">
+            <label>Key Wins This Period:</label>
+            <textarea placeholder="What did you accomplish? What moved forward?"></textarea>
+        </div>
+        <div class="summary-item">
+            <label>What Got in the Way:</label>
+            <textarea placeholder="What obstacles did you encounter?"></textarea>
+        </div>
+        <div class="summary-item">
+            <label>What I Learned:</label>
+            <textarea placeholder="What insight or lesson emerged?"></textarea>
+        </div>
+        <div class="summary-item">
+            <label>Next 14-Day Focus:</label>
+            <textarea placeholder="What will you prioritize in the next two weeks?"></textarea>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    14-Day Momentum Planner | Executive Leadership Lab | Coaching Women of Color<br>
+    Module 1: Break Through Career Plateaus | January
+</div>
+
+</body>
+</html>
