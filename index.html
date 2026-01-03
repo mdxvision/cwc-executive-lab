@@ -8,13 +8,14 @@
     <style>
         :root {
             --primary: #1A1A1A;
-            --accent: #3EBCE8;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
             --text: #333333;
             --text-light: #666666;
             --text-muted: #999999;
-            --bg: #FFFFFF;
-            --bg-warm: #FAFAFA;
-            --border: #E8E8E8;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -142,7 +143,7 @@
         .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; text-align: left; }
         .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
 
-        .card { padding: 32px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s ease; }
+        .card { padding: 40px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s ease; }
         .card:hover { border-color: var(--accent); }
         .card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
         .card p { font-size: 15px; color: var(--text-light); margin: 0; line-height: 1.6; }
@@ -153,10 +154,10 @@
 
         .feature-number {
             width: 32px; height: 32px;
-            border: 2px solid var(--accent);
+            background: var(--accent-warm);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-size: 14px; font-weight: 600; color: var(--accent);
+            font-size: 14px; font-weight: 600; color: white;
             flex-shrink: 0;
         }
 
@@ -176,7 +177,7 @@
             line-height: 1.5; color: var(--primary);
             max-width: 800px; font-style: italic;
         }
-        .quote-text::before { content: '"'; display: block; font-size: 72px; line-height: 1; color: var(--accent); margin-bottom: 16px; }
+        .quote-text::before { content: '"'; display: block; font-size: 72px; line-height: 1; color: var(--accent-warm); margin-bottom: 16px; }
 
         .stats-row { display: flex; justify-content: center; gap: 80px; margin-top: 56px; }
         .stat-item { text-align: center; }
@@ -191,7 +192,7 @@
         .slide-dark h2 { color: var(--bg); }
         .slide-dark p { color: rgba(255,255,255,0.6); }
 
-        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
         .callout p { font-size: 15px; margin: 0; }
 
         .activity-meta { display: inline-block; margin-top: 40px; padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--text-muted); }
