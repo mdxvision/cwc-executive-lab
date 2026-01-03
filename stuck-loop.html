@@ -3,238 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stuck Loop Reflection Sheet | Executive Leadership Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Stuck Loop Reflection | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-teal: #3EBCE8;
-            --primary-teal-dark: #2A9BC4;
-            --gold: #FFC425;
-            --lime: #C4D82E;
-            --magenta: #E91E8C;
-            --purple: #9333EA;
-            --dark: #1A1A1A;
-            --medium: #525252;
-            --light: #F8FAFC;
-            --white: #FFFFFF;
-            --border: #E5E7EB;
+            --primary: #1A1A1A;
+            --accent: #3EBCE8;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FFFFFF;
+            --bg-warm: #FAFAFA;
+            --border: #E5E5E5;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--light);
-            color: var(--dark);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            padding: 40px;
-            max-width: 900px;
+            padding: 48px;
+            max-width: 800px;
             margin: 0 auto;
         }
-
-        @media print {
-            body { padding: 20px; background: white; }
-        }
+        @media print { body { padding: 24px; } }
 
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
+            align-items: flex-start;
+            margin-bottom: 40px;
             padding-bottom: 24px;
-            border-bottom: 3px solid var(--primary-teal);
+            border-bottom: 2px solid var(--primary);
         }
-
         .header h1 {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--dark);
-            letter-spacing: -1px;
-            margin-bottom: 4px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
         }
-
-        .header p {
-            font-size: 14px;
-            color: var(--medium);
-        }
-
-        .logo { height: 50px; }
+        .header p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+        .logo { height: 40px; }
 
         .intro {
-            background: linear-gradient(135deg, rgba(62, 188, 232, 0.1), rgba(255, 196, 37, 0.1));
-            border-radius: 16px;
-            padding: 24px;
+            background: var(--bg-warm);
+            padding: 20px 24px;
             margin-bottom: 32px;
-            border-left: 4px solid var(--primary-teal);
+            border-left: 3px solid var(--accent);
         }
+        .intro p { font-size: 14px; color: var(--text-light); }
 
-        .intro p {
-            font-size: 15px;
-            color: var(--medium);
-        }
-
-        .intro strong { color: var(--dark); }
-
-        /* Loop Diagram */
         .loop-diagram {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 32px 0;
-            flex-wrap: wrap;
             gap: 12px;
-            padding: 32px;
-            background: white;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .loop-box {
-            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
-            color: white;
-            padding: 16px 24px;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(62, 188, 232, 0.2);
-        }
-
-        .loop-arrow {
-            font-size: 24px;
-            color: var(--primary-teal);
-        }
-
-        .loop-arrow.return {
-            font-size: 32px;
-            color: var(--magenta);
-        }
-
-        /* Example Box */
-        .example-box {
-            background: white;
-            border-left: 4px solid var(--purple);
+            margin: 32px 0;
             padding: 24px;
-            margin: 24px 0;
-            border-radius: 0 12px 12px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            background: var(--bg-warm);
         }
-
-        .example-box h4 {
-            color: var(--purple);
-            font-size: 16px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .loop-step {
+            padding: 12px 20px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            font-size: 13px;
+            font-weight: 500;
         }
+        .loop-arrow { font-size: 16px; color: var(--text-muted); }
 
-        .example-box p {
-            font-size: 14px;
-            margin-bottom: 8px;
-            color: var(--medium);
+        .example-box {
+            border-left: 3px solid var(--text-muted);
+            padding: 20px 24px;
+            margin-bottom: 40px;
         }
-
+        .example-box h4 { font-size: 13px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .example-box p { font-size: 14px; color: var(--text-light); margin-bottom: 6px; }
         .example-box p:last-child { margin-bottom: 0; }
 
-        .example-box strong { color: var(--dark); }
-
-        /* Field Containers */
         .field-container {
-            background: white;
-            border-radius: 16px;
+            border: 1px solid var(--border);
             padding: 24px;
             margin-bottom: 20px;
-            border: 1px solid var(--border);
         }
-
         .field-header {
             display: flex;
             align-items: center;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
-
         .field-number {
-            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
-            color: white;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
+            width: 28px; height: 28px;
+            background: var(--primary);
+            color: var(--bg);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 16px;
-            font-weight: 700;
-            margin-right: 14px;
-        }
-
-        .field-label {
+            font-size: 13px;
             font-weight: 600;
-            color: var(--dark);
-            font-size: 18px;
+            margin-right: 12px;
         }
-
-        .field-hint {
-            font-size: 14px;
-            color: var(--medium);
-            margin-bottom: 12px;
-            font-style: italic;
+        .field-label {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--primary);
         }
-
+        .field-hint { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; font-style: italic; }
         textarea {
             width: 100%;
-            padding: 16px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid var(--border);
             font-size: 14px;
             font-family: inherit;
-            min-height: 100px;
+            min-height: 90px;
             resize: vertical;
-            transition: all 0.2s ease;
         }
+        textarea:focus { outline: none; border-color: var(--accent); }
+        textarea::placeholder { color: #BBBBBB; }
 
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-teal);
-            box-shadow: 0 0 0 4px rgba(62, 188, 232, 0.15);
-        }
-
-        textarea::placeholder { color: #9CA3AF; }
-
-        /* New Choice Section */
         .new-choice-section {
-            background: linear-gradient(135deg, rgba(255, 196, 37, 0.15), rgba(255, 196, 37, 0.05));
-            border: 3px solid var(--gold);
-            border-radius: 16px;
+            border: 2px solid var(--accent);
             padding: 32px;
             margin-top: 40px;
         }
-
         .new-choice-section h3 {
-            color: var(--dark);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
             margin-bottom: 24px;
-            font-size: 22px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
         }
-
-        .new-choice-section .field-container {
-            background: white;
-        }
-
-        .new-choice-section .field-number {
-            background: linear-gradient(135deg, var(--gold), #E5B020);
-            color: var(--dark);
-        }
+        .new-choice-section .field-number { background: var(--accent); }
 
         .footer {
-            margin-top: 40px;
+            margin-top: 48px;
             padding-top: 20px;
-            border-top: 2px solid var(--border);
+            border-top: 1px solid var(--border);
             text-align: center;
-            color: var(--medium);
-            font-size: 12px;
+            font-size: 11px;
+            color: var(--text-muted);
         }
     </style>
 </head>
@@ -242,31 +151,31 @@
 
 <div class="header">
     <div>
-        <h1>Stuck Loop Reflection Sheet</h1>
+        <h1>Stuck Loop Reflection</h1>
         <p>Executive Leadership Lab | Module 1 | January</p>
     </div>
-    <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC Logo" class="logo">
+    <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo">
 </div>
 
 <div class="intro">
-    <p><strong>Purpose:</strong> Most career plateaus follow a predictable pattern — a "stuck loop" that repeats until we interrupt it with awareness and a new choice. This worksheet helps you identify your loop and design an alternative response.</p>
+    <p><strong>Purpose:</strong> Most career plateaus follow a predictable pattern—a "stuck loop" that repeats until we interrupt it with awareness and a new choice. This worksheet helps you identify your loop and design an alternative response.</p>
 </div>
 
 <div class="loop-diagram">
-    <div class="loop-box">Trigger</div>
+    <div class="loop-step">Trigger</div>
     <span class="loop-arrow">→</span>
-    <div class="loop-box">Thought</div>
+    <div class="loop-step">Thought</div>
     <span class="loop-arrow">→</span>
-    <div class="loop-box">Emotion</div>
+    <div class="loop-step">Emotion</div>
     <span class="loop-arrow">→</span>
-    <div class="loop-box">Behavior</div>
+    <div class="loop-step">Behavior</div>
     <span class="loop-arrow">→</span>
-    <div class="loop-box">Outcome</div>
-    <span class="loop-arrow return">↻</span>
+    <div class="loop-step">Outcome</div>
+    <span class="loop-arrow">↻</span>
 </div>
 
 <div class="example-box">
-    <h4>💡 Example Loop:</h4>
+    <h4>Example Loop</h4>
     <p><strong>Trigger:</strong> Asked to present to senior leadership</p>
     <p><strong>Thought:</strong> "I'll mess this up. They'll see I don't belong here."</p>
     <p><strong>Emotion:</strong> Anxiety, dread, stomach tightening</p>
@@ -274,57 +183,55 @@
     <p><strong>Outcome:</strong> Presentation goes "fine" but I feel exhausted and invisible</p>
 </div>
 
-<div class="section">
-    <div class="field-container">
-        <div class="field-header">
-            <span class="field-number">1</span>
-            <span class="field-label">Situation / Trigger</span>
-        </div>
-        <p class="field-hint">What's the recurring situation that activates your stuck pattern?</p>
-        <textarea placeholder="Describe the situation or event that triggers your loop..."></textarea>
+<div class="field-container">
+    <div class="field-header">
+        <span class="field-number">1</span>
+        <span class="field-label">Situation / Trigger</span>
     </div>
+    <p class="field-hint">What's the recurring situation that activates your stuck pattern?</p>
+    <textarea placeholder="Describe the situation or event that triggers your loop..."></textarea>
+</div>
 
-    <div class="field-container">
-        <div class="field-header">
-            <span class="field-number">2</span>
-            <span class="field-label">Thought / Story</span>
-        </div>
-        <p class="field-hint">What do you tell yourself when this happens? What story runs through your mind?</p>
-        <textarea placeholder="Write out the thoughts or narrative that plays..."></textarea>
+<div class="field-container">
+    <div class="field-header">
+        <span class="field-number">2</span>
+        <span class="field-label">Thought / Story</span>
     </div>
+    <p class="field-hint">What do you tell yourself when this happens? What story runs through your mind?</p>
+    <textarea placeholder="Write out the thoughts or narrative that plays..."></textarea>
+</div>
 
-    <div class="field-container">
-        <div class="field-header">
-            <span class="field-number">3</span>
-            <span class="field-label">Emotion / Body Cue</span>
-        </div>
-        <p class="field-hint">What emotion arises? Where do you feel it in your body?</p>
-        <textarea placeholder="Name the emotion and any physical sensations..."></textarea>
+<div class="field-container">
+    <div class="field-header">
+        <span class="field-number">3</span>
+        <span class="field-label">Emotion / Body Cue</span>
     </div>
+    <p class="field-hint">What emotion arises? Where do you feel it in your body?</p>
+    <textarea placeholder="Name the emotion and any physical sensations..."></textarea>
+</div>
 
-    <div class="field-container">
-        <div class="field-header">
-            <span class="field-number">4</span>
-            <span class="field-label">Behavior (Do / Avoid)</span>
-        </div>
-        <p class="field-hint">What do you do — or avoid doing — as a result?</p>
-        <textarea placeholder="Describe your typical response or avoidance pattern..."></textarea>
+<div class="field-container">
+    <div class="field-header">
+        <span class="field-number">4</span>
+        <span class="field-label">Behavior (Do / Avoid)</span>
     </div>
+    <p class="field-hint">What do you do—or avoid doing—as a result?</p>
+    <textarea placeholder="Describe your typical response or avoidance pattern..."></textarea>
+</div>
 
-    <div class="field-container">
-        <div class="field-header">
-            <span class="field-number">5</span>
-            <span class="field-label">Outcome</span>
-        </div>
-        <p class="field-hint">What result keeps repeating? How does the loop reinforce itself?</p>
-        <textarea placeholder="What happens as a result? What belief gets reinforced?"></textarea>
+<div class="field-container">
+    <div class="field-header">
+        <span class="field-number">5</span>
+        <span class="field-label">Outcome</span>
     </div>
+    <p class="field-hint">What result keeps repeating? How does the loop reinforce itself?</p>
+    <textarea placeholder="What happens as a result? What belief gets reinforced?"></textarea>
 </div>
 
 <div class="new-choice-section">
-    <h3>✨ Design Your New Choice</h3>
+    <h3>Design Your New Choice</h3>
 
-    <div class="field-container">
+    <div class="field-container" style="border: none; padding: 0; margin-bottom: 24px;">
         <div class="field-header">
             <span class="field-number">6</span>
             <span class="field-label">New Thought I'll Practice</span>
@@ -333,7 +240,7 @@
         <textarea placeholder="Write a reframe or alternative perspective..."></textarea>
     </div>
 
-    <div class="field-container">
+    <div class="field-container" style="border: none; padding: 0; margin-bottom: 24px;">
         <div class="field-header">
             <span class="field-number">7</span>
             <span class="field-label">New Behavior I'll Try</span>
@@ -342,7 +249,7 @@
         <textarea placeholder="Describe a new response you're willing to try..."></textarea>
     </div>
 
-    <div class="field-container">
+    <div class="field-container" style="border: none; padding: 0; margin-bottom: 0;">
         <div class="field-header">
             <span class="field-number">8</span>
             <span class="field-label">Support I Need</span>
@@ -353,7 +260,7 @@
 </div>
 
 <div class="footer">
-    Stuck Loop Reflection Sheet | Executive Leadership Lab | Coaching Women of Color<br>
+    Stuck Loop Reflection | Executive Leadership Lab | Coaching Women of Color<br>
     Module 1: Break Through Career Plateaus | January
 </div>
 

@@ -4,215 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plateau Diagnostic | Executive Leadership Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-teal: #3EBCE8;
-            --primary-teal-dark: #2A9BC4;
-            --gold: #FFC425;
-            --lime: #C4D82E;
-            --magenta: #E91E8C;
-            --purple: #9333EA;
-            --dark: #1A1A1A;
-            --medium: #525252;
-            --light: #F8FAFC;
-            --white: #FFFFFF;
-            --border: #E5E7EB;
+            --primary: #1A1A1A;
+            --accent: #3EBCE8;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FFFFFF;
+            --bg-warm: #FAFAFA;
+            --border: #E5E5E5;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--light);
-            color: var(--dark);
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            padding: 40px;
-            max-width: 900px;
+            padding: 48px;
+            max-width: 800px;
             margin: 0 auto;
         }
-
-        @media print {
-            body { padding: 20px; background: white; }
-            .section { break-inside: avoid; }
-        }
+        @media print { body { padding: 24px; } .section { break-inside: avoid; } }
 
         .header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
+            align-items: flex-start;
+            margin-bottom: 40px;
             padding-bottom: 24px;
-            border-bottom: 3px solid var(--primary-teal);
+            border-bottom: 2px solid var(--primary);
         }
-
         .header h1 {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--dark);
-            letter-spacing: -1px;
-            margin-bottom: 4px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
         }
-
-        .header p {
-            font-size: 14px;
-            color: var(--medium);
-        }
-
-        .logo { height: 50px; }
+        .header p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+        .logo { height: 40px; }
 
         .intro {
-            background: linear-gradient(135deg, rgba(62, 188, 232, 0.1), rgba(255, 196, 37, 0.1));
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 32px;
-            border-left: 4px solid var(--primary-teal);
+            background: var(--bg-warm);
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            border-left: 3px solid var(--accent);
         }
+        .intro p { font-size: 14px; color: var(--text-light); }
 
-        .intro p {
-            font-size: 15px;
-            color: var(--medium);
-        }
-
-        .intro strong { color: var(--dark); }
-
-        .section {
-            margin-bottom: 24px;
-        }
-
+        .section { margin-bottom: 32px; }
         .section-title {
-            background: linear-gradient(135deg, var(--primary-teal), var(--primary-teal-dark));
-            color: white;
-            padding: 14px 20px;
-            border-radius: 12px;
+            font-family: 'Source Serif 4', Georgia, serif;
             font-size: 16px;
             font-weight: 600;
+            color: var(--primary);
+            padding: 12px 16px;
+            background: var(--bg-warm);
+            border-left: 3px solid var(--primary);
             margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .section-title .icon {
-            font-size: 20px;
-        }
-
-        .checklist {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border);
-        }
-
+        .checklist { padding: 0 16px; }
         .checklist-item {
             display: flex;
             align-items: flex-start;
-            padding: 16px;
-            background: var(--light);
-            border-radius: 10px;
-            margin-bottom: 12px;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
             cursor: pointer;
         }
-
-        .checklist-item:last-child { margin-bottom: 0; }
-
-        .checklist-item:hover {
-            border-color: var(--primary-teal);
-            background: rgba(62, 188, 232, 0.05);
-        }
-
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item:hover { background: var(--bg-warm); margin: 0 -16px; padding-left: 16px; padding-right: 16px; }
         .checklist-item input {
-            width: 22px;
-            height: 22px;
-            margin-right: 16px;
+            width: 18px; height: 18px;
+            margin-right: 14px;
             margin-top: 2px;
-            accent-color: var(--primary-teal);
+            accent-color: var(--accent);
             flex-shrink: 0;
-            cursor: pointer;
         }
-
-        .checklist-item label {
-            font-size: 15px;
-            color: var(--dark);
-            cursor: pointer;
-        }
+        .checklist-item label { font-size: 15px; color: var(--text); cursor: pointer; }
 
         .results-box {
-            background: white;
-            border: 3px solid var(--primary-teal);
-            border-radius: 16px;
+            border: 2px solid var(--primary);
             padding: 32px;
-            margin-top: 32px;
+            margin-top: 40px;
         }
-
         .results-box h3 {
-            color: var(--primary-teal);
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
             margin-bottom: 24px;
-            font-size: 22px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
         }
-
-        .result-field {
-            margin-bottom: 20px;
-        }
-
+        .result-field { margin-bottom: 20px; }
         .result-field:last-child { margin-bottom: 0; }
-
         .result-field label {
             display: block;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--dark);
-            font-size: 15px;
+            color: var(--primary);
+            margin-bottom: 8px;
         }
-
-        .result-field input,
-        .result-field textarea {
+        .result-field input, .result-field textarea {
             width: 100%;
-            padding: 14px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
+            padding: 12px;
+            border: 1px solid var(--border);
             font-size: 14px;
             font-family: inherit;
-            transition: all 0.2s ease;
         }
-
-        .result-field input:focus,
-        .result-field textarea:focus {
-            outline: none;
-            border-color: var(--primary-teal);
-            box-shadow: 0 0 0 4px rgba(62, 188, 232, 0.15);
-        }
-
-        .result-field textarea {
-            min-height: 80px;
-            resize: vertical;
-        }
+        .result-field input:focus, .result-field textarea:focus { outline: none; border-color: var(--accent); }
+        .result-field textarea { min-height: 80px; resize: vertical; }
 
         .footer {
-            margin-top: 32px;
+            margin-top: 48px;
             padding-top: 20px;
-            border-top: 2px solid var(--border);
+            border-top: 1px solid var(--border);
             text-align: center;
-            color: var(--medium);
-            font-size: 12px;
+            font-size: 11px;
+            color: var(--text-muted);
         }
-
-        /* Category Colors */
-        .section:nth-child(2) .section-title { background: linear-gradient(135deg, var(--primary-teal), #2A9BC4); }
-        .section:nth-child(3) .section-title { background: linear-gradient(135deg, var(--gold), #E5B020); }
-        .section:nth-child(4) .section-title { background: linear-gradient(135deg, var(--magenta), #C4196F); }
-        .section:nth-child(5) .section-title { background: linear-gradient(135deg, var(--purple), #7C28C9); }
-        .section:nth-child(6) .section-title { background: linear-gradient(135deg, var(--lime), #A8BC20); }
-        .section:nth-child(7) .section-title { background: linear-gradient(135deg, #6B7280, #4B5563); }
-
-        .section:nth-child(3) .section-title { color: var(--dark); }
-        .section:nth-child(6) .section-title { color: var(--dark); }
     </style>
 </head>
 <body>
@@ -222,183 +134,83 @@
         <h1>Plateau Diagnostic</h1>
         <p>Executive Leadership Lab | Module 1 | January</p>
     </div>
-    <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC Logo" class="logo">
+    <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo">
 </div>
 
 <div class="intro">
-    <p><strong>Instructions:</strong> Check all statements that feel true for you right now. Be honest — this is for your eyes only. Your responses will help you identify your primary plateau type and top drivers.</p>
+    <p><strong>Instructions:</strong> Check all statements that feel true for you right now. Be honest—this is for your eyes only. Your responses will help you identify your primary plateau type and top drivers.</p>
 </div>
 
-<!-- Section 1: Clarity & Direction -->
 <div class="section">
-    <div class="section-title">
-        <span class="icon">🎯</span>
-        Clarity & Direction
-    </div>
+    <div class="section-title">Clarity & Direction</div>
     <div class="checklist">
-        <div class="checklist-item">
-            <input type="checkbox" id="c1">
-            <label for="c1">I don't have a clear next role or career target</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="c2">
-            <label for="c2">I'm unsure what I want or where I'm headed professionally</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="c3">
-            <label for="c3">My goals feel vague or I keep changing them</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="c4">
-            <label for="c4">I don't know what success looks like for me right now</label>
-        </div>
+        <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">I don't have a clear next role or career target</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">I'm unsure what I want or where I'm headed professionally</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">My goals feel vague or I keep changing them</label></div>
+        <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">I don't know what success looks like for me right now</label></div>
     </div>
 </div>
 
-<!-- Section 2: Value & Positioning -->
 <div class="section">
-    <div class="section-title">
-        <span class="icon">💎</span>
-        Value & Positioning
-    </div>
+    <div class="section-title">Value & Positioning</div>
     <div class="checklist">
-        <div class="checklist-item">
-            <input type="checkbox" id="v1">
-            <label for="v1">I struggle to articulate my unique value or contributions</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="v2">
-            <label for="v2">I'm not sure what I'm known for or should be known for</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="v3">
-            <label for="v3">My strengths feel outdated or not aligned with where I want to go</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="v4">
-            <label for="v4">I have skill gaps that are limiting my growth</label>
-        </div>
+        <div class="checklist-item"><input type="checkbox" id="v1"><label for="v1">I struggle to articulate my unique value or contributions</label></div>
+        <div class="checklist-item"><input type="checkbox" id="v2"><label for="v2">I'm not sure what I'm known for or should be known for</label></div>
+        <div class="checklist-item"><input type="checkbox" id="v3"><label for="v3">My strengths feel outdated or not aligned with where I want to go</label></div>
+        <div class="checklist-item"><input type="checkbox" id="v4"><label for="v4">I have skill gaps that are limiting my growth</label></div>
     </div>
 </div>
 
-<!-- Section 3: Visibility & Recognition -->
 <div class="section">
-    <div class="section-title">
-        <span class="icon">👁️</span>
-        Visibility & Recognition
-    </div>
+    <div class="section-title">Visibility & Recognition</div>
     <div class="checklist">
-        <div class="checklist-item">
-            <input type="checkbox" id="r1">
-            <label for="r1">Decision-makers don't see or recognize my work</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="r2">
-            <label for="r2">I do great work but rarely get credit or visibility</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="r3">
-            <label for="r3">I'm not in the rooms where important decisions are made</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="r4">
-            <label for="r4">I feel overlooked or undervalued despite my contributions</label>
-        </div>
+        <div class="checklist-item"><input type="checkbox" id="r1"><label for="r1">Decision-makers don't see or recognize my work</label></div>
+        <div class="checklist-item"><input type="checkbox" id="r2"><label for="r2">I do great work but rarely get credit or visibility</label></div>
+        <div class="checklist-item"><input type="checkbox" id="r3"><label for="r3">I'm not in the rooms where important decisions are made</label></div>
+        <div class="checklist-item"><input type="checkbox" id="r4"><label for="r4">I feel overlooked or undervalued despite my contributions</label></div>
     </div>
 </div>
 
-<!-- Section 4: Relationships & Sponsorship -->
 <div class="section">
-    <div class="section-title">
-        <span class="icon">🤝</span>
-        Relationships & Sponsorship
-    </div>
+    <div class="section-title">Relationships & Sponsorship</div>
     <div class="checklist">
-        <div class="checklist-item">
-            <input type="checkbox" id="s1">
-            <label for="s1">I don't have a sponsor or advocate in senior leadership</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="s2">
-            <label for="s2">I lack mentors who can guide my career growth</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="s3">
-            <label for="s3">My network feels weak or not aligned with my goals</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="s4">
-            <label for="s4">I don't know who could help me get to the next level</label>
-        </div>
+        <div class="checklist-item"><input type="checkbox" id="s1"><label for="s1">I don't have a sponsor or advocate in senior leadership</label></div>
+        <div class="checklist-item"><input type="checkbox" id="s2"><label for="s2">I lack mentors who can guide my career growth</label></div>
+        <div class="checklist-item"><input type="checkbox" id="s3"><label for="s3">My network feels weak or not aligned with my goals</label></div>
+        <div class="checklist-item"><input type="checkbox" id="s4"><label for="s4">I don't know who could help me get to the next level</label></div>
     </div>
 </div>
 
-<!-- Section 5: Energy & Sustainability -->
 <div class="section">
-    <div class="section-title">
-        <span class="icon">🔥</span>
-        Energy & Sustainability
-    </div>
+    <div class="section-title">Energy & Sustainability</div>
     <div class="checklist">
-        <div class="checklist-item">
-            <input type="checkbox" id="e1">
-            <label for="e1">I'm burned out and have no bandwidth for growth activities</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="e2">
-            <label for="e2">I'm over-functioning — doing too much with too little support</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="e3">
-            <label for="e3">Work-life balance feels impossible right now</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="e4">
-            <label for="e4">I'm exhausted and can't sustain my current pace</label>
-        </div>
+        <div class="checklist-item"><input type="checkbox" id="e1"><label for="e1">I'm burned out and have no bandwidth for growth activities</label></div>
+        <div class="checklist-item"><input type="checkbox" id="e2"><label for="e2">I'm over-functioning—doing too much with too little support</label></div>
+        <div class="checklist-item"><input type="checkbox" id="e3"><label for="e3">Work-life balance feels impossible right now</label></div>
+        <div class="checklist-item"><input type="checkbox" id="e4"><label for="e4">I'm exhausted and can't sustain my current pace</label></div>
     </div>
 </div>
 
-<!-- Section 6: Mindset & Identity -->
 <div class="section">
-    <div class="section-title">
-        <span class="icon">🧠</span>
-        Mindset & Identity
-    </div>
+    <div class="section-title">Mindset & Identity</div>
     <div class="checklist">
-        <div class="checklist-item">
-            <input type="checkbox" id="m1">
-            <label for="m1">I second-guess myself and struggle with imposter syndrome</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="m2">
-            <label for="m2">Perfectionism slows me down or holds me back</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="m3">
-            <label for="m3">I avoid high-stakes conversations or visible opportunities</label>
-        </div>
-        <div class="checklist-item">
-            <input type="checkbox" id="m4">
-            <label for="m4">Fear of failure or rejection keeps me playing small</label>
-        </div>
+        <div class="checklist-item"><input type="checkbox" id="m1"><label for="m1">I second-guess myself and struggle with imposter syndrome</label></div>
+        <div class="checklist-item"><input type="checkbox" id="m2"><label for="m2">Perfectionism slows me down or holds me back</label></div>
+        <div class="checklist-item"><input type="checkbox" id="m3"><label for="m3">I avoid high-stakes conversations or visible opportunities</label></div>
+        <div class="checklist-item"><input type="checkbox" id="m4"><label for="m4">Fear of failure or rejection keeps me playing small</label></div>
     </div>
 </div>
 
-<!-- Results -->
 <div class="results-box">
-    <h3>📊 Your Diagnostic Results</h3>
-
+    <h3>Your Diagnostic Results</h3>
     <div class="result-field">
         <label>Primary Plateau Type:</label>
         <input type="text" placeholder="Skill / Role / Identity (or combination)">
     </div>
-
     <div class="result-field">
         <label>Top 2 Plateau Drivers:</label>
         <textarea placeholder="Based on where you checked the most boxes, what are your primary barriers?"></textarea>
     </div>
-
     <div class="result-field">
         <label>One Insight from This Exercise:</label>
         <textarea placeholder="What became clearer after completing this diagnostic?"></textarea>
