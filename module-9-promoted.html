@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 9: Get Promoted | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: var(--bg);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-title {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            position: relative;
+        }
+
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .slide-title .module-number {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .slide-title h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .slide-title .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        .slide-content {
+            padding: 80px 120px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-header {
+            margin-bottom: 48px;
+        }
+
+        .slide-header h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .slide-header .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .slide-body {
+            flex: 1;
+        }
+
+        .slide-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .slide-section h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .slide-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .key-point {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .key-point p {
+            font-size: 1.375rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .quote {
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .quote blockquote {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.75rem;
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .quote cite {
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .card h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .card.accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .card.accent h3 {
+            color: white;
+        }
+
+        .card.accent p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .card.warm {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border: none;
+        }
+
+        .card.warm h3 {
+            color: white;
+        }
+
+        .card.warm p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-warm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .card.accent .icon-circle,
+        .card.warm .icon-circle {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .styled-list {
+            list-style: none;
+        }
+
+        .styled-list li {
+            padding: 16px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.125rem;
+        }
+
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+
+        .styled-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        .equation-box {
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .equation-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .equation {
+            font-size: 1.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .equation-part {
+            padding: 16px 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+
+        .equation-sign {
+            font-size: 2rem;
+            opacity: 0.7;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn.secondary {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: var(--bg-warm);
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            color: white;
+        }
+
+        .nav-btn.primary:hover:not(:disabled) {
+            background: #236d7a;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .slide-content {
+                padding: 60px;
+            }
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content {
+                padding: 40px 24px 100px;
+            }
+            .slide-title h1 {
+                font-size: 2.5rem;
+            }
+            .slide-header h2 {
+                font-size: 1.75rem;
+            }
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            .equation {
+                flex-direction: column;
+            }
+        }
+
+        @media print {
+            .slide { display: block !important; position: relative; page-break-after: always; height: auto; min-height: 100vh; }
+            .nav-bar { display: none; }
+            body { overflow: visible; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active">
+            <div class="module-number">Module 9 — September</div>
+            <h1>Get Promoted</h1>
+            <p class="subtitle">Strategic career advancement for women of color</p>
+        </div>
+
+        <!-- Slide 2: The Reality -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Let's Be Honest</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Hard work alone doesn't get you promoted. If it did, you'd already be there. Promotion requires strategy, visibility, advocacy—and understanding how decisions actually get made.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>The Myth</h3>
+                        <p style="font-size: 1.125rem; line-height: 1.7; color: var(--text);">If I do excellent work, keep my head down, and exceed expectations, I'll be recognized and promoted.</p>
+                        <p style="margin-top: 16px; color: #c0392b; font-weight: 500;">This rarely works—especially for WOC.</p>
+                    </div>
+                    <div class="card accent">
+                        <h3>The Reality</h3>
+                        <p style="font-size: 1.125rem; line-height: 1.7;">Promotions go to people who are known, who have advocates, who make their case, and who are seen as ready for the next level.</p>
+                        <p style="margin-top: 16px; font-weight: 500;">Visibility + Advocacy + Readiness = Promotion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: The Promotion Equation -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Promotion Equation</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="equation-box">
+                    <h3>What Actually Drives Promotion Decisions</h3>
+                    <div class="equation">
+                        <span class="equation-part">Performance</span>
+                        <span class="equation-sign">+</span>
+                        <span class="equation-part">Visibility</span>
+                        <span class="equation-sign">+</span>
+                        <span class="equation-part">Advocacy</span>
+                        <span class="equation-sign">=</span>
+                        <span class="equation-part" style="background: var(--accent);">Promotion</span>
+                    </div>
+                </div>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>Performance (Table Stakes)</h3>
+                        <p>Excellent work is necessary but not sufficient. Without it, nothing else matters—but with it alone, you'll stay stuck.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Visibility (The Multiplier)</h3>
+                        <p>Decision-makers must know who you are and what you've accomplished. Your work must be seen by those who matter.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Advocacy (The Accelerator)</h3>
+                        <p>You need people with power speaking on your behalf in rooms you're not in. This is where promotions are won or lost.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Section - Performance -->
+        <div class="slide slide-section">
+            <h2>Performance That Gets Noticed</h2>
+            <p>Doing the right work, not just more work</p>
+        </div>
+
+        <!-- Slide 5: High-Impact Work -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Focus on High-Impact Work</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Not all work is created equal. Promotions reward work that's visible, valued, and connected to business priorities—not the most hours or the most effort.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card" style="background: #f0f9f0; border-color: #27ae60;">
+                        <h3 style="color: #27ae60;">High-Impact Work</h3>
+                        <ul class="styled-list">
+                            <li>Tied to company strategic priorities</li>
+                            <li>Visible to senior leadership</li>
+                            <li>Creates measurable results</li>
+                            <li>Involves cross-functional exposure</li>
+                            <li>Demonstrates leadership capability</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: #fef5f5; border-color: #e74c3c;">
+                        <h3 style="color: #c0392b;">Low-Visibility Work</h3>
+                        <ul class="styled-list">
+                            <li>"Office housework" (note-taking, planning parties)</li>
+                            <li>Maintenance work that keeps things running</li>
+                            <li>Helping others without credit</li>
+                            <li>Projects no one asked for</li>
+                            <li>Work your boss takes credit for</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>The Question to Ask</h3>
+                    <p>"Will doing this well advance my career, or just add to my workload?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Document Your Impact -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Document Your Impact</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">If you don't track your wins, no one will. Keep a running record of your accomplishments using the STAR framework:</p>
+                <div class="grid-4">
+                    <div class="card" style="text-align: center; background: var(--bg-warm);">
+                        <h3 style="color: var(--accent); font-size: 2rem;">S</h3>
+                        <h3>Situation</h3>
+                        <p>The context and challenge</p>
+                    </div>
+                    <div class="card" style="text-align: center; background: var(--bg-warm);">
+                        <h3 style="color: var(--accent); font-size: 2rem;">T</h3>
+                        <h3>Task</h3>
+                        <p>Your responsibility</p>
+                    </div>
+                    <div class="card" style="text-align: center; background: var(--bg-warm);">
+                        <h3 style="color: var(--accent); font-size: 2rem;">A</h3>
+                        <h3>Action</h3>
+                        <p>What you specifically did</p>
+                    </div>
+                    <div class="card" style="text-align: center; background: var(--bg-warm);">
+                        <h3 style="color: var(--accent); font-size: 2rem;">R</h3>
+                        <h3>Result</h3>
+                        <p>Measurable outcome</p>
+                    </div>
+                </div>
+                <div class="card warm" style="margin-top: 32px;">
+                    <h3>Weekly Practice</h3>
+                    <p>Every Friday, spend 10 minutes adding to your accomplishments log. Include: project name, your specific contribution, quantifiable results, who saw it. This becomes your promotion evidence.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Section - Visibility -->
+        <div class="slide slide-section">
+            <h2>Building Strategic Visibility</h2>
+            <p>Being known for the right things</p>
+        </div>
+
+        <!-- Slide 8: Visibility Strategy -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Visibility Map</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Visibility isn't about self-promotion—it's about ensuring the right people know about your contributions. Ask: Who needs to know what I'm capable of?</p>
+                </div>
+                <div class="grid-3" style="margin-top: 32px;">
+                    <div class="card">
+                        <div class="icon-circle">👤</div>
+                        <h3>Your Manager</h3>
+                        <p>Keep them informed of your wins. Make it easy for them to advocate for you. Share regular updates on impact.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">👥</div>
+                        <h3>Skip-Level Leaders</h3>
+                        <p>Find opportunities to present, volunteer for their priorities, ask for brief introductions. They need to know you exist.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🌐</div>
+                        <h3>Cross-Functional Peers</h3>
+                        <p>Your reputation spreads through collaboration. Be the person others want on their projects.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Visibility Tactics -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Practical Visibility Tactics</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Volunteer for Visible Projects</h4>
+                            <p>Raise your hand for initiatives that leadership cares about. Say: "I'd like to contribute to [project]. Here's how I can add value."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Present Your Work</h4>
+                            <p>Look for opportunities to present to senior audiences. Volunteer to share updates, lead meetings, or represent your team.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Share Strategic Updates</h4>
+                            <p>Send concise updates to your manager and stakeholders after major wins. "Quick update: [Project] delivered [result]."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Build External Presence</h4>
+                            <p>Speak at industry events, publish thought leadership, engage on LinkedIn. External visibility creates internal credibility.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Section - Advocacy -->
+        <div class="slide slide-section">
+            <h2>Securing Advocacy</h2>
+            <p>Getting people to speak for you</p>
+        </div>
+
+        <!-- Slide 11: Sponsors vs Mentors -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>You Need Sponsors, Not Just Mentors</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Mentors</h3>
+                        <p style="margin-bottom: 16px; font-size: 1.125rem; color: var(--text);">Talk TO you. Give advice. Help you think through decisions.</p>
+                        <p style="color: var(--text-light);">Valuable, but they don't get you promoted.</p>
+                    </div>
+                    <div class="card accent">
+                        <h3>Sponsors</h3>
+                        <p style="margin-bottom: 16px; font-size: 1.125rem;">Talk ABOUT you. Advocate in rooms you're not in. Use their power for your advancement.</p>
+                        <p style="opacity: 0.9;">These are the people who get you promoted.</p>
+                    </div>
+                </div>
+                <div class="key-point" style="margin-top: 32px;">
+                    <p>Research shows WOC are over-mentored and under-sponsored. We get plenty of advice but not enough advocacy. Focus your energy on earning sponsors.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Earning Sponsors -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>How to Earn a Sponsor</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Sponsorship is earned, not asked for. Sponsors invest in people who make them look good:</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Deliver Outstanding Results</h4>
+                            <p>Sponsors stake their reputation on you. Give them undeniable evidence of your excellence. Exceed expectations visibly.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Support Their Priorities</h4>
+                            <p>Volunteer for their initiatives. Make their job easier. Show you understand what they care about and can deliver on it.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Be Visible to Them</h4>
+                            <p>They can't sponsor what they don't know. Present in meetings they attend. Update them on wins. Build genuine relationship.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Be Clear About Your Goals</h4>
+                            <p>Once trust is built, share your aspirations. "I'm working toward [role]. I'd value your guidance on what I need to get there."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Section - The Conversation -->
+        <div class="slide slide-section">
+            <h2>Having the Promotion Conversation</h2>
+            <p>Asking for what you've earned</p>
+        </div>
+
+        <!-- Slide 14: When to Ask -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Timing Your Ask</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card" style="background: #f0f9f0; border-color: #27ae60;">
+                        <h3 style="color: #27ae60;">Good Times to Ask</h3>
+                        <ul class="styled-list">
+                            <li>After a major successful project</li>
+                            <li>During performance review cycles</li>
+                            <li>When you've been doing the job already</li>
+                            <li>When a position opens up</li>
+                            <li>When your boss has budget authority</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: #fef5f5; border-color: #e74c3c;">
+                        <h3 style="color: #c0392b;">Not Ideal Times</h3>
+                        <ul class="styled-list">
+                            <li>During company layoffs or freezes</li>
+                            <li>When your boss is under pressure</li>
+                            <li>Before you've built your case</li>
+                            <li>Right after a setback or mistake</li>
+                            <li>When you haven't signaled interest before</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>The Pre-Conversation</h3>
+                    <p>Plant the seed early. "I want to discuss my path to [role]. Can we schedule time to talk about what I need to get there?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Making Your Case -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Making Your Case</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Lead with Impact</h4>
+                            <p>"Over the past [time], I've [specific accomplishments with measurable results]. I've consistently exceeded expectations in [areas]."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Show You're Already Doing the Job</h4>
+                            <p>"I've been operating at the [next level] by [examples]. I'm already doing [responsibilities] of that role."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Make the Ask Clear</h4>
+                            <p>"I'm ready for the [specific role/level] and believe I've demonstrated the impact to support this. I'd like to discuss making this official."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Address Potential Objections</h4>
+                            <p>If there are gaps, acknowledge them: "I know [area] is a growth area. Here's how I'm addressing it..."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: If They Say No -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>When the Answer Is "Not Yet"</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>A "no" isn't the end—it's information. Your job is to understand what's needed and create accountability for getting there.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <h3>Questions to Ask</h3>
+                        <ul class="styled-list">
+                            <li>"What specifically do I need to demonstrate?"</li>
+                            <li>"What timeline are we looking at?"</li>
+                            <li>"What would change your answer?"</li>
+                            <li>"Who else needs to be on board?"</li>
+                            <li>"How can I get more visibility for my work?"</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>Follow-Up Actions</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Email summary of the conversation</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Create a 90-day development plan</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Schedule regular check-ins on progress</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Document all achievements</li>
+                            <li style="padding: 12px 0;">Revisit the conversation on agreed timeline</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: When to Leave -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Know When to Look Elsewhere</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="quote">
+                    <blockquote>"Sometimes the only way to get promoted is to get promoted out."</blockquote>
+                    <cite>— Career Truth</cite>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>Signs It's Time to Look</h3>
+                        <ul class="styled-list">
+                            <li>Vague feedback with no clear path</li>
+                            <li>Goal posts keep moving</li>
+                            <li>Others promoted ahead of you repeatedly</li>
+                            <li>No sponsor willing to advocate</li>
+                            <li>Company culture doesn't support your growth</li>
+                        </ul>
+                    </div>
+                    <div class="card warm">
+                        <h3>The External Path</h3>
+                        <p style="margin-bottom: 16px;">External opportunities often come with:</p>
+                        <ul style="margin-left: 20px; opacity: 0.95;">
+                            <li style="margin-bottom: 8px;">Significant title advancement</li>
+                            <li style="margin-bottom: 8px;">15-20%+ salary increase</li>
+                            <li style="margin-bottom: 8px;">Fresh start without baggage</li>
+                            <li style="margin-bottom: 8px;">Expanded scope and challenge</li>
+                            <li>Leverage for internal negotiation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Section - WOC Specific -->
+        <div class="slide slide-section">
+            <h2>Navigating as a WOC</h2>
+            <p>The specific challenges we face</p>
+        </div>
+
+        <!-- Slide 19: WOC Challenges -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Extra Work We Do</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>WOC often face additional barriers: we're held to higher standards, receive less sponsorship, and must navigate bias while still delivering excellent work.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <h3>Common Barriers</h3>
+                        <ul class="styled-list">
+                            <li>Being "too aggressive" or "not assertive enough"</li>
+                            <li>Less access to informal networks</li>
+                            <li>Work attributed to others or teams</li>
+                            <li>Judged on potential less than peers</li>
+                            <li>Expected to prove more to earn less</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>Strategic Responses</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Document everything meticulously</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Build multiple sponsors (don't rely on one)</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Claim credit explicitly and often</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Find allies who will amplify you</li>
+                            <li style="padding: 12px 0;">Know your market value externally</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Your Promotion Plan -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Your Promotion Action Plan</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="icon-circle">📊</div>
+                        <h3>This Week</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Start your accomplishments log</li>
+                            <li>Identify 2-3 potential sponsors</li>
+                            <li>Research the next-level role requirements</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">📈</div>
+                        <h3>This Month</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Have a career conversation with your manager</li>
+                            <li>Volunteer for one high-visibility project</li>
+                            <li>Build relationship with one senior leader</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🎯</div>
+                        <h3>This Quarter</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Present to a senior audience</li>
+                            <li>Close the gaps identified with your manager</li>
+                            <li>Have the promotion conversation</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>Your Promotion Is Your Project</h3>
+                    <p>Treat your advancement with the same rigor you'd give a work project. Plan it, execute it, track progress, and course correct.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Closing -->
+        <div class="slide slide-title">
+            <div class="module-number">Key Takeaway</div>
+            <h1>You Are Not<br>Self-Promoting</h1>
+            <p class="subtitle">You are advocating for the recognition you've earned. Your advancement isn't vanity—it's justice. Ask for what you deserve.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <span class="progress-text"><span id="currentSlide">1</span> / <span id="totalSlides">21</span></span>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn secondary" id="prevBtn" disabled>Previous</button>
+            <button class="nav-btn primary" id="nextBtn">Next</button>
+        </div>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        const progress = document.getElementById('progress');
+
+        totalSlidesEl.textContent = totalSlides;
+
+        function updateProgress() {
+            const percent = (currentSlide / totalSlides) * 100;
+            progress.style.width = percent + '%';
+        }
+
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                goToSlide(currentSlide + 1);
+            } else if (touchEndX - touchStartX > 50) {
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        document.querySelector('.slide-container').addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-bar') && !e.target.closest('button') && !e.target.closest('input') && !e.target.closest('textarea')) {
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>

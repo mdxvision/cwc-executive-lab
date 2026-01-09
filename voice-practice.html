@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Practice Planner | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .worksheet {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 48px;
+        }
+
+        .intro {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .intro p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .focus-selection {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .focus-option {
+            position: relative;
+        }
+
+        .focus-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .focus-option label {
+            display: block;
+            padding: 24px;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .focus-option label:hover {
+            border-color: var(--accent);
+            background: rgba(42, 123, 140, 0.05);
+        }
+
+        .focus-option input:checked + label {
+            border-color: var(--accent);
+            background: rgba(42, 123, 140, 0.1);
+        }
+
+        .focus-option label h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.125rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .focus-option label p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .technique-cards {
+            display: grid;
+            gap: 20px;
+        }
+
+        .technique-card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .technique-card h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.125rem;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .technique-card p {
+            color: var(--text-light);
+            font-size: 0.9375rem;
+            margin-bottom: 16px;
+        }
+
+        .technique-card .example {
+            background: white;
+            padding: 16px;
+            border-radius: 8px;
+            font-style: italic;
+            color: var(--text);
+            border-left: 3px solid var(--accent-warm);
+        }
+
+        .meeting-planner {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .meeting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .meeting-header h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .meeting-number {
+            background: var(--accent);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .meeting-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .meeting-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .meeting-row label {
+            font-weight: 500;
+            color: var(--text);
+            padding-top: 10px;
+        }
+
+        .meeting-row input,
+        .meeting-row textarea,
+        .meeting-row select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .meeting-row textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .meeting-row input:focus,
+        .meeting-row textarea:focus,
+        .meeting-row select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .checkbox-item input {
+            width: auto;
+        }
+
+        .checkbox-item label {
+            font-size: 0.875rem;
+            padding: 0;
+        }
+
+        .reflection-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            border: 2px dashed var(--border);
+        }
+
+        .reflection-section h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .reflection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .reflection-grid textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .reflection-grid textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .reflection-grid label {
+            display: block;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+        }
+
+        .scripts-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .scripts-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+        }
+
+        .script-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .script-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .script-item h5 {
+            font-size: 0.9375rem;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .script-item textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .commitment-section {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .commitment-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .commitment-text {
+            font-size: 1.125rem;
+            color: var(--text);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .commitment-text input {
+            border: none;
+            border-bottom: 2px solid var(--accent);
+            background: transparent;
+            font-size: inherit;
+            font-family: inherit;
+            padding: 4px 8px;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .commitment-text input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-warm);
+        }
+
+        .signature-line {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 32px;
+        }
+
+        .signature-item {
+            text-align: center;
+        }
+
+        .signature-item input {
+            border: none;
+            border-bottom: 1px solid var(--text);
+            background: transparent;
+            padding: 8px 24px;
+            font-size: 1rem;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .signature-item input:focus {
+            outline: none;
+        }
+
+        .signature-item label {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 48px;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .worksheet { box-shadow: none; }
+            .meeting-planner { page-break-inside: avoid; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 1.75rem; }
+            .content { padding: 24px; }
+            .focus-selection { grid-template-columns: 1fr; }
+            .meeting-row { grid-template-columns: 1fr; gap: 8px; }
+            .reflection-grid { grid-template-columns: 1fr; }
+            .signature-line { flex-direction: column; gap: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <h1>Voice Practice Planner</h1>
+            <p>Module 5: Amplify Your Voice | May</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>Real change happens through deliberate practice. This planner helps you prepare for three specific meetings where you'll intentionally practice amplifying your voice. Plan before, execute during, and reflect after to accelerate your growth.</p>
+            </div>
+
+            <!-- Focus Area Selection -->
+            <div class="section">
+                <h2 class="section-title">Step 1: Select Your Focus Area</h2>
+                <p style="margin-bottom: 20px; color: var(--text-light);">Based on your Voice Assessment, which area will you prioritize this month?</p>
+                <div class="focus-selection">
+                    <div class="focus-option">
+                        <input type="radio" name="focus" id="focus-speaking" value="speaking">
+                        <label for="focus-speaking">
+                            <h4>Speaking Up</h4>
+                            <p>Share ideas earlier, speak with confidence, claim credit</p>
+                        </label>
+                    </div>
+                    <div class="focus-option">
+                        <input type="radio" name="focus" id="focus-holding" value="holding">
+                        <label for="focus-holding">
+                            <h4>Holding Space</h4>
+                            <p>Handle interruptions, reclaim ideas, maintain position</p>
+                        </label>
+                    </div>
+                    <div class="focus-option">
+                        <input type="radio" name="focus" id="focus-influence" value="influence">
+                        <label for="focus-influence">
+                            <h4>Influencing</h4>
+                            <p>Build coalitions, get buy-in, lead without authority</p>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Techniques Reference -->
+            <div class="section">
+                <h2 class="section-title">Step 2: Review Key Techniques</h2>
+                <div class="technique-cards">
+                    <div class="technique-card">
+                        <h4>The Early Entry</h4>
+                        <p>Contribute in the first 10 minutes to establish your voice and stake your position before the conversation gets crowded.</p>
+                        <div class="example">"Before we go further, I want to add that..." or "Building on what [Name] said, I'd suggest..."</div>
+                    </div>
+                    <div class="technique-card">
+                        <h4>The Confident Pause</h4>
+                        <p>When interrupted, pause briefly, maintain eye contact, and continue where you left off or redirect the conversation.</p>
+                        <div class="example">"I'd like to finish my thought..." [pause] "As I was saying, the data shows..."</div>
+                    </div>
+                    <div class="technique-card">
+                        <h4>The Reclaim</h4>
+                        <p>When someone repeats your idea without credit, acknowledge it graciously while clearly establishing ownership.</p>
+                        <div class="example">"I'm glad that resonates, [Name]. When I suggested it earlier, my thinking was..."</div>
+                    </div>
+                    <div class="technique-card">
+                        <h4>The Coalition Build</h4>
+                        <p>Before key meetings, connect 1:1 with stakeholders to share your perspective and understand their priorities.</p>
+                        <div class="example">"I wanted to get your thoughts before Thursday's meeting. Here's what I'm thinking..."</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meeting 1 -->
+            <div class="section">
+                <h2 class="section-title">Step 3: Plan Your Practice Meetings</h2>
+
+                <div class="meeting-planner">
+                    <div class="meeting-header">
+                        <h3>Practice Meeting 1</h3>
+                        <div class="meeting-number">1</div>
+                    </div>
+                    <div class="meeting-grid">
+                        <div class="meeting-row">
+                            <label>Meeting Name:</label>
+                            <input type="text" placeholder="e.g., Weekly Leadership Team Sync">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Date & Time:</label>
+                            <input type="text" placeholder="e.g., Tuesday, May 6 at 2pm">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Key Attendees:</label>
+                            <input type="text" placeholder="Who will be in the room? Who matters most?">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Technique(s) I'll Practice:</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m1-early">
+                                    <label for="m1-early">Early Entry</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m1-pause">
+                                    <label for="m1-pause">Confident Pause</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m1-reclaim">
+                                    <label for="m1-reclaim">Reclaim</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m1-coalition">
+                                    <label for="m1-coalition">Coalition Build</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="meeting-row">
+                            <label>My Specific Goal:</label>
+                            <textarea placeholder="What exactly will you do? Be specific. e.g., 'I will share my perspective on the Q3 timeline in the first 10 minutes'"></textarea>
+                        </div>
+                        <div class="meeting-row">
+                            <label>Prepared Statement:</label>
+                            <textarea placeholder="Write out what you plan to say. Having exact words ready increases follow-through."></textarea>
+                        </div>
+                        <div class="meeting-row">
+                            <label>Potential Challenge:</label>
+                            <textarea placeholder="What might make this hard? How will you handle it?"></textarea>
+                        </div>
+                    </div>
+                    <div class="reflection-section">
+                        <h4>Post-Meeting Reflection (complete within 24 hours)</h4>
+                        <div class="reflection-grid">
+                            <div>
+                                <label>What happened when I practiced?</label>
+                                <textarea placeholder="Describe the moment and how it went"></textarea>
+                            </div>
+                            <div>
+                                <label>How did others respond?</label>
+                                <textarea placeholder="What reactions did you notice?"></textarea>
+                            </div>
+                            <div>
+                                <label>What felt different?</label>
+                                <textarea placeholder="How did you feel before, during, and after?"></textarea>
+                            </div>
+                            <div>
+                                <label>What will I do next time?</label>
+                                <textarea placeholder="Adjustments for your next practice"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meeting 2 -->
+                <div class="meeting-planner">
+                    <div class="meeting-header">
+                        <h3>Practice Meeting 2</h3>
+                        <div class="meeting-number">2</div>
+                    </div>
+                    <div class="meeting-grid">
+                        <div class="meeting-row">
+                            <label>Meeting Name:</label>
+                            <input type="text" placeholder="e.g., Cross-Functional Project Review">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Date & Time:</label>
+                            <input type="text" placeholder="e.g., Thursday, May 15 at 10am">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Key Attendees:</label>
+                            <input type="text" placeholder="Who will be in the room? Who matters most?">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Technique(s) I'll Practice:</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m2-early">
+                                    <label for="m2-early">Early Entry</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m2-pause">
+                                    <label for="m2-pause">Confident Pause</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m2-reclaim">
+                                    <label for="m2-reclaim">Reclaim</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m2-coalition">
+                                    <label for="m2-coalition">Coalition Build</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="meeting-row">
+                            <label>My Specific Goal:</label>
+                            <textarea placeholder="What exactly will you do? Be specific."></textarea>
+                        </div>
+                        <div class="meeting-row">
+                            <label>Prepared Statement:</label>
+                            <textarea placeholder="Write out what you plan to say."></textarea>
+                        </div>
+                        <div class="meeting-row">
+                            <label>Potential Challenge:</label>
+                            <textarea placeholder="What might make this hard? How will you handle it?"></textarea>
+                        </div>
+                    </div>
+                    <div class="reflection-section">
+                        <h4>Post-Meeting Reflection (complete within 24 hours)</h4>
+                        <div class="reflection-grid">
+                            <div>
+                                <label>What happened when I practiced?</label>
+                                <textarea placeholder="Describe the moment and how it went"></textarea>
+                            </div>
+                            <div>
+                                <label>How did others respond?</label>
+                                <textarea placeholder="What reactions did you notice?"></textarea>
+                            </div>
+                            <div>
+                                <label>What felt different?</label>
+                                <textarea placeholder="How did you feel before, during, and after?"></textarea>
+                            </div>
+                            <div>
+                                <label>What will I do next time?</label>
+                                <textarea placeholder="Adjustments for your next practice"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Meeting 3 -->
+                <div class="meeting-planner">
+                    <div class="meeting-header">
+                        <h3>Practice Meeting 3</h3>
+                        <div class="meeting-number">3</div>
+                    </div>
+                    <div class="meeting-grid">
+                        <div class="meeting-row">
+                            <label>Meeting Name:</label>
+                            <input type="text" placeholder="e.g., Executive Presentation">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Date & Time:</label>
+                            <input type="text" placeholder="e.g., Monday, May 26 at 3pm">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Key Attendees:</label>
+                            <input type="text" placeholder="Who will be in the room? Who matters most?">
+                        </div>
+                        <div class="meeting-row">
+                            <label>Technique(s) I'll Practice:</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m3-early">
+                                    <label for="m3-early">Early Entry</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m3-pause">
+                                    <label for="m3-pause">Confident Pause</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m3-reclaim">
+                                    <label for="m3-reclaim">Reclaim</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="m3-coalition">
+                                    <label for="m3-coalition">Coalition Build</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="meeting-row">
+                            <label>My Specific Goal:</label>
+                            <textarea placeholder="What exactly will you do? Be specific."></textarea>
+                        </div>
+                        <div class="meeting-row">
+                            <label>Prepared Statement:</label>
+                            <textarea placeholder="Write out what you plan to say."></textarea>
+                        </div>
+                        <div class="meeting-row">
+                            <label>Potential Challenge:</label>
+                            <textarea placeholder="What might make this hard? How will you handle it?"></textarea>
+                        </div>
+                    </div>
+                    <div class="reflection-section">
+                        <h4>Post-Meeting Reflection (complete within 24 hours)</h4>
+                        <div class="reflection-grid">
+                            <div>
+                                <label>What happened when I practiced?</label>
+                                <textarea placeholder="Describe the moment and how it went"></textarea>
+                            </div>
+                            <div>
+                                <label>How did others respond?</label>
+                                <textarea placeholder="What reactions did you notice?"></textarea>
+                            </div>
+                            <div>
+                                <label>What felt different?</label>
+                                <textarea placeholder="How did you feel before, during, and after?"></textarea>
+                            </div>
+                            <div>
+                                <label>What will I do next time?</label>
+                                <textarea placeholder="Adjustments for your next practice"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Personal Scripts -->
+            <div class="section">
+                <div class="scripts-section">
+                    <h3>My Go-To Voice Scripts</h3>
+                    <p style="opacity: 0.9; margin-bottom: 20px;">Write your personalized versions of these phrases to have ready:</p>
+                    <div class="script-grid">
+                        <div class="script-item">
+                            <h5>When I want to contribute early:</h5>
+                            <textarea placeholder="e.g., 'Before we dive deeper, I want to share a perspective on...'"></textarea>
+                        </div>
+                        <div class="script-item">
+                            <h5>When I'm interrupted:</h5>
+                            <textarea placeholder="e.g., 'I appreciate that, and I'd like to finish my point—...'"></textarea>
+                        </div>
+                        <div class="script-item">
+                            <h5>When my idea is repeated without credit:</h5>
+                            <textarea placeholder="e.g., 'I'm glad you're building on that. When I raised it earlier, my thinking was...'"></textarea>
+                        </div>
+                        <div class="script-item">
+                            <h5>When I need to disagree respectfully:</h5>
+                            <textarea placeholder="e.g., 'I see it differently. Here's what the data suggests...'"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment -->
+            <div class="section">
+                <div class="commitment-section">
+                    <h3>My Voice Commitment</h3>
+                    <p class="commitment-text">
+                        This month, I commit to practicing <input type="text" placeholder="[technique]">
+                        in at least <input type="text" placeholder="[number]"> meetings.
+                        I will prepare in advance, reflect afterward, and trust that my voice matters.
+                        I know that discomfort is part of growth, and I choose growth.
+                    </p>
+                    <div class="signature-line">
+                        <div class="signature-item">
+                            <input type="text" placeholder="">
+                            <label>Signature</label>
+                        </div>
+                        <div class="signature-item">
+                            <input type="text" placeholder="">
+                            <label>Date</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Executive Leadership Lab | Module 5: Amplify Your Voice</p>
+        </div>
+    </div>
+</body>
+</html>

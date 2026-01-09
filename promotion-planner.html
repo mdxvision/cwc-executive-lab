@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotion Readiness Planner | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .worksheet {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 48px;
+        }
+
+        .intro {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .intro p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .target-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .target-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+        }
+
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .target-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .target-item label {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .target-item input,
+        .target-item textarea {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .target-item textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .accomplishments-log {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .accomplishments-log h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .accomplishment-entry {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .accomplishment-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .accomplishment-header input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9375rem;
+        }
+
+        .accomplishment-header input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .star-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        .star-item {
+            background: var(--bg-warm);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .star-item label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .star-item textarea {
+            width: 100%;
+            min-height: 60px;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            resize: vertical;
+            background: white;
+        }
+
+        .star-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .visibility-section {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .visibility-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .visibility-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .visibility-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .visibility-card h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .visibility-card textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .visibility-card textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .sponsors-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            border: 2px solid var(--accent);
+        }
+
+        .sponsors-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .sponsor-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr 2fr 1fr;
+            gap: 16px;
+            padding: 16px;
+            background: var(--bg);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .sponsor-entry label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin-bottom: 6px;
+        }
+
+        .sponsor-entry input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.875rem;
+            background: white;
+        }
+
+        .sponsor-entry input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .gap-analysis {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .gap-analysis h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .gap-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .gap-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .gap-item h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .gap-item textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .gap-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .script-section {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .script-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .script-section p {
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .script-section textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            background: rgba(255,255,255,0.95);
+            line-height: 1.6;
+        }
+
+        .timeline-section {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .timeline-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .timeline-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .timeline-item h4 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .timeline-item textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .timeline-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 48px;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .worksheet { box-shadow: none; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 1.75rem; }
+            .content { padding: 24px; }
+            .target-grid { grid-template-columns: 1fr; }
+            .accomplishment-header { grid-template-columns: 1fr; }
+            .star-grid { grid-template-columns: repeat(2, 1fr); }
+            .visibility-grid { grid-template-columns: 1fr; }
+            .sponsor-entry { grid-template-columns: 1fr; }
+            .gap-grid { grid-template-columns: 1fr; }
+            .timeline-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <h1>Promotion Readiness Planner</h1>
+            <p>Module 9: Get Promoted | September</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>Use this planner to build your case for promotion. Document your accomplishments, map your visibility strategy, identify sponsors, and prepare for the conversation. Promotions are won through preparation, not luck.</p>
+            </div>
+
+            <!-- Target Role -->
+            <div class="section">
+                <h2 class="section-title">Part 1: Define Your Target</h2>
+                <div class="target-section">
+                    <h3>Your Promotion Goal</h3>
+                    <div class="target-grid">
+                        <div class="target-item">
+                            <label>Target Role/Title:</label>
+                            <input type="text" placeholder="e.g., Senior Manager, Director, VP">
+                        </div>
+                        <div class="target-item">
+                            <label>Target Timeline:</label>
+                            <input type="text" placeholder="e.g., Next review cycle (March)">
+                        </div>
+                        <div class="target-item">
+                            <label>Key Requirements for This Level:</label>
+                            <textarea placeholder="What does your company require for this role? Check job descriptions and competency frameworks."></textarea>
+                        </div>
+                        <div class="target-item">
+                            <label>Why You Deserve This Promotion:</label>
+                            <textarea placeholder="Your elevator pitch for why you're ready now."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Accomplishments Log -->
+            <div class="section">
+                <h2 class="section-title">Part 2: Accomplishments Log</h2>
+                <div class="accomplishments-log">
+                    <h3>Your STAR Evidence (add more rows as needed)</h3>
+
+                    <div class="accomplishment-entry">
+                        <div class="accomplishment-header">
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Project/Initiative</label>
+                                <input type="text" placeholder="Name of project">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Date</label>
+                                <input type="text" placeholder="When">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Visibility (Who saw this?)</label>
+                                <input type="text" placeholder="Senior leaders, stakeholders">
+                            </div>
+                        </div>
+                        <div class="star-grid">
+                            <div class="star-item">
+                                <label>Situation</label>
+                                <textarea placeholder="Context and challenge"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Task</label>
+                                <textarea placeholder="Your responsibility"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Action</label>
+                                <textarea placeholder="What YOU did"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Result</label>
+                                <textarea placeholder="Measurable outcome"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accomplishment-entry">
+                        <div class="accomplishment-header">
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Project/Initiative</label>
+                                <input type="text" placeholder="Name of project">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Date</label>
+                                <input type="text" placeholder="When">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Visibility (Who saw this?)</label>
+                                <input type="text" placeholder="Senior leaders, stakeholders">
+                            </div>
+                        </div>
+                        <div class="star-grid">
+                            <div class="star-item">
+                                <label>Situation</label>
+                                <textarea placeholder="Context and challenge"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Task</label>
+                                <textarea placeholder="Your responsibility"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Action</label>
+                                <textarea placeholder="What YOU did"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Result</label>
+                                <textarea placeholder="Measurable outcome"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accomplishment-entry">
+                        <div class="accomplishment-header">
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Project/Initiative</label>
+                                <input type="text" placeholder="Name of project">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Date</label>
+                                <input type="text" placeholder="When">
+                            </div>
+                            <div>
+                                <label style="font-size: 0.75rem; color: var(--text-light); display: block; margin-bottom: 4px;">Visibility (Who saw this?)</label>
+                                <input type="text" placeholder="Senior leaders, stakeholders">
+                            </div>
+                        </div>
+                        <div class="star-grid">
+                            <div class="star-item">
+                                <label>Situation</label>
+                                <textarea placeholder="Context and challenge"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Task</label>
+                                <textarea placeholder="Your responsibility"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Action</label>
+                                <textarea placeholder="What YOU did"></textarea>
+                            </div>
+                            <div class="star-item">
+                                <label>Result</label>
+                                <textarea placeholder="Measurable outcome"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visibility Strategy -->
+            <div class="section">
+                <div class="visibility-section">
+                    <h3>Part 3: Visibility Strategy</h3>
+                    <div class="visibility-grid">
+                        <div class="visibility-card">
+                            <h4>Decision Makers Who Need to Know Me</h4>
+                            <textarea placeholder="List the people who influence promotion decisions. Who do you need to be visible to?"></textarea>
+                        </div>
+                        <div class="visibility-card">
+                            <h4>High-Visibility Projects I'll Pursue</h4>
+                            <textarea placeholder="What initiatives can you volunteer for that will get you in front of the right people?"></textarea>
+                        </div>
+                        <div class="visibility-card">
+                            <h4>How I'll Share My Wins</h4>
+                            <textarea placeholder="How will you make your accomplishments known? Updates to manager? Presentations? LinkedIn?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sponsors -->
+            <div class="section">
+                <div class="sponsors-section">
+                    <h3>Part 4: Sponsor Strategy</h3>
+                    <p style="color: var(--text-light); margin-bottom: 20px;">Identify 2-3 senior leaders who could advocate for you. How will you earn their sponsorship?</p>
+                    <div class="sponsor-entry">
+                        <div>
+                            <label>Name</label>
+                            <input type="text" placeholder="Potential sponsor">
+                        </div>
+                        <div>
+                            <label>Their Role</label>
+                            <input type="text" placeholder="Title/Position">
+                        </div>
+                        <div>
+                            <label>Why They Could Sponsor Me</label>
+                            <input type="text" placeholder="Connection, shared work, etc.">
+                        </div>
+                        <div>
+                            <label>Next Step</label>
+                            <input type="text" placeholder="Action to build relationship">
+                        </div>
+                    </div>
+                    <div class="sponsor-entry">
+                        <div>
+                            <label>Name</label>
+                            <input type="text" placeholder="Potential sponsor">
+                        </div>
+                        <div>
+                            <label>Their Role</label>
+                            <input type="text" placeholder="Title/Position">
+                        </div>
+                        <div>
+                            <label>Why They Could Sponsor Me</label>
+                            <input type="text" placeholder="Connection, shared work, etc.">
+                        </div>
+                        <div>
+                            <label>Next Step</label>
+                            <input type="text" placeholder="Action to build relationship">
+                        </div>
+                    </div>
+                    <div class="sponsor-entry">
+                        <div>
+                            <label>Name</label>
+                            <input type="text" placeholder="Potential sponsor">
+                        </div>
+                        <div>
+                            <label>Their Role</label>
+                            <input type="text" placeholder="Title/Position">
+                        </div>
+                        <div>
+                            <label>Why They Could Sponsor Me</label>
+                            <input type="text" placeholder="Connection, shared work, etc.">
+                        </div>
+                        <div>
+                            <label>Next Step</label>
+                            <input type="text" placeholder="Action to build relationship">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gap Analysis -->
+            <div class="section">
+                <div class="gap-analysis">
+                    <h3>Part 5: Gap Analysis</h3>
+                    <div class="gap-grid">
+                        <div class="gap-item">
+                            <h4>Skills/Experiences I Need</h4>
+                            <textarea placeholder="What requirements am I missing? What would make my case stronger?"></textarea>
+                        </div>
+                        <div class="gap-item">
+                            <h4>How I'll Close These Gaps</h4>
+                            <textarea placeholder="Specific actions to develop these areas before your target date"></textarea>
+                        </div>
+                        <div class="gap-item">
+                            <h4>Objections I Might Face</h4>
+                            <textarea placeholder="What concerns might decision-makers have about promoting you?"></textarea>
+                        </div>
+                        <div class="gap-item">
+                            <h4>How I'll Address Them</h4>
+                            <textarea placeholder="Evidence or actions that counter these objections"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The Ask -->
+            <div class="section">
+                <div class="script-section">
+                    <h3>Part 6: Your Promotion Pitch</h3>
+                    <p>Write out your case for promotion. Practice saying this out loud.</p>
+                    <textarea placeholder="Example structure:
+
+'Over the past [time period], I've consistently [exceeded expectations/delivered results] including [2-3 specific accomplishments with measurable outcomes].
+
+I've been operating at the [next level] by [examples of next-level work]. I'm already [specific responsibilities] that are typical of [target role].
+
+Based on my contributions and readiness, I'm asking to be promoted to [specific role]. I believe I've demonstrated the impact and capability to succeed at this level.
+
+What I need from you is [specific ask: support, timeline, clarity on next steps].'"></textarea>
+                </div>
+            </div>
+
+            <!-- Action Timeline -->
+            <div class="section">
+                <div class="timeline-section">
+                    <h3>Part 7: Your Promotion Action Plan</h3>
+                    <div class="timeline-grid">
+                        <div class="timeline-item">
+                            <h4>This Week</h4>
+                            <textarea placeholder="Immediate actions to start your promotion campaign"></textarea>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>This Month</h4>
+                            <textarea placeholder="Key milestones and relationship-building activities"></textarea>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Before Target Date</h4>
+                            <textarea placeholder="What must be done before you have the conversation?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Executive Leadership Lab | Module 9: Get Promoted</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amplify Your Voice | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1A1A1A; --accent: #2A7B8C; --accent-warm: #D4A574; --text: #333333; --text-light: #666666; --text-muted: #999999; --bg: #FAF8F5; --bg-warm: #F5F2ED; --border: #E5E0D8; }
+        @media print { body { overflow: visible; height: auto; background: white; } .presentation { height: auto; } .slide { position: relative; opacity: 1; visibility: visible; transform: none; page-break-after: always; height: 100vh; padding: 40px 60px; } .slide::before { display: none; } .nav-controls, .keyboard-hint, .progress-bar { display: none; } }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--primary); color: var(--text); overflow: hidden; height: 100vh; }
+        .presentation { position: relative; width: 100vw; height: 100vh; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 80px 120px; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.5s ease; background: var(--bg); }
+        .slide::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.03; pointer-events: none; z-index: 0; }
+        .slide > * { position: relative; z-index: 1; }
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .nav-controls { position: fixed; bottom: 48px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 24px; z-index: 1000; }
+        .nav-btn { width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
+        .nav-btn:hover { background: var(--primary); color: var(--bg); }
+        .nav-btn:disabled { border-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        .nav-btn:disabled:hover { background: transparent; color: var(--text-muted); }
+        .nav-btn svg { width: 20px; height: 20px; }
+        .slide-counter { font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px; }
+        .progress-bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); transition: width 0.4s ease; z-index: 1001; }
+        .slide-header { position: absolute; top: 40px; left: 60px; right: 60px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { height: 64px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+        .slide-content { max-width: 960px; width: 100%; text-align: center; }
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 56px; font-weight: 700; color: var(--primary); line-height: 1.15; letter-spacing: -1px; margin-bottom: 24px; }
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 42px; font-weight: 600; color: var(--primary); line-height: 1.2; margin-bottom: 20px; }
+        .section-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 20px; display: block; }
+        p, .lead { font-size: 18px; line-height: 1.7; color: var(--text-light); max-width: 680px; margin: 0 auto; }
+        .lead { font-size: 20px; }
+        .slide-title { background: linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 50%, #1A1A1A 100%); color: var(--bg); }
+        .slide-title::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('images/0B1A7916.jpg') center/cover no-repeat; opacity: 0.15; pointer-events: none; z-index: -1; }
+        .slide-title h1 { color: var(--bg); font-size: 64px; }
+        .slide-title p { color: rgba(255,255,255,0.6); }
+        .title-meta { display: flex; justify-content: center; gap: 48px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .meta-item { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; text-align: left; }
+        .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+        .card { padding: 40px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s ease; }
+        .card:hover { border-color: var(--accent); }
+        .card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+        .card p { font-size: 15px; color: var(--text-light); margin: 0; line-height: 1.6; }
+        .feature-list { text-align: left; max-width: 640px; margin: 48px auto 0; }
+        .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+        .feature-item:last-child { border-bottom: none; }
+        .feature-number { width: 32px; height: 32px; background: var(--accent-warm); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: white; flex-shrink: 0; }
+        .feature-text h4 { font-size: 17px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+        .feature-text p { font-size: 15px; color: var(--text-light); margin: 0; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; text-align: left; max-width: 880px; margin: 48px auto 0; }
+        .column h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
+        .column ul { list-style: none; }
+        .column li { padding: 10px 0; font-size: 15px; color: var(--text-light); border-bottom: 1px solid var(--border); }
+        .column li:last-child { border-bottom: none; }
+        .slide-quote { background: var(--bg-warm); }
+        .quote-text { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.5; color: var(--primary); max-width: 800px; font-style: italic; }
+        .quote-text::before { content: '"'; display: block; font-size: 72px; line-height: 1; color: var(--accent-warm); margin-bottom: 16px; }
+        .stats-row { display: flex; justify-content: center; gap: 80px; margin-top: 56px; }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+        .slide-dark { background: linear-gradient(135deg, #1A1A1A 0%, #252525 40%, #1A1A1A 100%); color: var(--bg); }
+        .slide-dark h2 { color: var(--bg); }
+        .slide-dark p { color: rgba(255,255,255,0.6); }
+        .ell-mark { position: absolute; bottom: 40px; right: 60px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; font-weight: 600; letter-spacing: 3px; color: var(--accent-warm); opacity: 0.4; }
+        .slide-dark .ell-mark { color: rgba(255,255,255,0.15); }
+        .slide-title .ell-mark { color: rgba(255,255,255,0.15); }
+        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .callout p { font-size: 15px; margin: 0; }
+        .activity-meta { display: inline-block; margin-top: 40px; padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--text-muted); }
+        .keyboard-hint { position: fixed; bottom: 112px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .keyboard-hint kbd { display: inline-block; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; font-family: inherit; font-size: 11px; margin: 0 2px; }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+
+        <div class="slide slide-title active" data-slide="1">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo">
+                <span class="module-label">Executive Leadership Lab</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Module 5 — May</span>
+                <h1>Amplify Your Voice</h1>
+                <p class="lead">Speak up, be heard, and influence outcomes—without shrinking, over-explaining, or waiting for permission.</p>
+                <div class="title-meta">
+                    <span class="meta-item">10-Month Program</span>
+                    <span class="meta-item">Coaching Women of Color</span>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <div class="slide" data-slide="2">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Welcome</span>
+                <h2>Your Voice Matters.<br>It's Time to Use It.</h2>
+                <p>WOC are often socialized to be quiet, accommodating, and grateful. But executive leadership requires speaking up, challenging ideas, and claiming space. This module gives you the tools to do it strategically.</p>
+                <div class="stats-row">
+                    <div class="stat-item"><div class="stat-number">75%</div><div class="stat-label">of WOC feel unheard at work</div></div>
+                    <div class="stat-item"><div class="stat-number">2×</div><div class="stat-label">more ideas ignored</div></div>
+                    <div class="stat-item"><div class="stat-number">Today</div><div class="stat-label">you claim your voice</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="3">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Objectives</span>
+                <h2>What You'll Gain</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Speak Up with Impact</h4><p>Learn techniques to contribute confidently in meetings without over-qualifying or apologizing</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Handle Interruptions and Pushback</h4><p>Strategies for when you're talked over, dismissed, or challenged unfairly</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Influence Without Authority</h4><p>Persuade stakeholders and drive decisions even when you don't have positional power</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="4">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">The Challenge</span>
+                <h2>Why It's Harder for WOC<br>to Be Heard</h2>
+                <p>The barriers to being heard aren't about your communication skills. They're about systems that weren't designed for your voice.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Cultural Programming</h4><p>Raised to defer, accommodate, and not "make waves." Speaking up can feel like defiance.</p></div>
+                    <div class="card"><h4>Double Bind</h4><p>Speak confidently = aggressive. Speak softly = not leadership material. You can't win.</p></div>
+                    <div class="card"><h4>Invisible Labor</h4><p>Often asked to listen, support, and translate—rarely given the floor to lead.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="5">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Framework</span>
+                <h2>The Voice Amplification Model</h2>
+                <p>Three dimensions of speaking up effectively: what you say, how you say it, and when you say it.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Message Clarity</h4><p>Lead with your point. Be concise. Remove qualifiers. Say what you mean with confidence.</p></div>
+                    <div class="card"><h4>Delivery Power</h4><p>Use vocal variety, strategic pauses, and body language that commands attention.</p></div>
+                    <div class="card"><h4>Strategic Timing</h4><p>Know when to speak first, when to wait, and how to insert yourself into the conversation.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="6">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Message Clarity</span>
+                <h2>Say It Clean, Say It Clear</h2>
+                <p>Strip away the verbal hedges and qualifiers that undermine your message.</p>
+                <div class="two-column">
+                    <div class="column"><h4>Remove These</h4><ul><li>"I just think maybe..."</li><li>"This might be a dumb idea, but..."</li><li>"I'm not sure if this is right..."</li><li>"Does that make sense?"</li><li>"Sorry, but..."</li></ul></div>
+                    <div class="column"><h4>Replace With</h4><ul><li>"My recommendation is..."</li><li>"Here's my perspective..."</li><li>"Based on my analysis..."</li><li>"What questions do you have?"</li><li>(Just make your point)</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="7">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Delivery Power</span>
+                <h2>How You Say It Matters</h2>
+                <p>Your delivery can either amplify or undermine your message. Master these elements.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>The Power of the Pause</h4><p>Pause before key points. Pause after. Let silence do the work. Don't rush to fill space.</p></div>
+                    <div class="card"><h4>End Strong</h4><p>Statements go down in pitch, not up. "We should do X." not "We should do X?"</p></div>
+                    <div class="card"><h4>Volume and Pace</h4><p>Slow down for emphasis. Speak from your diaphragm. Take up auditory space.</p></div>
+                    <div class="card"><h4>Physical Presence</h4><p>Sit forward. Use gestures. Make eye contact. Your body reinforces your words.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide-quote" data-slide="8" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">You don't need permission to speak. You need practice speaking without it.</p>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="9">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Strategic Timing</span>
+                <h2>When to Speak Up</h2>
+                <p>Timing is strategy. Know when your voice will have the most impact.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Speak in the First 5 Minutes</h4><p>Early contributions establish you as a participant, not an observer. Get your voice in the room.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Build on Your Own Ideas</h4><p>If you raised a point earlier, reference it. "As I mentioned before..." reclaims ownership.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Summarize and Redirect</h4><p>Taking the summary role gives you power: "Let me synthesize what I'm hearing..."</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="10">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Handling Interruptions</span>
+                <h2>When You're Talked Over</h2>
+                <p>Interruptions are common for WOC. Here's how to handle them with grace and power.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Keep Going</h4><p>"I'd like to finish my thought..." Continue speaking at the same pace and volume. Don't yield.</p></div>
+                    <div class="card"><h4>Name It Neutrally</h4><p>"I wasn't quite done." "I'd like to complete my point." Simple, direct, not apologetic.</p></div>
+                    <div class="card"><h4>Use an Ally</h4><p>Prep a trusted colleague to say "I think [your name] wasn't finished..." Amplification works.</p></div>
+                    <div class="card"><h4>Circle Back</h4><p>"Before we move on, I want to return to what I was saying..." Reclaim your idea.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="11">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Idea Reclamation</span>
+                <h2>When Someone Takes Your Idea</h2>
+                <p>The "bro-propriation" of ideas is real. Here's how to reclaim credit without seeming petty.</p>
+                <div class="two-column">
+                    <div class="column"><h4>In the Moment</h4><ul><li>"Thanks for championing my idea."</li><li>"I'm glad you're supporting what I proposed."</li><li>"Yes, that builds on my earlier point."</li><li>"Exactly what I was saying earlier."</li></ul></div>
+                    <div class="column"><h4>Preventively</h4><ul><li>Document your ideas in writing first</li><li>Send a pre-meeting email with your thoughts</li><li>Follow up with written summaries</li><li>Build allies who will credit you</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="12">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Self-Assessment</span>
+                <h2>Voice Assessment</h2>
+                <p>Use the Voice Assessment worksheet to identify your patterns and opportunities for growth.</p>
+                <div class="cards-grid two-col" style="margin-top: 48px;">
+                    <div class="card"><h4>Part 1: Your Patterns</h4><p>When do you speak up vs. stay silent? What triggers each? What's the cost?</p></div>
+                    <div class="card"><h4>Part 2: Your Opportunities</h4><p>Where could you use your voice more? What specific situations will you target?</p></div>
+                </div>
+                <div class="activity-meta">Time: 15 minutes</div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="13">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Influence Without Authority</span>
+                <h2>Persuading When You<br>Don't Have Power</h2>
+                <p>You don't need a title to influence outcomes. You need strategy.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Build Coalitions First</h4><p>Socialize your ideas before the meeting. Arrive with allies who will support you.</p></div>
+                    <div class="card"><h4>Frame for Their Interests</h4><p>Connect your proposal to what the decision-maker cares about. Make it their win.</p></div>
+                    <div class="card"><h4>Use Questions Strategically</h4><p>Guide thinking with questions: "Have we considered...?" "What if we...?"</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="14">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Difficult Conversations</span>
+                <h2>Speaking Up When It's Hard</h2>
+                <p>The most important moments to use your voice are often the most uncomfortable.</p>
+                <div class="two-column">
+                    <div class="column"><h4>When to Speak Up</h4><ul><li>When you disagree with direction</li><li>When you see a risk others don't</li><li>When you need resources or support</li><li>When you witness something wrong</li><li>When you want an opportunity</li></ul></div>
+                    <div class="column"><h4>How to Frame It</h4><ul><li>Lead with the goal, not the problem</li><li>Use "I" statements about your perspective</li><li>Ask permission to share a different view</li><li>Offer solutions, not just concerns</li><li>Express directly what you need</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide-quote" data-slide="15" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">The room needs your voice. Don't deprive it—or yourself—of your contribution.</p>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="16">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Practice</span>
+                <h2>Voice Practice Plan</h2>
+                <p>Use the Voice Practice worksheet to plan specific opportunities to amplify your voice over the next 2 weeks.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Identify 3 Meetings</h4><p>Choose 3 meetings this week where you'll practice speaking up—early, clearly, and without qualifiers.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Prepare Your Contributions</h4><p>Write down what you want to say in advance. Practice saying it out loud.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Debrief After</h4><p>Note what worked, what was hard, and what you'll do differently next time.</p></div></div>
+                </div>
+                <div class="activity-meta">Time: 15 minutes planning + ongoing practice</div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="17">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Summary</span>
+                <h2>Key Takeaways</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Clarity Over Comfort</h4><p>Remove qualifiers. Lead with your point. Say what you mean.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Delivery Amplifies Message</h4><p>Use pauses, end statements downward, and let your body reinforce your words.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Timing Is Strategy</h4><p>Speak early. Build on your ideas. Summarize to lead.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Reclaim Your Space</h4><p>When interrupted or stolen from, have scripts ready. Your voice belongs in the room.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" data-slide="18">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 5</span></div>
+            <div class="slide-content">
+                <span class="section-label">Before Next Session</span>
+                <h2>Your Homework</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Complete Your Voice Assessment</h4><p>Identify your patterns and target opportunities for the next 2 weeks.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Practice in 3 Meetings</h4><p>Speak in the first 5 minutes. Use power language. Track how it felt.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Prepare One Difficult Contribution</h4><p>Identify something you've been holding back. Practice saying it. Deliver it.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Recruit an Amplification Ally</h4><p>Ask one colleague to help credit and amplify your contributions.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide slide-dark" data-slide="19" style="background: linear-gradient(rgba(26,26,26,0.92), rgba(26,26,26,0.92)), url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);"><span class="module-label" style="color: rgba(255,255,255,0.5);">Module 5 Complete</span></div>
+            <div class="slide-content">
+                <span class="section-label">Executive Leadership Lab</span>
+                <h2>Your Voice Is<br>Your Instrument</h2>
+                <p>Stop waiting for permission. Stop qualifying. Stop shrinking.<br>The room needs what you have to say.</p>
+                <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="font-size: 14px; color: rgba(255,255,255,0.4);">Next Module: Build Your Board of Advisors — June</p>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+    </div>
+
+    <div class="keyboard-hint">Press <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">19</span></span>
+        <button class="nav-btn" id="nextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const progressBar = document.getElementById('progress');
+        document.getElementById('totalSlides').textContent = totalSlides;
+        function updateProgress() { progressBar.style.width = (currentSlide / totalSlides) * 100 + '%'; }
+        function goToSlide(n) { if (n < 1 || n > totalSlides) return; slides[currentSlide - 1].classList.remove('active'); currentSlide = n; slides[currentSlide - 1].classList.add('active'); currentSlideEl.textContent = currentSlide; prevBtn.disabled = currentSlide === 1; nextBtn.disabled = currentSlide === totalSlides; updateProgress(); }
+        function nextSlide() { if (currentSlide < totalSlides) goToSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 1) goToSlide(currentSlide - 1); }
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        document.addEventListener('keydown', (e) => { if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); } else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); } });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].screenX; if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); } });
+        updateProgress();
+    </script>
+</body>
+</html>

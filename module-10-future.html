@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 10: Set the Table for Your Future | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: var(--bg);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-title {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            position: relative;
+        }
+
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .slide-title .module-number {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .slide-title h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .slide-title .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        .slide-content {
+            padding: 80px 120px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-header {
+            margin-bottom: 48px;
+        }
+
+        .slide-header h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .slide-header .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .slide-body {
+            flex: 1;
+        }
+
+        .slide-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .slide-section h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .slide-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .key-point {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .key-point p {
+            font-size: 1.375rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .quote {
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .quote blockquote {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.75rem;
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .quote cite {
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .card h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .card.accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .card.accent h3 {
+            color: white;
+        }
+
+        .card.accent p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .card.warm {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border: none;
+        }
+
+        .card.warm h3 {
+            color: white;
+        }
+
+        .card.warm p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-warm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .card.accent .icon-circle,
+        .card.warm .icon-circle {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .styled-list {
+            list-style: none;
+        }
+
+        .styled-list li {
+            padding: 16px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.125rem;
+        }
+
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+
+        .styled-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        .vision-box {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .vision-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+
+        .vision-prompt {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2rem;
+            font-style: italic;
+            line-height: 1.4;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .timeline-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 0;
+            position: relative;
+        }
+
+        .timeline-visual::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--border);
+            transform: translateY(-50%);
+        }
+
+        .timeline-point {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-point .dot {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 12px;
+        }
+
+        .timeline-point h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .timeline-point p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn.secondary {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: var(--bg-warm);
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            color: white;
+        }
+
+        .nav-btn.primary:hover:not(:disabled) {
+            background: #236d7a;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .slide-content {
+                padding: 60px;
+            }
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content {
+                padding: 40px 24px 100px;
+            }
+            .slide-title h1 {
+                font-size: 2.5rem;
+            }
+            .slide-header h2 {
+                font-size: 1.75rem;
+            }
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+            .timeline-visual {
+                flex-direction: column;
+                gap: 32px;
+            }
+            .timeline-visual::before {
+                width: 4px;
+                height: 100%;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media print {
+            .slide { display: block !important; position: relative; page-break-after: always; height: auto; min-height: 100vh; }
+            .nav-bar { display: none; }
+            body { overflow: visible; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active">
+            <div class="module-number">Module 10 — October</div>
+            <h1>Set the Table for<br>Your Future</h1>
+            <p class="subtitle">Designing the career and life you want on your terms</p>
+        </div>
+
+        <!-- Slide 2: The Journey So Far -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Look How Far You've Come</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Over the past 10 months, you've built the foundation for executive leadership. Now it's time to look forward—to design the next chapter of your career with intention.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card" style="text-align: center;">
+                        <h3>Months 1-3</h3>
+                        <p>Foundation: Values, Presence, Brand</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3>Months 4-6</h3>
+                        <p>Navigation: Bias, Voice, Relationships</p>
+                    </div>
+                    <div class="card" style="text-align: center;">
+                        <h3>Months 7-9</h3>
+                        <p>Leadership: Teams, Conversations, Promotion</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>Month 10: Your Future</h3>
+                    <p>Now we bring it all together to design what comes next.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Vision Setting -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Start With the End in Mind</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="vision-box">
+                    <h3>Imagine yourself 5 years from now</h3>
+                    <p class="vision-prompt">"What does 'making it' look like for you? Not someone else's definition of success—yours."</p>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>Questions to Consider</h3>
+                        <ul class="styled-list">
+                            <li>What role are you in?</li>
+                            <li>What kind of impact are you making?</li>
+                            <li>How do you spend your days?</li>
+                            <li>Who are you working with?</li>
+                            <li>What's your life outside work like?</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>Your Vision Should Include</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Career: Role, influence, compensation</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Impact: How you're making a difference</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Growth: What you're learning</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Relationships: Your board, network, team</li>
+                            <li style="padding: 12px 0;">Life: Integration, wellbeing, joy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Section -->
+        <div class="slide slide-section">
+            <h2>Charting Your Path</h2>
+            <p>Reverse-engineering your vision</p>
+        </div>
+
+        <!-- Slide 5: The Timeline -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Your 5-Year Arc</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Work backwards from your vision. What needs to happen at each milestone?</p>
+                <div class="timeline-visual">
+                    <div class="timeline-point">
+                        <div class="dot">Now</div>
+                        <h4>Today</h4>
+                        <p>Current role</p>
+                    </div>
+                    <div class="timeline-point">
+                        <div class="dot">1</div>
+                        <h4>Year 1</h4>
+                        <p>First milestone</p>
+                    </div>
+                    <div class="timeline-point">
+                        <div class="dot">2</div>
+                        <h4>Year 2</h4>
+                        <p>Building momentum</p>
+                    </div>
+                    <div class="timeline-point">
+                        <div class="dot">3</div>
+                        <h4>Year 3</h4>
+                        <p>Established leader</p>
+                    </div>
+                    <div class="timeline-point">
+                        <div class="dot">5</div>
+                        <h4>Year 5</h4>
+                        <p>Your vision realized</p>
+                    </div>
+                </div>
+                <div class="card warm" style="margin-top: 32px;">
+                    <h3>The Power of Reverse Planning</h3>
+                    <p>When you know where you want to be in 5 years, you can work backwards to identify what needs to happen in year 3, year 1, and this quarter. Clarity creates momentum.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Multiple Paths -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Career Paths Aren't Linear</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>The corporate ladder is a myth. Modern careers are more like a jungle gym—you move sideways, diagonally, sometimes even backwards to go forward.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 32px;">
+                    <div class="card">
+                        <div class="icon-circle">⬆️</div>
+                        <h3>Vertical Move</h3>
+                        <p>Traditional promotion—same function, higher level. More scope, more responsibility, more influence.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">↔️</div>
+                        <h3>Lateral Move</h3>
+                        <p>Same level, different function or business. Builds breadth, expands skills, creates new opportunities.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">↗️</div>
+                        <h3>Diagonal Move</h3>
+                        <p>Different function AND higher level. Often requires going external. High risk, high reward.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>Consider All Options</h3>
+                    <p>Sometimes the fastest path to your goal isn't a straight line. A lateral move into a high-growth area might accelerate your career more than waiting for a promotion.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Inside vs Outside -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Stay or Go?</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Be honest about whether your current organization can support your vision:</p>
+                <div class="grid-2">
+                    <div class="card" style="background: #f0f9f0; border-color: #27ae60;">
+                        <h3 style="color: #27ae60;">Reasons to Stay</h3>
+                        <ul class="styled-list">
+                            <li>Clear path to your next role</li>
+                            <li>Strong sponsorship in place</li>
+                            <li>Company growing / opportunities expanding</li>
+                            <li>Culture supports your success</li>
+                            <li>You're learning and challenged</li>
+                            <li>Compensation is competitive</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: #fef5f5; border-color: #e74c3c;">
+                        <h3 style="color: #c0392b;">Signals to Explore</h3>
+                        <ul class="styled-list">
+                            <li>Path blocked or unclear</li>
+                            <li>No one advocating for you</li>
+                            <li>Company shrinking / layoffs</li>
+                            <li>Bias limiting your growth</li>
+                            <li>Stagnant—not learning</li>
+                            <li>Significantly underpaid vs. market</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card accent" style="margin-top: 32px;">
+                    <h3>The Smart Play</h3>
+                    <p>Always know your market value. Always have relationships outside your company. You don't have to leave—but you should always have options. Leverage comes from alternatives.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Section - Beyond Corporate -->
+        <div class="slide slide-section">
+            <h2>Beyond the Corporate Path</h2>
+            <p>Other ways to create impact</p>
+        </div>
+
+        <!-- Slide 9: Alternative Paths -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Executive Isn't the Only Path</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Traditional corporate leadership is one path. There are others that might better align with your values, strengths, and life goals.</p>
+                </div>
+                <div class="grid-4" style="margin-top: 32px;">
+                    <div class="card">
+                        <div class="icon-circle">🚀</div>
+                        <h3>Entrepreneurship</h3>
+                        <p>Build your own company. Control your destiny. Create something new.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🎤</div>
+                        <h3>Consulting/Speaking</h3>
+                        <p>Leverage expertise across organizations. Portfolio career. Freedom.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🏛️</div>
+                        <h3>Board Roles</h3>
+                        <p>Corporate governance. Strategic influence. Multiple organizations.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">❤️</div>
+                        <h3>Nonprofit/Social</h3>
+                        <p>Mission-driven work. Direct impact. Different measures of success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Building Options -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Building Future Options Now</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Whatever path you choose, these investments compound over time:</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Build Your External Brand</h4>
+                            <p>LinkedIn thought leadership, industry speaking, published perspectives. Be known for something outside your company walls.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Cultivate an External Network</h4>
+                            <p>Industry peers, recruiters, leaders at other companies. These relationships create opportunities you can't see yet.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Diversify Your Experience</h4>
+                            <p>Board observer roles, nonprofit boards, advisory positions, side projects. Breadth creates options.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Build Financial Runway</h4>
+                            <p>Save aggressively. Financial freedom gives you courage to take risks and say no to the wrong opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Section - Integration -->
+        <div class="slide slide-section">
+            <h2>Career + Life Integration</h2>
+            <p>Success on your own terms</p>
+        </div>
+
+        <!-- Slide 12: Defining Success -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>What Does Success Really Mean?</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="quote">
+                    <blockquote>"Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful."</blockquote>
+                    <cite>— Albert Schweitzer</cite>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>External Success Markers</h3>
+                        <ul class="styled-list">
+                            <li>Title and compensation</li>
+                            <li>Scope of responsibility</li>
+                            <li>Industry recognition</li>
+                            <li>Team size / budget</li>
+                            <li>Status and prestige</li>
+                        </ul>
+                    </div>
+                    <div class="card warm">
+                        <h3>Internal Success Markers</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Alignment with values</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Meaningful impact</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Joy in daily work</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Time for what matters</li>
+                            <li style="padding: 12px 0;">Health and wellbeing</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="key-point" style="margin-top: 32px;">
+                    <p>The goal isn't to choose one or the other—it's to be intentional about which metrics matter to YOU and to make tradeoffs consciously.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Boundaries -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Protecting What Matters</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Ambition without boundaries leads to burnout. Sustainable success requires protecting time for rest, relationships, and renewal.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 32px;">
+                    <div class="card">
+                        <div class="icon-circle">🔋</div>
+                        <h3>Energy Management</h3>
+                        <p>Know what drains you and what fills you. Structure your calendar to protect energy, not just time.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🚫</div>
+                        <h3>Strategic No's</h3>
+                        <p>Every yes is a no to something else. Be ruthless about what doesn't serve your vision.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">💚</div>
+                        <h3>Non-Negotiables</h3>
+                        <p>Identify the commitments (health, family, self-care) that you won't compromise. Then protect them fiercely.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>The Long Game</h3>
+                    <p>A career is 40+ years. Burnout, health issues, or broken relationships aren't worth any promotion. Pace yourself for the marathon.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Section - Legacy -->
+        <div class="slide slide-section">
+            <h2>Your Legacy</h2>
+            <p>The impact that outlasts your title</p>
+        </div>
+
+        <!-- Slide 15: Legacy Thinking -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>What Do You Want to Be Remembered For?</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="vision-box">
+                    <h3>When you've moved on...</h3>
+                    <p class="vision-prompt">"What will people say about the impact you made? What will have changed because you were there?"</p>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>Legacy Through People</h3>
+                        <p style="margin-bottom: 16px;">The leaders you've developed. The careers you've changed. The people who are where they are because you invested in them.</p>
+                        <p style="font-style: italic; color: var(--text-light);">"My greatest accomplishment isn't what I did—it's who I helped become."</p>
+                    </div>
+                    <div class="card">
+                        <h3>Legacy Through Change</h3>
+                        <p style="margin-bottom: 16px;">The culture you shifted. The doors you opened. The systems you transformed. The path you made easier for those who follow.</p>
+                        <p style="font-style: italic; color: var(--text-light);">"We weren't just successful—we changed how the game is played."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Paying It Forward -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Paying It Forward</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Part of your legacy as a WOC leader is making it easier for those who come after you. You can be the sponsor, mentor, and advocate you wish you'd had.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 32px;">
+                    <div class="card accent">
+                        <h3>Mentor Emerging Leaders</h3>
+                        <p>Share your experience with those coming up behind you. Your journey has lessons that can accelerate theirs.</p>
+                    </div>
+                    <div class="card accent">
+                        <h3>Sponsor Visibly</h3>
+                        <p>Use your growing influence to advocate for others. Speak up in rooms where diverse talent isn't represented.</p>
+                    </div>
+                    <div class="card accent">
+                        <h3>Change Systems</h3>
+                        <p>Challenge inequitable practices. Advocate for fair processes. Create cultures where more people can thrive.</p>
+                    </div>
+                </div>
+                <div class="card warm" style="margin-top: 32px;">
+                    <h3>The Ripple Effect</h3>
+                    <p>When you succeed, you become proof of what's possible. When you help others succeed, you multiply that proof exponentially. Your impact lives on through everyone you've lifted.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Section - Action -->
+        <div class="slide slide-section">
+            <h2>Your Action Plan</h2>
+            <p>Making it real</p>
+        </div>
+
+        <!-- Slide 18: Immediate Actions -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Next Steps: Making This Real</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="icon-circle">📋</div>
+                        <h3>This Week</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Write your 5-year vision</li>
+                            <li>Identify your top 3 goals for next year</li>
+                            <li>Share your vision with one trusted person</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">📅</div>
+                        <h3>This Month</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Create your career development plan</li>
+                            <li>Have a career conversation with your manager</li>
+                            <li>Schedule time for one external relationship</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🎯</div>
+                        <h3>This Quarter</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Take action on your biggest priority</li>
+                            <li>Build one new external relationship</li>
+                            <li>Identify one person to mentor or sponsor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Commitment -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Your Commitment to Yourself</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="vision-box">
+                    <h3>I commit to:</h3>
+                    <p class="vision-prompt" style="font-size: 1.5rem;">Taking ownership of my career journey. Being intentional about my choices. Asking for what I deserve. Leading authentically. Building a legacy I'm proud of.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>What I'll Stop Doing</h3>
+                        <p style="padding: 16px; background: var(--bg); border-radius: 8px; min-height: 80px;">Waiting to be noticed. Doubting my value. Apologizing for my ambition. Playing small.</p>
+                    </div>
+                    <div class="card">
+                        <h3>What I'll Start Doing</h3>
+                        <p style="padding: 16px; background: var(--bg); border-radius: 8px; min-height: 80px;">Advocating for myself. Building strategic relationships. Planning my future intentionally. Leading others.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Closing -->
+        <div class="slide slide-title" style="background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);">
+            <div class="module-number">The Journey Continues</div>
+            <h1>You Belong at<br>the Table</h1>
+            <p class="subtitle" style="max-width: 700px;">This program gave you tools. Your courage gave them power. Now go build something extraordinary. The world needs your leadership.</p>
+        </div>
+
+        <!-- Slide 21: Final Thought -->
+        <div class="slide slide-title">
+            <div class="module-number">Final Thought</div>
+            <h1>Your Success<br>Changes Everything</h1>
+            <p class="subtitle">When you rise, you don't rise alone. Every ceiling you break becomes a floor for someone else. Lead boldly. The future is waiting.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <span class="progress-text"><span id="currentSlide">1</span> / <span id="totalSlides">21</span></span>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn secondary" id="prevBtn" disabled>Previous</button>
+            <button class="nav-btn primary" id="nextBtn">Next</button>
+        </div>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        const progress = document.getElementById('progress');
+
+        totalSlidesEl.textContent = totalSlides;
+
+        function updateProgress() {
+            const percent = (currentSlide / totalSlides) * 100;
+            progress.style.width = percent + '%';
+        }
+
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                goToSlide(currentSlide + 1);
+            } else if (touchEndX - touchStartX > 50) {
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        document.querySelector('.slide-container').addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-bar') && !e.target.closest('button') && !e.target.closest('input') && !e.target.closest('textarea')) {
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>

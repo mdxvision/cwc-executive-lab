@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: Build Your Board of Advisors | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: var(--bg);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Title Slide */
+        .slide-title {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            position: relative;
+        }
+
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .slide-title .module-number {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .slide-title h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .slide-title .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        /* Content Slides */
+        .slide-content {
+            padding: 80px 120px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-header {
+            margin-bottom: 48px;
+        }
+
+        .slide-header h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .slide-header .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .slide-body {
+            flex: 1;
+        }
+
+        /* Section Divider */
+        .slide-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .slide-section h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .slide-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        /* Key Point */
+        .key-point {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .key-point p {
+            font-size: 1.375rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        /* Quote */
+        .quote {
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .quote blockquote {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.75rem;
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .quote cite {
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        /* Grid layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .card h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .card.accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .card.accent h3 {
+            color: white;
+        }
+
+        .card.accent p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .card.warm {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border: none;
+        }
+
+        .card.warm h3 {
+            color: white;
+        }
+
+        .card.warm p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        /* Icon circles */
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-warm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .card.accent .icon-circle,
+        .card.warm .icon-circle {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Lists */
+        .styled-list {
+            list-style: none;
+        }
+
+        .styled-list li {
+            padding: 16px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.125rem;
+        }
+
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+
+        .styled-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Role Cards - special styling for advisor roles */
+        .role-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .role-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(42, 123, 140, 0.12);
+        }
+
+        .role-card .role-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--bg-warm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .role-card h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.125rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .role-card p {
+            color: var(--text-light);
+            font-size: 0.9375rem;
+            line-height: 1.5;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th {
+            background: var(--primary);
+            color: white;
+            padding: 16px 24px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            font-size: 1rem;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--bg-warm);
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn.secondary {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: var(--bg-warm);
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            color: white;
+        }
+
+        .nav-btn.primary:hover:not(:disabled) {
+            background: #236d7a;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .slide-content {
+                padding: 60px;
+            }
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content {
+                padding: 40px 24px 100px;
+            }
+            .slide-title h1 {
+                font-size: 2.5rem;
+            }
+            .slide-header h2 {
+                font-size: 1.75rem;
+            }
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .slide { display: block !important; position: relative; page-break-after: always; height: auto; min-height: 100vh; }
+            .nav-bar { display: none; }
+            body { overflow: visible; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active">
+            <div class="module-number">Module 6 — June</div>
+            <h1>Build Your Board<br>of Advisors</h1>
+            <p class="subtitle">Strategic relationships that accelerate your career</p>
+        </div>
+
+        <!-- Slide 2: The Truth -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Truth About Getting Ahead</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>The executives who rise fastest don't do it alone. They strategically cultivate a network of advisors who open doors, share wisdom, and advocate on their behalf.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>What Research Shows</h3>
+                        <ul class="styled-list">
+                            <li>Mentored employees are 5x more likely to advance</li>
+                            <li>Sponsors increase promotion rates by 23%</li>
+                            <li>Diverse networks correlate with higher pay</li>
+                            <li>85% of jobs filled through relationships</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>The WOC Reality</h3>
+                        <p style="font-size: 1.125rem; line-height: 1.7;">We often have smaller professional networks and less access to senior advocates. This isn't about capability—it's about intentionally building what isn't always handed to us.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Section - The Board Framework -->
+        <div class="slide slide-section">
+            <h2>The Personal Board Framework</h2>
+            <p>Six essential roles for your career</p>
+        </div>
+
+        <!-- Slide 4: Board Overview -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Your Personal Board of Advisors</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Think of your career like a company. Every successful company has a board of directors. Your career needs the same—people who bring different perspectives and serve different purposes.</p>
+                <div class="grid-3">
+                    <div class="role-card">
+                        <div class="role-icon">🎯</div>
+                        <h4>The Sponsor</h4>
+                        <p>Advocates for you in rooms you're not in. Uses their power for your advancement.</p>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-icon">🧭</div>
+                        <h4>The Mentor</h4>
+                        <p>Shares wisdom from experience. Guides your decisions and development.</p>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-icon">🔌</div>
+                        <h4>The Connector</h4>
+                        <p>Opens doors and makes introductions. Expands your network exponentially.</p>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-icon">🪞</div>
+                        <h4>The Truth-Teller</h4>
+                        <p>Gives honest feedback even when hard. Keeps you grounded in reality.</p>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-icon">🌱</div>
+                        <h4>The Role Model</h4>
+                        <p>Shows what's possible. May not know you but inspires your path.</p>
+                    </div>
+                    <div class="role-card">
+                        <div class="role-icon">🤝</div>
+                        <h4>The Peer Ally</h4>
+                        <p>Navigates similar challenges. Provides mutual support and accountability.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Sponsor Deep Dive -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Sponsor: Your Most Critical Role</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div>
+                        <div class="key-point" style="border-left-color: var(--accent-warm);">
+                            <p style="font-size: 1.25rem;">A sponsor is someone with power who spends their political capital on your behalf. They don't just give advice—they take action.</p>
+                        </div>
+                        <h3 style="margin-top: 32px; margin-bottom: 16px; font-family: 'Source Serif 4', Georgia, serif;">What Sponsors Do:</h3>
+                        <ul class="styled-list">
+                            <li>Recommend you for promotions and stretch assignments</li>
+                            <li>Defend your reputation in closed-door meetings</li>
+                            <li>Connect you to decision-makers</li>
+                            <li>Share insider knowledge about opportunities</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Mentor</th>
+                                    <th>Sponsor</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Talks TO you</td>
+                                    <td>Talks ABOUT you</td>
+                                </tr>
+                                <tr>
+                                    <td>Shares advice</td>
+                                    <td>Takes action</td>
+                                </tr>
+                                <tr>
+                                    <td>Any level</td>
+                                    <td>Has organizational power</td>
+                                </tr>
+                                <tr>
+                                    <td>You seek them</td>
+                                    <td>You earn them</td>
+                                </tr>
+                                <tr>
+                                    <td>Relationship-based</td>
+                                    <td>Results-based</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Earning Sponsors -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>How to Earn a Sponsor</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Sponsorship isn't asked for—it's earned. Sponsors invest in people who make them look good and who deliver results.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Deliver Exceptional Work</h4>
+                            <p>Sponsors stake their reputation on you. Give them undeniable evidence of your excellence. Go beyond expectations on high-visibility projects.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Make Your Work Visible</h4>
+                            <p>Potential sponsors can't advocate for what they don't know about. Share wins strategically. Present in meetings where leaders attend.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Build the Relationship First</h4>
+                            <p>Create genuine connection before you need anything. Offer value—insights, support on their initiatives, thoughtful perspective.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Be Explicit About Your Goals</h4>
+                            <p>Once trust is established, clearly share your aspirations. "I'm working toward VP. I'd value your perspective on what I need to get there."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Mentor Role -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Mentor: Wisdom Through Experience</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="icon-circle">🧭</div>
+                        <h3>What Great Mentors Provide</h3>
+                        <ul class="styled-list">
+                            <li>Career navigation advice</li>
+                            <li>Industry and organizational insights</li>
+                            <li>Sounding board for decisions</li>
+                            <li>Skills development guidance</li>
+                            <li>Perspective from their journey</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="card warm" style="margin-bottom: 24px;">
+                            <h3>Finding the Right Mentors</h3>
+                            <p>Look for people 2-3 levels ahead who've navigated paths similar to yours. You need multiple mentors for different areas—career, leadership, industry expertise, work-life integration.</p>
+                        </div>
+                        <div class="card">
+                            <h3>The Ask</h3>
+                            <p style="font-style: italic; color: var(--text);">"I admire how you've [specific accomplishment]. I'm working on [specific goal]. Would you be open to a 30-minute conversation about your experience?"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Connector & Truth-Teller -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Connector & Truth-Teller</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card" style="background: var(--bg-warm);">
+                        <div class="icon-circle" style="background: white;">🔌</div>
+                        <h3>The Connector</h3>
+                        <p style="margin-bottom: 20px;">Someone who naturally knows everyone and loves making introductions. They expand your network exponentially.</p>
+                        <h4 style="font-size: 0.9375rem; color: var(--text); margin-bottom: 12px;">Look for people who:</h4>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Host or attend many events</li>
+                            <li>Sit on multiple boards or groups</li>
+                            <li>Frequently say "You should meet..."</li>
+                            <li>Have diverse, expansive networks</li>
+                        </ul>
+                    </div>
+                    <div class="card" style="background: var(--bg-warm);">
+                        <div class="icon-circle" style="background: white;">🪞</div>
+                        <h3>The Truth-Teller</h3>
+                        <p style="margin-bottom: 20px;">Someone who will tell you what you need to hear, not what you want to hear. This is rare and precious.</p>
+                        <h4 style="font-size: 0.9375rem; color: var(--text); margin-bottom: 12px;">This person will:</h4>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Call out your blind spots</li>
+                            <li>Challenge your assumptions</li>
+                            <li>Give feedback others won't</li>
+                            <li>Hold you accountable to your best self</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>The Gift of Honest Feedback</h3>
+                    <p>As WOC, we often receive less direct feedback than our peers. A truth-teller who genuinely supports your success is invaluable.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Role Model & Peer Ally -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Role Model & Peer Ally</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card accent">
+                        <div class="icon-circle">🌱</div>
+                        <h3>The Role Model</h3>
+                        <p style="margin-bottom: 20px;">Someone who represents what you aspire to become. They show you what's possible—especially important when you're the "first" or "only."</p>
+                        <p><strong>This doesn't require a relationship.</strong> You can learn from someone's public presence, speeches, career moves, and leadership style from afar.</p>
+                        <p style="margin-top: 16px; font-style: italic; opacity: 0.9;">"If she can do it, so can I."</p>
+                    </div>
+                    <div class="card warm">
+                        <div class="icon-circle">🤝</div>
+                        <h3>The Peer Ally</h3>
+                        <p style="margin-bottom: 20px;">Someone at a similar career stage who gets it. They understand your day-to-day challenges in a way seniors can't.</p>
+                        <p><strong>Peer allies provide:</strong></p>
+                        <ul style="margin-top: 12px; margin-left: 20px; opacity: 0.9;">
+                            <li style="margin-bottom: 8px;">Real-time support and venting</li>
+                            <li style="margin-bottom: 8px;">Information sharing</li>
+                            <li style="margin-bottom: 8px;">Mutual amplification</li>
+                            <li>Accountability partnership</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="key-point" style="margin-top: 32px;">
+                    <p>Build peer relationships NOW. Today's peers are tomorrow's executives. The VP who can open doors in 10 years is your colleague today.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Section - Building Relationships -->
+        <div class="slide slide-section">
+            <h2>Building Strategic Relationships</h2>
+            <p>Practical approaches that work</p>
+        </div>
+
+        <!-- Slide 11: Networking Reframe -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Reframing "Networking"</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="quote">
+                    <blockquote>"Networking is not about just connecting people. It's about connecting people with people, people with ideas, and people with opportunities."</blockquote>
+                    <cite>— Michele Jennae</cite>
+                </div>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3 style="color: #c0392b;">If networking feels...</h3>
+                        <p>Transactional, fake, self-serving, uncomfortable, like "using" people</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--accent);">Reframe it as...</h3>
+                        <p>Building genuine relationships, learning from others, finding common ground, offering mutual value</p>
+                    </div>
+                    <div class="card">
+                        <h3 style="color: var(--accent-warm);">Which leads to...</h3>
+                        <p>Authentic connection, sustainable relationships, doors that open naturally, people who want to help</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: The Outreach -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Making the Outreach</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Reaching out to people you admire or want to learn from doesn't have to be awkward. Here's a framework:</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Start with Genuine Appreciation</h4>
+                            <p>Reference something specific about their work that resonated with you. Be authentic—people can tell when praise is performative.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Establish Relevance</h4>
+                            <p>Briefly explain who you are and why you're reaching out. Create a connection point between your work/goals and theirs.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Make a Specific, Small Ask</h4>
+                            <p>Don't ask for mentorship outright. Ask for one conversation, one question, one piece of advice. Make it easy to say yes.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Make It About Them</h4>
+                            <p>Show you value their time. Offer flexibility. Express that you're open to whatever they can share.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Outreach Examples -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Sample Outreach Messages</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="card" style="margin-bottom: 24px; background: var(--bg-warm);">
+                    <h3 style="color: var(--accent);">To a Potential Mentor (LinkedIn)</h3>
+                    <p style="font-style: italic; margin-top: 12px; line-height: 1.8;">"Hi [Name], I've followed your career at [Company] and was particularly inspired by [specific project/article/talk]. As a [your role] looking to grow into [aspiration], I'd love to learn from your experience navigating [specific challenge]. Would you be open to a 20-minute call? I'd be grateful for any insights you'd be willing to share."</p>
+                </div>
+                <div class="card" style="margin-bottom: 24px; background: var(--bg-warm);">
+                    <h3 style="color: var(--accent);">To an Internal Leader</h3>
+                    <p style="font-style: italic; margin-top: 12px; line-height: 1.8;">"Hi [Name], I'm [Your name] from [Team]. I've admired how you've [specific observation] and would love to learn more about your approach to [topic]. Would you have 15 minutes for coffee sometime? I'm working on developing [skill/area] and would value your perspective."</p>
+                </div>
+                <div class="card" style="background: var(--bg-warm);">
+                    <h3 style="color: var(--accent);">Following Up After an Event</h3>
+                    <p style="font-style: italic; margin-top: 12px; line-height: 1.8;">"Hi [Name], It was great meeting you at [Event]. Our conversation about [topic] really stuck with me, especially [specific point]. I'd love to continue the conversation—would you be open to grabbing coffee or a quick call?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Maintaining Relationships -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Nurturing Your Network</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Relationships require maintenance. The time to build your network is before you need it—not when you're job searching or need a favor.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>Regular Touch Points</h3>
+                        <ul class="styled-list">
+                            <li>Share articles relevant to their interests</li>
+                            <li>Congratulate them on wins and milestones</li>
+                            <li>Provide updates on how their advice helped</li>
+                            <li>Introduce them to valuable connections</li>
+                            <li>Invite them to events they'd enjoy</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Cadence Guidelines</h3>
+                        <ul class="styled-list">
+                            <li><strong>Close advisors:</strong> Monthly check-in</li>
+                            <li><strong>Key relationships:</strong> Quarterly contact</li>
+                            <li><strong>Broader network:</strong> Bi-annual touchpoint</li>
+                            <li><strong>All:</strong> React to their content on social</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>The Give-First Mindset</h3>
+                    <p>Always look for ways to add value before asking for help. Generosity builds lasting relationships.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Section - WOC Specific -->
+        <div class="slide slide-section">
+            <h2>Navigating as a WOC</h2>
+            <p>Specific strategies for our experience</p>
+        </div>
+
+        <!-- Slide 16: WOC Challenges -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Challenges We Face</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Structural Barriers</h3>
+                        <ul class="styled-list">
+                            <li>Fewer senior leaders who look like us</li>
+                            <li>Exclusion from informal networks where deals happen</li>
+                            <li>Less access to "warm" introductions</li>
+                            <li>Sponsorship gap—we're over-mentored and under-sponsored</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Internal Tensions</h3>
+                        <ul class="styled-list">
+                            <li>Feeling like we're "asking for too much"</li>
+                            <li>Not wanting to burden busy people</li>
+                            <li>Imposter syndrome when reaching "up"</li>
+                            <li>Uncertainty about who's a real ally</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="quote" style="margin-top: 40px;">
+                    <blockquote>"You can't be what you can't see—but you can become what hasn't existed yet."</blockquote>
+                    <cite>— Dr. Kimberly Bryant</cite>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Building Across Difference -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Building Relationships Across Difference</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Your board should include people who don't look like you. Here's how to build authentic cross-cultural relationships:</p>
+                <div class="grid-2">
+                    <div class="card accent">
+                        <h3>What to Look For</h3>
+                        <p style="margin-bottom: 16px;">Not everyone will be a true ally. Seek people who:</p>
+                        <ul style="margin-left: 20px; opacity: 0.9;">
+                            <li style="margin-bottom: 8px;">Have a track record of supporting diverse talent</li>
+                            <li style="margin-bottom: 8px;">Speak up in meetings about inclusion</li>
+                            <li style="margin-bottom: 8px;">Ask questions and listen more than they advise</li>
+                            <li style="margin-bottom: 8px;">Acknowledge their own learning journey</li>
+                            <li>Take action, not just express intentions</li>
+                        </ul>
+                    </div>
+                    <div class="card warm">
+                        <h3>How to Build Trust</h3>
+                        <p style="margin-bottom: 16px;">Start small and observe:</p>
+                        <ul style="margin-left: 20px; opacity: 0.9;">
+                            <li style="margin-bottom: 8px;">Begin with professional topics</li>
+                            <li style="margin-bottom: 8px;">Watch how they handle challenging moments</li>
+                            <li style="margin-bottom: 8px;">Share more as trust develops</li>
+                            <li style="margin-bottom: 8px;">Let them earn the right to discuss your experience</li>
+                            <li>Trust actions over words</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Finding WOC Community -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Finding Your Community</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>You also need people who truly understand your experience—who you can be fully yourself with. This is not optional; it's essential for sustainability.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <div class="icon-circle">🏢</div>
+                        <h3>Within Your Organization</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Employee Resource Groups</li>
+                            <li>Affinity networks</li>
+                            <li>Informal lunch groups</li>
+                            <li>D&I councils and initiatives</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🌐</div>
+                        <h3>Professional Communities</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Industry-specific WOC groups</li>
+                            <li>Executive women's networks</li>
+                            <li>LinkedIn communities</li>
+                            <li>Professional associations</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">💫</div>
+                        <h3>Intentional Spaces</h3>
+                        <ul class="styled-list" style="font-size: 0.9375rem;">
+                            <li>Conferences for WOC leaders</li>
+                            <li>Leadership cohort programs</li>
+                            <li>Mastermind groups</li>
+                            <li>Peer coaching circles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Audit Your Board -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Audit Your Current Board</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Use this framework to assess your current advisory network and identify gaps:</p>
+                <div class="grid-3">
+                    <div class="role-card">
+                        <h4>Sponsor</h4>
+                        <p style="margin-bottom: 12px;">Who advocates for you in rooms you're not in?</p>
+                        <div style="background: var(--bg); padding: 12px; border-radius: 8px; min-height: 60px;">
+                            <span style="color: var(--text-muted); font-size: 0.875rem;">Current:</span>
+                        </div>
+                    </div>
+                    <div class="role-card">
+                        <h4>Mentor(s)</h4>
+                        <p style="margin-bottom: 12px;">Who guides your development?</p>
+                        <div style="background: var(--bg); padding: 12px; border-radius: 8px; min-height: 60px;">
+                            <span style="color: var(--text-muted); font-size: 0.875rem;">Current:</span>
+                        </div>
+                    </div>
+                    <div class="role-card">
+                        <h4>Connector</h4>
+                        <p style="margin-bottom: 12px;">Who expands your network?</p>
+                        <div style="background: var(--bg); padding: 12px; border-radius: 8px; min-height: 60px;">
+                            <span style="color: var(--text-muted); font-size: 0.875rem;">Current:</span>
+                        </div>
+                    </div>
+                    <div class="role-card">
+                        <h4>Truth-Teller</h4>
+                        <p style="margin-bottom: 12px;">Who gives you honest feedback?</p>
+                        <div style="background: var(--bg); padding: 12px; border-radius: 8px; min-height: 60px;">
+                            <span style="color: var(--text-muted); font-size: 0.875rem;">Current:</span>
+                        </div>
+                    </div>
+                    <div class="role-card">
+                        <h4>Role Model</h4>
+                        <p style="margin-bottom: 12px;">Who inspires what's possible?</p>
+                        <div style="background: var(--bg); padding: 12px; border-radius: 8px; min-height: 60px;">
+                            <span style="color: var(--text-muted); font-size: 0.875rem;">Current:</span>
+                        </div>
+                    </div>
+                    <div class="role-card">
+                        <h4>Peer Ally</h4>
+                        <p style="margin-bottom: 12px;">Who navigates alongside you?</p>
+                        <div style="background: var(--bg); padding: 12px; border-radius: 8px; min-height: 60px;">
+                            <span style="color: var(--text-muted); font-size: 0.875rem;">Current:</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Action Planning -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Your Board-Building Action Plan</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>This Week: Complete the Board Audit</h4>
+                            <p>Map your current network against the six roles. Identify your strongest relationships and biggest gaps.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>This Month: Make Three Outreach Attempts</h4>
+                            <p>Reach out to three people who could fill gaps—one potential mentor, one connector, one peer ally.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>This Quarter: Invest in Sponsorship</h4>
+                            <p>Identify one senior leader who could become a sponsor. Create visibility with them through your work.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Ongoing: Give First</h4>
+                            <p>Look for opportunities to add value to your network every week. Generosity compounds.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 40px;">
+                    <h3>Remember</h3>
+                    <p>You're not asking for charity. You're building mutually beneficial relationships. The right people will be honored to support your journey.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Closing -->
+        <div class="slide slide-title">
+            <div class="module-number">Key Takeaway</div>
+            <h1>Your Career Is a<br>Team Sport</h1>
+            <p class="subtitle">Strategic relationships multiply your impact. Build intentionally, nurture consistently, and invest in others generously.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <span class="progress-text"><span id="currentSlide">1</span> / <span id="totalSlides">21</span></span>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn secondary" id="prevBtn" disabled>Previous</button>
+            <button class="nav-btn primary" id="nextBtn">Next</button>
+        </div>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        const progress = document.getElementById('progress');
+
+        totalSlidesEl.textContent = totalSlides;
+
+        function updateProgress() {
+            const percent = (currentSlide / totalSlides) * 100;
+            progress.style.width = percent + '%';
+        }
+
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                goToSlide(currentSlide + 1);
+            } else if (touchEndX - touchStartX > 50) {
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        // Click to advance
+        document.querySelector('.slide-container').addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-bar') && !e.target.closest('button') && !e.target.closest('input') && !e.target.closest('textarea')) {
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>

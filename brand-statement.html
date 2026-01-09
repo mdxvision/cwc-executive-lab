@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Statement Builder | Module 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        @media print {
+            body { background: white; }
+            .worksheet { box-shadow: none; }
+        }
+
+        .worksheet {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header-left h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .formula-box {
+            background: var(--primary);
+            color: white;
+            padding: 32px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .formula-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .formula {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            line-height: 2;
+        }
+
+        .formula strong {
+            color: var(--accent-warm);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .draft-card {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .draft-header {
+            background: var(--bg-warm);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .draft-header h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .draft-number {
+            background: var(--accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .draft-body {
+            padding: 24px;
+        }
+
+        .formula-field {
+            margin-bottom: 20px;
+        }
+
+        .formula-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .formula-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .formula-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-warm);
+            border-radius: 2px;
+        }
+
+        .formula-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .formula-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .statement-preview {
+            background: var(--bg-warm);
+            border-left: 3px solid var(--accent-warm);
+            padding: 20px 24px;
+            margin-top: 20px;
+        }
+
+        .statement-preview label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .statement-preview textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 15px;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .statement-preview textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .example-box {
+            background: var(--bg-warm);
+            border-radius: 4px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .example-box h5 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .example-box p {
+            font-size: 15px;
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.7;
+        }
+
+        .final-statement {
+            border: 2px solid var(--primary);
+            border-radius: 4px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .final-statement h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .final-statement textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+            resize: vertical;
+        }
+
+        .final-statement textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .testing-section {
+            background: var(--bg-warm);
+            padding: 24px;
+            border-radius: 4px;
+        }
+
+        .testing-section h5 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .testing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .testing-item {
+            padding: 16px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .testing-item label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text);
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .testing-item input,
+        .testing-item textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .testing-item textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <div class="header-left">
+                <h1>Brand Statement Builder</h1>
+                <p>Module 3: Build Your Strategic Brand</p>
+            </div>
+            <div class="header-right">
+                <span class="module-badge">Worksheet</span>
+            </div>
+        </div>
+
+        <div class="formula-box">
+            <h3>The Brand Statement Formula</h3>
+            <p class="formula">
+                <strong>I help</strong> [target audience]<br>
+                <strong>achieve</strong> [outcome/transformation]<br>
+                <strong>by</strong> [your unique approach]<br>
+                <strong>which results in</strong> [concrete value/impact]
+            </p>
+        </div>
+
+        <div class="example-box">
+            <h5>Example Brand Statements</h5>
+            <p>"I help tech startups scale their engineering teams by building inclusive hiring systems, which results in 40% faster hiring and doubled retention."</p>
+            <p style="margin-top: 12px;">"I help executive teams navigate organizational change by combining data-driven strategy with emotional intelligence, which results in faster adoption and higher employee engagement."</p>
+        </div>
+
+        <!-- Draft 1 -->
+        <div class="section">
+            <div class="draft-card">
+                <div class="draft-header">
+                    <h4>Draft 1</h4>
+                    <span class="draft-number">Version A</span>
+                </div>
+                <div class="draft-body">
+                    <div class="formula-field">
+                        <div class="formula-label">I help (target audience)</div>
+                        <input type="text" class="formula-input" placeholder="e.g., Fortune 500 companies, early-stage startups, women leaders in tech...">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">Achieve (outcome/transformation)</div>
+                        <input type="text" class="formula-input" placeholder="e.g., build high-performing diverse teams, accelerate their career growth...">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">By (your unique approach)</div>
+                        <input type="text" class="formula-input" placeholder="e.g., combining executive coaching with data analytics, using my 15 years of experience...">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">Which results in (concrete value/impact)</div>
+                        <input type="text" class="formula-input" placeholder="e.g., 30% improvement in team performance, faster promotions, reduced turnover...">
+                    </div>
+                    <div class="statement-preview">
+                        <label>Full Statement (combine above)</label>
+                        <textarea placeholder="Write your complete brand statement here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Draft 2 -->
+        <div class="section">
+            <div class="draft-card">
+                <div class="draft-header">
+                    <h4>Draft 2</h4>
+                    <span class="draft-number">Version B</span>
+                </div>
+                <div class="draft-body">
+                    <div class="formula-field">
+                        <div class="formula-label">I help (target audience)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">Achieve (outcome/transformation)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">By (your unique approach)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">Which results in (concrete value/impact)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="statement-preview">
+                        <label>Full Statement (combine above)</label>
+                        <textarea placeholder="Write your complete brand statement here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Draft 3 -->
+        <div class="section">
+            <div class="draft-card">
+                <div class="draft-header">
+                    <h4>Draft 3</h4>
+                    <span class="draft-number">Version C</span>
+                </div>
+                <div class="draft-body">
+                    <div class="formula-field">
+                        <div class="formula-label">I help (target audience)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">Achieve (outcome/transformation)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">By (your unique approach)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="formula-field">
+                        <div class="formula-label">Which results in (concrete value/impact)</div>
+                        <input type="text" class="formula-input" placeholder="">
+                    </div>
+                    <div class="statement-preview">
+                        <label>Full Statement (combine above)</label>
+                        <textarea placeholder="Write your complete brand statement here..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testing -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">T</div>
+                <h2 class="section-title">Test Your Statements</h2>
+            </div>
+
+            <div class="testing-section">
+                <h5>Share your drafts with 2-3 trusted colleagues and gather feedback</h5>
+                <div class="testing-grid">
+                    <div class="testing-item">
+                        <label>Who did you test with?</label>
+                        <input type="text" placeholder="Name and role">
+                    </div>
+                    <div class="testing-item">
+                        <label>Which version resonated most?</label>
+                        <input type="text" placeholder="A, B, or C">
+                    </div>
+                    <div class="testing-item">
+                        <label>What questions did they have?</label>
+                        <textarea placeholder="What wasn't clear?"></textarea>
+                    </div>
+                    <div class="testing-item">
+                        <label>What suggestions did they offer?</label>
+                        <textarea placeholder="How would they improve it?"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Statement -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">F</div>
+                <h2 class="section-title">Your Final Brand Statement</h2>
+            </div>
+
+            <div class="final-statement">
+                <h4>Combining the best elements from your drafts and testing</h4>
+                <textarea placeholder="Write your final, polished brand statement here. This is what you'll use on LinkedIn, in introductions, and when positioning yourself for opportunities."></textarea>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-logo">Coaching Women of Color | Executive Leadership Lab</span>
+            <span class="footer-page">Module 3 Worksheet</span>
+        </div>
+    </div>
+</body>
+</html>

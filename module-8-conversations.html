@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8: Lead Difficult Conversations | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            background: var(--bg);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-title {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+            position: relative;
+        }
+
+        .slide-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        .slide-title .module-number {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .slide-title h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .slide-title .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+        }
+
+        .slide-content {
+            padding: 80px 120px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-header {
+            margin-bottom: 48px;
+        }
+
+        .slide-header h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .slide-header .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .slide-body {
+            flex: 1;
+        }
+
+        .slide-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px;
+        }
+
+        .slide-section h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.75rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .slide-section p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .key-point {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 32px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .key-point p {
+            font-size: 1.375rem;
+            color: var(--primary);
+            line-height: 1.6;
+        }
+
+        .quote {
+            background: var(--primary);
+            color: white;
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .quote blockquote {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.75rem;
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .quote cite {
+            font-style: normal;
+            opacity: 0.7;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .card h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .card.accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .card.accent h3 {
+            color: white;
+        }
+
+        .card.accent p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .card.warm {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border: none;
+        }
+
+        .card.warm h3 {
+            color: white;
+        }
+
+        .card.warm p {
+            color: rgba(255,255,255,0.85);
+        }
+
+        .icon-circle {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--bg-warm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .card.accent .icon-circle,
+        .card.warm .icon-circle {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .styled-list {
+            list-style: none;
+        }
+
+        .styled-list li {
+            padding: 16px 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            font-size: 1.125rem;
+        }
+
+        .styled-list li:last-child {
+            border-bottom: none;
+        }
+
+        .styled-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .highlight-box p {
+            font-size: 1.125rem;
+            opacity: 0.95;
+        }
+
+        .framework-box {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .framework-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .framework-items {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .framework-item {
+            text-align: center;
+        }
+
+        .framework-letter {
+            width: 64px;
+            height: 64px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 0 auto 12px;
+        }
+
+        .framework-item h4 {
+            font-size: 1.125rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .framework-item p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .script-box {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .script-box h4 {
+            font-size: 0.875rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .script-box p {
+            font-size: 1.125rem;
+            color: var(--primary);
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-progress {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .progress-bar {
+            width: 200px;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn.secondary {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .nav-btn.secondary:hover:not(:disabled) {
+            background: var(--bg-warm);
+        }
+
+        .nav-btn.primary {
+            background: var(--accent);
+            border: 1px solid var(--accent);
+            color: white;
+        }
+
+        .nav-btn.primary:hover:not(:disabled) {
+            background: #236d7a;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 1024px) {
+            .slide-content {
+                padding: 60px;
+            }
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .framework-items {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-content {
+                padding: 40px 24px 100px;
+            }
+            .slide-title h1 {
+                font-size: 2.5rem;
+            }
+            .slide-header h2 {
+                font-size: 1.75rem;
+            }
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .slide { display: block !important; position: relative; page-break-after: always; height: auto; min-height: 100vh; }
+            .nav-bar { display: none; }
+            body { overflow: visible; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active">
+            <div class="module-number">Module 8 — August</div>
+            <h1>Lead Difficult<br>Conversations</h1>
+            <p class="subtitle">Navigate high-stakes interactions with confidence and skill</p>
+        </div>
+
+        <!-- Slide 2: Why This Matters -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The Conversations That Define Leaders</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Leadership is not about avoiding difficult conversations—it's about having them skillfully. The conversations you're avoiding are often the ones that would change everything.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <div class="icon-circle">📉</div>
+                        <h3>Cost of Avoidance</h3>
+                        <p>Unaddressed issues fester. Problems grow. Trust erodes. Your leadership credibility suffers when you don't address what everyone sees.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">⚡</div>
+                        <h3>Power of Directness</h3>
+                        <p>Leaders who address issues head-on build respect and trust. People know where they stand. Teams perform better.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🎯</div>
+                        <h3>Skill, Not Personality</h3>
+                        <p>Difficult conversations are a learnable skill. You don't have to be naturally confrontational—you just need frameworks and practice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Types of Conversations -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Types of Difficult Conversations</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>Performance Conversations</h3>
+                        <ul class="styled-list">
+                            <li>Addressing underperformance</li>
+                            <li>Giving critical feedback</li>
+                            <li>Discussing development gaps</li>
+                            <li>Communicating difficult decisions</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Conflict Conversations</h3>
+                        <ul class="styled-list">
+                            <li>Disagreements with peers or leaders</li>
+                            <li>Mediating team conflicts</li>
+                            <li>Addressing behavior issues</li>
+                            <li>Navigating political dynamics</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Advocacy Conversations</h3>
+                        <ul class="styled-list">
+                            <li>Asking for a raise or promotion</li>
+                            <li>Pushing back on unfair treatment</li>
+                            <li>Negotiating resources or scope</li>
+                            <li>Setting boundaries</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>High-Stakes Conversations</h3>
+                        <ul class="styled-list">
+                            <li>Delivering bad news to stakeholders</li>
+                            <li>Termination conversations</li>
+                            <li>Crisis communications</li>
+                            <li>Addressing bias or discrimination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Section - Preparation -->
+        <div class="slide slide-section">
+            <h2>Preparing for the Conversation</h2>
+            <p>What happens before you speak</p>
+        </div>
+
+        <!-- Slide 5: PREP Framework -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>The PREP Framework</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="framework-box">
+                    <h3>Before Any Difficult Conversation</h3>
+                    <div class="framework-items">
+                        <div class="framework-item">
+                            <div class="framework-letter">P</div>
+                            <h4>Purpose</h4>
+                            <p>What outcome do you want?</p>
+                        </div>
+                        <div class="framework-item">
+                            <div class="framework-letter">R</div>
+                            <h4>Reality</h4>
+                            <p>What are the facts?</p>
+                        </div>
+                        <div class="framework-item">
+                            <div class="framework-letter">E</div>
+                            <h4>Empathy</h4>
+                            <p>What's their perspective?</p>
+                        </div>
+                        <div class="framework-item">
+                            <div class="framework-letter">P</div>
+                            <h4>Plan</h4>
+                            <p>What will you say/ask?</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <h3>Questions to Ask Yourself</h3>
+                        <ul class="styled-list" style="font-size: 1rem;">
+                            <li>What's my goal for this conversation?</li>
+                            <li>What facts do I have (vs. assumptions)?</li>
+                            <li>How might they be feeling right now?</li>
+                            <li>What's the best possible outcome?</li>
+                            <li>What's the worst case and how do I handle it?</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>Red Flag Check</h3>
+                        <p style="margin-bottom: 16px;">Don't have the conversation if:</p>
+                        <ul style="margin-left: 20px; opacity: 0.9;">
+                            <li style="margin-bottom: 8px;">You're emotionally triggered</li>
+                            <li style="margin-bottom: 8px;">You don't have the facts</li>
+                            <li style="margin-bottom: 8px;">You haven't considered their view</li>
+                            <li style="margin-bottom: 8px;">You're not clear on your goal</li>
+                            <li>You just want to vent or be right</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Opening -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Opening the Conversation</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>How you start sets the tone for everything. Lead with clarity and respect. Don't soften so much that the message is lost.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div>
+                        <h3 style="font-family: 'Source Serif 4', Georgia, serif; margin-bottom: 20px;">Strong Opening Elements</h3>
+                        <div class="steps">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>State Your Intent</h4>
+                                    <p>"I want to talk about X because I value our working relationship and want to address this directly."</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Share Observations</h4>
+                                    <p>"I've noticed [specific behavior/situation]..." Lead with facts, not judgments.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Invite Their View</h4>
+                                    <p>"I'd like to understand your perspective. Help me understand what's happening from your side."</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="script-box" style="margin-bottom: 20px;">
+                            <h4>Example Opening</h4>
+                            <p>"I wanted to talk with you directly about the project timeline. I've noticed we've missed two deadlines, and I want to understand what's happening so we can figure out a path forward together."</p>
+                        </div>
+                        <div class="card" style="background: #fef5f5; border-color: #e74c3c;">
+                            <h3 style="color: #c0392b;">Avoid</h3>
+                            <ul style="margin-left: 20px; color: var(--text); margin-top: 12px;">
+                                <li style="margin-bottom: 8px;">"Don't take this personally, but..."</li>
+                                <li style="margin-bottom: 8px;">Long preambles and softening</li>
+                                <li style="margin-bottom: 8px;">Starting with accusations</li>
+                                <li>"Some people have said..."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Section - During -->
+        <div class="slide slide-section">
+            <h2>During the Conversation</h2>
+            <p>Staying centered when it gets hard</p>
+        </div>
+
+        <!-- Slide 8: Managing Emotions -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Managing Your Emotions</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="quote">
+                    <blockquote>"Between stimulus and response there is a space. In that space is our power to choose our response."</blockquote>
+                    <cite>— Viktor Frankl</cite>
+                </div>
+                <div class="grid-3" style="margin-top: 40px;">
+                    <div class="card">
+                        <div class="icon-circle">🧘</div>
+                        <h3>The Pause</h3>
+                        <p>When triggered, take a breath before responding. Even 3 seconds creates space for a better response.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">📝</div>
+                        <h3>Name It to Tame It</h3>
+                        <p>Internally label your emotion: "I'm feeling defensive." Naming it reduces its power over you.</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🎯</div>
+                        <h3>Return to Purpose</h3>
+                        <p>When derailed, ask: "What am I trying to accomplish?" Redirect yourself back to your goal.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>If You Need to Reset</h3>
+                    <p>"I want to take a moment to make sure I'm responding thoughtfully. Can we pause for a minute?"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Active Listening -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Listening to Understand</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>In difficult conversations, most people listen to respond, not to understand. Being truly heard often de-escalates tension more than any argument.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <h3>Active Listening Techniques</h3>
+                        <ul class="styled-list">
+                            <li><strong>Reflect:</strong> "What I hear you saying is..."</li>
+                            <li><strong>Clarify:</strong> "Help me understand..."</li>
+                            <li><strong>Validate:</strong> "That makes sense given..."</li>
+                            <li><strong>Summarize:</strong> "So the key points are..."</li>
+                            <li><strong>Ask:</strong> "What else is important here?"</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>What Not to Do</h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Interrupt to make your point</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Prepare your response while they talk</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Dismiss or minimize their feelings</li>
+                            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.2);">Jump to solutions too quickly</li>
+                            <li style="padding: 12px 0;">Make it about being right</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Staying Centered -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>When They Get Defensive</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Defensiveness is natural. Don't match it. Here's how to respond:</p>
+                <div class="grid-2">
+                    <div>
+                        <div class="script-box" style="margin-bottom: 20px;">
+                            <h4>If They Deny</h4>
+                            <p>"I understand you see it differently. Help me understand your perspective on what happened with [specific situation]."</p>
+                        </div>
+                        <div class="script-box" style="margin-bottom: 20px;">
+                            <h4>If They Deflect</h4>
+                            <p>"I hear that there are other factors. Right now I want to focus on what's in your control. What can you do differently?"</p>
+                        </div>
+                        <div class="script-box">
+                            <h4>If They Attack</h4>
+                            <p>"I can see you're frustrated. I'm not here to attack you—I want to find a solution together. Can we reset?"</p>
+                        </div>
+                    </div>
+                    <div class="card warm">
+                        <h3>Stay Grounded</h3>
+                        <p style="margin-bottom: 16px;">Your calm is contagious. When they escalate:</p>
+                        <ul style="margin-left: 20px; opacity: 0.95;">
+                            <li style="margin-bottom: 12px;">Slow your speech</li>
+                            <li style="margin-bottom: 12px;">Lower your volume</li>
+                            <li style="margin-bottom: 12px;">Keep your body open</li>
+                            <li style="margin-bottom: 12px;">Maintain eye contact</li>
+                            <li>Breathe deeply</li>
+                        </ul>
+                        <p style="margin-top: 20px; font-style: italic;">"What you resist, persists. What you accept, you can address."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Section - Specific Scenarios -->
+        <div class="slide slide-section">
+            <h2>Specific Scenarios</h2>
+            <p>Scripts for common difficult conversations</p>
+        </div>
+
+        <!-- Slide 12: Performance Feedback -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Addressing Performance Issues</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Be Direct About the Gap</h4>
+                            <p>"The expectation is X. What I'm seeing is Y. There's a gap we need to address."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Use Specific Examples</h4>
+                            <p>"For example, on the Smith project, the deliverable was late by two weeks and had three errors that the client caught."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Ask for Their Input</h4>
+                            <p>"What's your perspective? What's getting in the way? What do you need to be successful?"</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Agree on Next Steps</h4>
+                            <p>"What I need to see going forward is X. Let's check in weekly. What support do you need from me?"</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>Remember</h3>
+                    <p>Be kind, but be clear. Unclear feedback is unkind—it robs them of the opportunity to improve.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Asking for What You Want -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Asking for What You Deserve</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Whether it's a raise, promotion, better assignment, or more resources—asking is a skill. Don't wait to be noticed. Make your case.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <h3>The STAR-A Formula</h3>
+                        <ul class="styled-list">
+                            <li><strong>Situation:</strong> Context of your contribution</li>
+                            <li><strong>Task:</strong> What you were responsible for</li>
+                            <li><strong>Action:</strong> What you specifically did</li>
+                            <li><strong>Result:</strong> Measurable impact</li>
+                            <li><strong>Ask:</strong> Your specific request</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="script-box">
+                            <h4>Example Script</h4>
+                            <p>"Over the past year, I've led three major initiatives that delivered $2M in savings. I've consistently exceeded expectations and taken on senior-level responsibilities. Based on my contributions and market data, I'm requesting a promotion to Senior Manager and a compensation adjustment to $X. I'd like to discuss what's possible."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Pushing Back -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Pushing Back Respectfully</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <p style="margin-bottom: 32px; font-size: 1.125rem; color: var(--text-light);">Disagreeing with your boss or a senior leader requires tact but is essential for your credibility:</p>
+                <div class="grid-2">
+                    <div>
+                        <div class="script-box" style="margin-bottom: 20px;">
+                            <h4>Disagree with the Approach</h4>
+                            <p>"I understand the goal. I have a different perspective on how to get there. Can I share some concerns and an alternative approach?"</p>
+                        </div>
+                        <div class="script-box" style="margin-bottom: 20px;">
+                            <h4>Challenge Unrealistic Expectations</h4>
+                            <p>"I want to set us up for success. With current resources, I can deliver X by the deadline or Y with more time. Which is the priority?"</p>
+                        </div>
+                        <div class="script-box">
+                            <h4>Address Unfair Treatment</h4>
+                            <p>"I've noticed that I wasn't included in [situation]. I want to understand the decision and share why my involvement would benefit the outcome."</p>
+                        </div>
+                    </div>
+                    <div class="card accent">
+                        <h3>The Formula</h3>
+                        <p style="margin-bottom: 16px;">Respectful pushback follows this pattern:</p>
+                        <ol style="margin-left: 20px; opacity: 0.95;">
+                            <li style="margin-bottom: 12px;">Acknowledge their position</li>
+                            <li style="margin-bottom: 12px;">Share your concern/perspective</li>
+                            <li style="margin-bottom: 12px;">Offer an alternative or question</li>
+                            <li>Seek alignment on next steps</li>
+                        </ol>
+                        <p style="margin-top: 20px; font-style: italic;">You can disagree without being disagreeable.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Addressing Bias -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Addressing Bias in Real Time</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>When you experience bias, you have choices. Sometimes addressing it in the moment is strategic; sometimes waiting is wiser. Know your options.</p>
+                </div>
+                <div class="grid-3" style="margin-top: 32px;">
+                    <div class="card">
+                        <div class="icon-circle">⏱️</div>
+                        <h3>In the Moment (Low Stakes)</h3>
+                        <p>"I'd prefer to be called [correct name/title]."</p>
+                        <p style="margin-top: 8px;">"Actually, that was my idea—glad it resonated."</p>
+                        <p style="margin-top: 8px;">"Can you help me understand what you mean by that?"</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">🚪</div>
+                        <h3>After the Meeting</h3>
+                        <p>"I wanted to follow up on what happened in the meeting. When you [behavior], the impact was [effect]. I'd appreciate [change] going forward."</p>
+                    </div>
+                    <div class="card">
+                        <div class="icon-circle">📋</div>
+                        <h3>Formal Escalation</h3>
+                        <p>When pattern persists or impact is significant, document and engage HR or leadership with specific examples and requested action.</p>
+                    </div>
+                </div>
+                <div class="highlight-box" style="margin-top: 32px;">
+                    <h3>Your Safety First</h3>
+                    <p>Not every battle is worth fighting. Assess the risk, your energy, and the potential outcome before deciding how to respond.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Section - Closing -->
+        <div class="slide slide-section">
+            <h2>Closing Strong</h2>
+            <p>Ending with clarity and commitment</p>
+        </div>
+
+        <!-- Slide 17: Closing Well -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Ending the Conversation</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Summarize Key Points</h4>
+                            <p>"Let me make sure we're aligned. We agreed that [summary of discussion and decisions]."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Clarify Next Steps</h4>
+                            <p>"The next steps are: you will [action] by [date], and I will [action] by [date]. Does that match your understanding?"</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Set Follow-Up</h4>
+                            <p>"Let's check in on [date] to review progress. I'll send a calendar invite."</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>End on a Constructive Note</h4>
+                            <p>"I appreciate you having this conversation with me. I'm confident we can move forward positively."</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card warm" style="margin-top: 32px;">
+                    <h3>Document It</h3>
+                    <p>After significant conversations, send a brief follow-up email summarizing what was discussed and agreed. This creates a record and ensures alignment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: When It Doesn't Go Well -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>When Conversations Don't Go Well</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="key-point">
+                    <p>Not every difficult conversation ends well. Sometimes people aren't ready, emotions run too high, or agreement isn't possible. Know your options.</p>
+                </div>
+                <div class="grid-2" style="margin-top: 32px;">
+                    <div class="card">
+                        <h3>Pause and Resume</h3>
+                        <p style="margin-bottom: 16px;">"I can see we're not in a place to resolve this right now. Let's take a break and come back to this tomorrow with fresh perspective."</p>
+                        <p style="color: var(--text-light); font-size: 0.9375rem;">Taking a break isn't failure—it's strategy.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Agree to Disagree</h3>
+                        <p style="margin-bottom: 16px;">"We see this differently, and that's okay. What I need us to agree on is [specific behavior/action] going forward."</p>
+                        <p style="color: var(--text-light); font-size: 0.9375rem;">You don't need agreement on everything—just on actions.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Escalate When Needed</h3>
+                        <p style="margin-bottom: 16px;">"I've tried to resolve this directly, and we're not making progress. I think we need to bring [manager/HR] into this conversation."</p>
+                        <p style="color: var(--text-light); font-size: 0.9375rem;">Escalation isn't tattling—it's problem-solving.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Know When to Walk Away</h3>
+                        <p style="margin-bottom: 16px;">Some situations can't be fixed with conversation. Sometimes the answer is to change teams, roles, or organizations.</p>
+                        <p style="color: var(--text-light); font-size: 0.9375rem;">Not every environment deserves your energy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Practice -->
+        <div class="slide slide-content">
+            <div class="slide-header">
+                <h2>Building Your Skill</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="slide-body">
+                <div class="quote">
+                    <blockquote>"The conversation you're avoiding is often the one that would change everything."</blockquote>
+                    <cite>— Your future self</cite>
+                </div>
+                <div class="grid-2" style="margin-top: 40px;">
+                    <div class="card">
+                        <h3>This Month's Challenge</h3>
+                        <ul class="styled-list">
+                            <li>Identify one conversation you've been avoiding</li>
+                            <li>Use PREP to prepare for it</li>
+                            <li>Schedule the conversation</li>
+                            <li>Practice your opening with a trusted friend</li>
+                            <li>Have the conversation</li>
+                            <li>Reflect: What worked? What would you do differently?</li>
+                        </ul>
+                    </div>
+                    <div class="card accent">
+                        <h3>Your Courage Builds</h3>
+                        <p style="margin-bottom: 16px;">Every difficult conversation you have makes the next one easier. You build:</p>
+                        <ul style="margin-left: 20px; opacity: 0.95;">
+                            <li style="margin-bottom: 8px;">Confidence in your ability</li>
+                            <li style="margin-bottom: 8px;">Scripts you can reuse</li>
+                            <li style="margin-bottom: 8px;">Reputation as someone direct</li>
+                            <li style="margin-bottom: 8px;">Trust with your team</li>
+                            <li>Problems that get solved</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Closing -->
+        <div class="slide slide-title">
+            <div class="module-number">Key Takeaway</div>
+            <h1>Clarity Is Kindness</h1>
+            <p class="subtitle">The most caring thing you can do is be direct. Your growth as a leader is directly proportional to your willingness to have difficult conversations.</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-bar">
+        <div class="nav-progress">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            <span class="progress-text"><span id="currentSlide">1</span> / <span id="totalSlides">20</span></span>
+        </div>
+        <div class="nav-buttons">
+            <button class="nav-btn secondary" id="prevBtn" disabled>Previous</button>
+            <button class="nav-btn primary" id="nextBtn">Next</button>
+        </div>
+    </nav>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const totalSlidesEl = document.getElementById('totalSlides');
+        const progress = document.getElementById('progress');
+
+        totalSlidesEl.textContent = totalSlides;
+
+        function updateProgress() {
+            const percent = (currentSlide / totalSlides) * 100;
+            progress.style.width = percent + '%';
+        }
+
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+
+        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 50) {
+                goToSlide(currentSlide + 1);
+            } else if (touchEndX - touchStartX > 50) {
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        document.querySelector('.slide-container').addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-bar') && !e.target.closest('button') && !e.target.closest('input') && !e.target.closest('textarea')) {
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        updateProgress();
+    </script>
+</body>
+</html>

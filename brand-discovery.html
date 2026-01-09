@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Discovery Worksheet | Module 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        @media print {
+            body { background: white; }
+            .worksheet { box-shadow: none; }
+        }
+
+        .worksheet {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header-left h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .instructions {
+            background: var(--bg-warm);
+            padding: 24px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+        }
+
+        .instructions h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .instructions p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .prompt-group {
+            margin-bottom: 28px;
+        }
+
+        .prompt-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .prompt-hint {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .text-area {
+            width: 100%;
+            min-height: 100px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            color: var(--text);
+            resize: vertical;
+        }
+
+        .text-area:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .list-input {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .list-number {
+            width: 24px;
+            height: 24px;
+            background: var(--bg-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .list-item input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .list-item input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .venn-section {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .venn-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .venn-header h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .venn-header p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .venn-circle {
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .venn-circle.strengths {
+            background: rgba(42, 123, 140, 0.1);
+            border-left: 4px solid var(--accent);
+        }
+
+        .venn-circle.passions {
+            background: rgba(212, 165, 116, 0.1);
+            border-left: 4px solid var(--accent-warm);
+        }
+
+        .venn-circle.market {
+            background: rgba(26, 26, 26, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .venn-circle h5 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        .venn-circle.strengths h5 { color: var(--accent); }
+        .venn-circle.passions h5 { color: var(--accent-warm); }
+        .venn-circle.market h5 { color: var(--primary); }
+
+        .sweet-spot {
+            background: var(--bg-warm);
+            border: 2px dashed var(--accent-warm);
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .sweet-spot h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .feedback-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .feedback-card {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 16px;
+        }
+
+        .feedback-card h5 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .feedback-card input,
+        .feedback-card textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .feedback-card textarea {
+            min-height: 60px;
+            resize: vertical;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <div class="header-left">
+                <h1>Brand Discovery Worksheet</h1>
+                <p>Module 3: Build Your Strategic Brand</p>
+            </div>
+            <div class="header-right">
+                <span class="module-badge">Worksheet</span>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Use This Worksheet</h3>
+            <p>Your brand lives at the intersection of what you're great at, what you love, and what the market values. Complete each section honestly to discover your unique brand territory.</p>
+        </div>
+
+        <!-- Section 1: Strengths -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2 class="section-title">Your Strengths</h2>
+            </div>
+
+            <div class="venn-circle strengths">
+                <h5>What You're Great At</h5>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">Top 5 Professional Skills</div>
+                    <div class="prompt-hint">Technical skills, soft skills, or capabilities where you have proven expertise</div>
+                    <div class="list-input">
+                        <div class="list-item"><span class="list-number">1</span><input type="text" placeholder="e.g., Strategic planning"></div>
+                        <div class="list-item"><span class="list-number">2</span><input type="text" placeholder="e.g., Cross-functional collaboration"></div>
+                        <div class="list-item"><span class="list-number">3</span><input type="text" placeholder=""></div>
+                        <div class="list-item"><span class="list-number">4</span><input type="text" placeholder=""></div>
+                        <div class="list-item"><span class="list-number">5</span><input type="text" placeholder=""></div>
+                    </div>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">Signature Experiences</div>
+                    <div class="prompt-hint">Major projects, achievements, or experiences that set you apart</div>
+                    <textarea class="text-area" placeholder="e.g., Led a $10M digital transformation, Built a team from 5 to 50, Launched product in 3 new markets..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">What do people consistently ask you for help with?</div>
+                    <textarea class="text-area" placeholder="What expertise do colleagues seek from you?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Passions -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2 class="section-title">Your Passions</h2>
+            </div>
+
+            <div class="venn-circle passions">
+                <h5>What Energizes You</h5>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">What type of work doesn't feel like work?</div>
+                    <div class="prompt-hint">The activities where you lose track of time</div>
+                    <textarea class="text-area" placeholder="e.g., Solving complex problems, mentoring others, presenting to large groups..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">What problems do you love to solve?</div>
+                    <textarea class="text-area" placeholder="e.g., Building inclusive teams, simplifying complex processes, helping leaders find their voice..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">If you could do any work and get paid the same, what would you choose?</div>
+                    <textarea class="text-area" placeholder=""></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: Market Needs -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2 class="section-title">Market Needs</h2>
+            </div>
+
+            <div class="venn-circle market">
+                <h5>What's Valued</h5>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">What skills are in high demand in your industry/field?</div>
+                    <textarea class="text-area" placeholder="e.g., AI/ML expertise, change management, DEI leadership..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">What problems are organizations paying to solve?</div>
+                    <textarea class="text-area" placeholder="e.g., Talent retention, digital transformation, scaling operations..."></textarea>
+                </div>
+
+                <div class="prompt-group">
+                    <div class="prompt-label">What gaps exist in your organization or industry?</div>
+                    <textarea class="text-area" placeholder="What's missing that you could fill?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: External Feedback -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2 class="section-title">External Feedback</h2>
+            </div>
+
+            <div class="prompt-group">
+                <div class="prompt-label">Ask 3-5 trusted colleagues these questions:</div>
+                <div class="prompt-hint">Record their answers below. Look for patterns.</div>
+            </div>
+
+            <div class="feedback-grid">
+                <div class="feedback-card">
+                    <h5>Person 1</h5>
+                    <input type="text" placeholder="Name" style="margin-bottom: 8px;">
+                    <textarea placeholder="3 words to describe me:"></textarea>
+                    <textarea placeholder="What would you recommend me for?" style="margin-top: 8px;"></textarea>
+                </div>
+                <div class="feedback-card">
+                    <h5>Person 2</h5>
+                    <input type="text" placeholder="Name" style="margin-bottom: 8px;">
+                    <textarea placeholder="3 words to describe me:"></textarea>
+                    <textarea placeholder="What would you recommend me for?" style="margin-top: 8px;"></textarea>
+                </div>
+                <div class="feedback-card">
+                    <h5>Person 3</h5>
+                    <input type="text" placeholder="Name" style="margin-bottom: 8px;">
+                    <textarea placeholder="3 words to describe me:"></textarea>
+                    <textarea placeholder="What would you recommend me for?" style="margin-top: 8px;"></textarea>
+                </div>
+            </div>
+
+            <div class="prompt-group" style="margin-top: 24px;">
+                <div class="prompt-label">What patterns do you notice in the feedback?</div>
+                <textarea class="text-area" placeholder="What words or themes came up repeatedly?"></textarea>
+            </div>
+        </div>
+
+        <!-- Section 5: Sweet Spot -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2 class="section-title">Your Brand Sweet Spot</h2>
+            </div>
+
+            <div class="sweet-spot">
+                <h4>Where Strengths, Passions, and Market Needs Overlap</h4>
+                <div class="prompt-group" style="text-align: left;">
+                    <div class="prompt-label">Based on your discovery, what is your unique brand territory?</div>
+                    <div class="prompt-hint">This is what you should be known for—the intersection of what you're great at, what you love, and what the market values.</div>
+                    <textarea class="text-area" placeholder="e.g., I'm the leader who helps tech companies build inclusive engineering cultures that attract and retain diverse talent, driving both innovation and business results."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Differentiators -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2 class="section-title">Your Differentiators</h2>
+            </div>
+
+            <div class="prompt-group">
+                <div class="prompt-label">What unique combination of skills/experiences do you bring?</div>
+                <div class="prompt-hint">What 2-3 things come together in you that rarely exist in one person?</div>
+                <textarea class="text-area" placeholder="e.g., Technical engineering background + executive coaching certification + lived experience as a WOC in tech"></textarea>
+            </div>
+
+            <div class="prompt-group">
+                <div class="prompt-label">What perspective do you have that others don't?</div>
+                <textarea class="text-area" placeholder="What do you see that others miss? What contrarian view do you hold?"></textarea>
+            </div>
+
+            <div class="prompt-group">
+                <div class="prompt-label">What results do you consistently deliver?</div>
+                <textarea class="text-area" placeholder="What outcomes can you point to? What's your track record?"></textarea>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-logo">Coaching Women of Color | Executive Leadership Lab</span>
+            <span class="footer-page">Module 3 Worksheet</span>
+        </div>
+    </div>
+</body>
+</html>

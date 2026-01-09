@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-Day Presence Practice Tracker | Module 2 Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+            .worksheet { box-shadow: none; }
+            .week-section { page-break-inside: avoid; }
+        }
+
+        .worksheet {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header-left h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .instructions {
+            background: var(--bg-warm);
+            padding: 24px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+        }
+
+        .instructions h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .instructions p {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+
+        .practice-overview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .practice-card {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 24px;
+        }
+
+        .practice-card h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .practice-card .frequency {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .practice-card p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .week-section {
+            margin-bottom: 40px;
+        }
+
+        .week-header {
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px 4px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date-range {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+
+        .week-body {
+            border: 1px solid var(--border);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+        }
+
+        .day-row {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr 100px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .day-row:last-child {
+            border-bottom: none;
+        }
+
+        .day-header {
+            display: grid;
+            grid-template-columns: 100px 1fr 1fr 100px;
+            background: var(--bg-warm);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .day-header > div,
+        .day-row > div {
+            padding: 12px 16px;
+            border-right: 1px solid var(--border);
+        }
+
+        .day-header > div:last-child,
+        .day-row > div:last-child {
+            border-right: none;
+        }
+
+        .day-label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .day-label .date-input {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .practice-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-family: inherit;
+            font-size: 13px;
+            color: var(--text);
+            resize: none;
+            min-height: 60px;
+        }
+
+        .practice-input:focus {
+            outline: none;
+        }
+
+        .practice-input::placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .check-cell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .check-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .check-box:hover {
+            border-color: var(--accent);
+        }
+
+        .check-box.checked {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .check-box.checked::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+
+        .weekly-challenge {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 24px;
+            margin-top: 24px;
+        }
+
+        .weekly-challenge h5 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .challenge-field {
+            margin-bottom: 16px;
+        }
+
+        .challenge-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .challenge-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .challenge-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .challenge-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .reflection-section {
+            margin-top: 48px;
+        }
+
+        .reflection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .reflection-card {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 24px;
+        }
+
+        .reflection-card h5 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .reflection-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+        }
+
+        .reflection-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer-page {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <div class="header-left">
+                <h1>14-Day Presence Practice Tracker</h1>
+                <p>Module 2: Master Your Executive Presence</p>
+            </div>
+            <div class="header-right">
+                <span class="module-badge">Worksheet</span>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>Your 14-Day Challenge</h3>
+            <p>Executive presence is built through deliberate practice. Track your daily exercises and weekly challenges below. The goal isn't perfection—it's progress. Each day you practice, you're rewiring how you show up.</p>
+            <p><strong>Commitment:</strong> Power Posture + Power Phrase daily. Command one room weekly.</p>
+        </div>
+
+        <!-- Practice Overview -->
+        <div class="practice-overview">
+            <div class="practice-card">
+                <div class="frequency">Daily</div>
+                <h4>Power Posture</h4>
+                <p>Before meetings, stand tall for 2 minutes. Shoulders back, feet planted, breathe deeply. Enter with intention.</p>
+            </div>
+            <div class="practice-card">
+                <div class="frequency">Daily</div>
+                <h4>Power Phrase</h4>
+                <p>Replace one hedge phrase with a power phrase. Track what you changed and how it felt.</p>
+            </div>
+            <div class="practice-card">
+                <div class="frequency">Weekly</div>
+                <h4>Command the Room</h4>
+                <p>Choose one meeting to fully embody your presence strategy. Debrief what worked.</p>
+            </div>
+        </div>
+
+        <!-- Week 1 -->
+        <div class="section week-section">
+            <div class="week-header">
+                <span>Week 1</span>
+                <span class="date-range">Start Date: ___________</span>
+            </div>
+            <div class="week-body">
+                <div class="day-header">
+                    <div>Day</div>
+                    <div>Power Posture (Before which meeting? How did it feel?)</div>
+                    <div>Power Phrase (What did you change? Old → New)</div>
+                    <div>Done?</div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 1<span class="date-input">Mon</span></div>
+                    <div><textarea class="practice-input" placeholder="e.g., Before team standup - felt grounded and confident"></textarea></div>
+                    <div><textarea class="practice-input" placeholder="e.g., 'I just think' → 'My recommendation is'"></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 2<span class="date-input">Tue</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 3<span class="date-input">Wed</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 4<span class="date-input">Thu</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 5<span class="date-input">Fri</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 6<span class="date-input">Sat</span></div>
+                    <div><textarea class="practice-input" placeholder="Optional - social or personal context"></textarea></div>
+                    <div><textarea class="practice-input" placeholder="Optional"></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 7<span class="date-input">Sun</span></div>
+                    <div><textarea class="practice-input" placeholder="Optional - reflect on the week"></textarea></div>
+                    <div><textarea class="practice-input" placeholder="Optional"></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+            </div>
+
+            <div class="weekly-challenge">
+                <h5>Week 1: Command the Room Challenge</h5>
+                <div class="challenge-field">
+                    <div class="challenge-label">Which meeting did you choose?</div>
+                    <input type="text" class="challenge-input" placeholder="e.g., Wednesday's cross-functional project review">
+                </div>
+                <div class="challenge-field">
+                    <div class="challenge-label">What specific behaviors did you practice?</div>
+                    <input type="text" class="challenge-input" placeholder="e.g., Sat at the table, spoke in first 5 minutes, used 'I recommend...'">
+                </div>
+                <div class="challenge-field">
+                    <div class="challenge-label">What worked? What would you do differently?</div>
+                    <input type="text" class="challenge-input" placeholder="e.g., The pause before responding felt powerful. Need to work on eye contact.">
+                </div>
+            </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="section week-section">
+            <div class="week-header">
+                <span>Week 2</span>
+                <span class="date-range">Start Date: ___________</span>
+            </div>
+            <div class="week-body">
+                <div class="day-header">
+                    <div>Day</div>
+                    <div>Power Posture (Before which meeting? How did it feel?)</div>
+                    <div>Power Phrase (What did you change? Old → New)</div>
+                    <div>Done?</div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 8<span class="date-input">Mon</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 9<span class="date-input">Tue</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 10<span class="date-input">Wed</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 11<span class="date-input">Thu</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 12<span class="date-input">Fri</span></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div><textarea class="practice-input" placeholder=""></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 13<span class="date-input">Sat</span></div>
+                    <div><textarea class="practice-input" placeholder="Optional"></textarea></div>
+                    <div><textarea class="practice-input" placeholder="Optional"></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+                <div class="day-row">
+                    <div class="day-label">Day 14<span class="date-input">Sun</span></div>
+                    <div><textarea class="practice-input" placeholder="Final reflection"></textarea></div>
+                    <div><textarea class="practice-input" placeholder="Final reflection"></textarea></div>
+                    <div class="check-cell"><div class="check-box" onclick="this.classList.toggle('checked')"></div></div>
+                </div>
+            </div>
+
+            <div class="weekly-challenge">
+                <h5>Week 2: Command the Room Challenge</h5>
+                <div class="challenge-field">
+                    <div class="challenge-label">Which meeting did you choose?</div>
+                    <input type="text" class="challenge-input" placeholder="">
+                </div>
+                <div class="challenge-field">
+                    <div class="challenge-label">What specific behaviors did you practice?</div>
+                    <input type="text" class="challenge-input" placeholder="">
+                </div>
+                <div class="challenge-field">
+                    <div class="challenge-label">What worked? What would you do differently?</div>
+                    <input type="text" class="challenge-input" placeholder="">
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Reflection -->
+        <div class="section reflection-section">
+            <div class="section-header">
+                <div class="section-number">R</div>
+                <h2 class="section-title">14-Day Reflection</h2>
+            </div>
+
+            <div class="reflection-grid">
+                <div class="reflection-card">
+                    <h5>What shifted over these 14 days?</h5>
+                    <textarea class="reflection-textarea" placeholder="What do you notice about your presence now vs. when you started?"></textarea>
+                </div>
+                <div class="reflection-card">
+                    <h5>What was your biggest win?</h5>
+                    <textarea class="reflection-textarea" placeholder="What moment are you most proud of?"></textarea>
+                </div>
+                <div class="reflection-card">
+                    <h5>What will you continue?</h5>
+                    <textarea class="reflection-textarea" placeholder="Which practices do you want to make permanent habits?"></textarea>
+                </div>
+                <div class="reflection-card">
+                    <h5>What's your next presence goal?</h5>
+                    <textarea class="reflection-textarea" placeholder="What's the next behavior or context you want to master?"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-logo">Coaching Women of Color | Executive Leadership Lab</span>
+            <span class="footer-page">Module 2 Worksheet</span>
+        </div>
+    </div>
+</body>
+</html>

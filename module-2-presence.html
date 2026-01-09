@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Your Executive Presence | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        /* Print styles */
+        @media print {
+            body { overflow: visible; height: auto; background: white; }
+            .presentation { height: auto; }
+            .slide {
+                position: relative;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                page-break-after: always;
+                height: 100vh;
+                padding: 40px 60px;
+            }
+            .slide::before { display: none; }
+            .nav-controls, .keyboard-hint, .progress-bar { display: none; }
+            .slide-title, .slide-dark { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation { position: relative; width: 100vw; height: 100vh; }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            background: var(--bg);
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .slide > * { position: relative; z-index: 1; }
+
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover { background: var(--primary); color: var(--bg); }
+        .nav-btn:disabled { border-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        .nav-btn:disabled:hover { background: transparent; color: var(--text-muted); }
+        .nav-btn svg { width: 20px; height: 20px; }
+
+        .slide-counter { font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px; }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+            z-index: 1001;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 40px; left: 60px; right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { height: 64px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .slide-content { max-width: 960px; width: 100%; text-align: center; }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 56px; font-weight: 700;
+            color: var(--primary);
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 42px; font-weight: 600;
+            color: var(--primary);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-size: 11px; font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        p, .lead { font-size: 18px; line-height: 1.7; color: var(--text-light); max-width: 680px; margin: 0 auto; }
+        .lead { font-size: 20px; }
+
+        .slide-title {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 50%, #1A1A1A 100%);
+            color: var(--bg);
+            position: relative;
+        }
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/0B1A7916.jpg') center/cover no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .slide-title h1 { color: var(--bg); font-size: 64px; }
+        .slide-title p { color: rgba(255,255,255,0.6); }
+
+        .title-meta {
+            display: flex; justify-content: center; gap: 48px;
+            margin-top: 48px; padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .meta-item { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; text-align: left; }
+        .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+        .card { padding: 40px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s ease; }
+        .card:hover { border-color: var(--accent); }
+        .card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+        .card p { font-size: 15px; color: var(--text-light); margin: 0; line-height: 1.6; }
+
+        .feature-list { text-align: left; max-width: 640px; margin: 48px auto 0; }
+        .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+        .feature-item:last-child { border-bottom: none; }
+
+        .feature-number {
+            width: 32px; height: 32px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 600; color: white;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 { font-size: 17px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+        .feature-text p { font-size: 15px; color: var(--text-light); margin: 0; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; text-align: left; max-width: 880px; margin: 48px auto 0; }
+        .column h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
+        .column ul { list-style: none; }
+        .column li { padding: 10px 0; font-size: 15px; color: var(--text-light); border-bottom: 1px solid var(--border); }
+        .column li:last-child { border-bottom: none; }
+
+        .slide-quote {
+            background: var(--bg-warm);
+        }
+        .quote-text {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px; font-weight: 400;
+            line-height: 1.5; color: var(--primary);
+            max-width: 800px; font-style: italic;
+        }
+        .quote-text::before { content: '"'; display: block; font-size: 72px; line-height: 1; color: var(--accent-warm); margin-bottom: 16px; }
+
+        .stats-row { display: flex; justify-content: center; gap: 80px; margin-top: 56px; }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+        .flow-diagram { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 48px; flex-wrap: wrap; }
+        .flow-step { padding: 16px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 14px; font-weight: 500; color: var(--text); }
+        .flow-arrow { font-size: 18px; color: var(--text-muted); }
+
+        .slide-dark {
+            background: linear-gradient(135deg, #1A1A1A 0%, #252525 40%, #1A1A1A 100%);
+            color: var(--bg);
+        }
+        .slide-dark h2 { color: var(--bg); }
+        .slide-dark p { color: rgba(255,255,255,0.6); }
+
+        /* ELL Visual Mark */
+        .ell-mark {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--accent-warm);
+            opacity: 0.4;
+        }
+        .slide-dark .ell-mark { color: rgba(255,255,255,0.15); }
+        .slide-title .ell-mark { color: rgba(255,255,255,0.15); }
+
+        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .callout p { font-size: 15px; margin: 0; }
+
+        .activity-meta { display: inline-block; margin-top: 40px; padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--text-muted); }
+
+        .keyboard-hint { position: fixed; bottom: 112px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .keyboard-hint kbd { display: inline-block; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; font-family: inherit; font-size: 11px; margin: 0 2px; }
+
+        /* Presence-specific styles */
+        .presence-pillar {
+            text-align: center;
+            padding: 32px;
+        }
+        .pillar-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .spectrum-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 16px 0;
+            padding: 20px;
+            background: var(--bg-warm);
+            border-radius: 4px;
+        }
+        .spectrum-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-muted);
+            min-width: 100px;
+        }
+        .spectrum-track {
+            flex: 1;
+            height: 8px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-warm) 100%);
+            border-radius: 4px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active" data-slide="1">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo">
+                <span class="module-label">Executive Leadership Lab</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Module 2 — February</span>
+                <h1>Master Your<br>Executive Presence</h1>
+                <p class="lead">Command attention, communicate with authority, and own your seat at the table—authentically.</p>
+                <div class="title-meta">
+                    <span class="meta-item">10-Month Program</span>
+                    <span class="meta-item">Coaching Women of Color</span>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 2: Welcome -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Welcome</span>
+                <h2>You Already Have Presence.<br>Let's Make It Work for You.</h2>
+                <p>Executive presence isn't about changing who you are—it's about showing up with intention. For WOC, this means navigating expectations while staying true to your authentic leadership style.</p>
+                <div class="stats-row">
+                    <div class="stat-item"><div class="stat-number">26%</div><div class="stat-label">of execs lack EP</div></div>
+                    <div class="stat-item"><div class="stat-number">#1</div><div class="stat-label">factor in promotions</div></div>
+                    <div class="stat-item"><div class="stat-number">You</div><div class="stat-label">define your style</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Objectives -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Objectives</span>
+                <h2>What You'll Gain</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Define Your Presence Style</h4><p>Understand your natural strengths and identify how to amplify them strategically</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Master the Three Pillars</h4><p>Build gravitas, refine communication, and align your visual presence with your ambitions</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Navigate the Double Bind</h4><p>Learn strategies to handle contradictory feedback without losing yourself</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Challenge -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">The Challenge</span>
+                <h2>The Double Bind Is Real</h2>
+                <p>WOC leaders face contradictory expectations that white male leaders rarely encounter. You're told to be confident—but not "aggressive." Warm—but not "soft." Visible—but not "attention-seeking."</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>"Too Much"</h4><p>Too assertive, too loud, too ambitious, too visible, too direct, too passionate.</p></div>
+                    <div class="card"><h4>"Not Enough"</h4><p>Not strategic enough, not visible enough, not confident enough, not polished enough.</p></div>
+                    <div class="card"><h4>The Truth</h4><p>These contradictions aren't about you. They're about others' discomfort with your power.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Framework -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Framework</span>
+                <h2>The Three Pillars of<br>Executive Presence</h2>
+                <p>Research identifies three core dimensions. Mastering all three creates the "complete package" that opens doors.</p>
+                <div class="cards-grid">
+                    <div class="card presence-pillar">
+                        <div class="pillar-icon">G</div>
+                        <h4>Gravitas</h4>
+                        <p>How you carry yourself. Your confidence, composure under pressure, and ability to command respect.</p>
+                    </div>
+                    <div class="card presence-pillar">
+                        <div class="pillar-icon">C</div>
+                        <h4>Communication</h4>
+                        <p>How you speak. Your ability to articulate ideas clearly, listen actively, and influence through words.</p>
+                    </div>
+                    <div class="card presence-pillar">
+                        <div class="pillar-icon">A</div>
+                        <h4>Appearance</h4>
+                        <p>How you show up visually. Your personal brand through clothing, grooming, and physical presence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Gravitas Deep Dive -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Gravitas</span></div>
+            <div class="slide-content">
+                <span class="section-label">Pillar 1</span>
+                <h2>Gravitas: Own Your Authority</h2>
+                <p>Gravitas is the foundation of executive presence. It's not about being loud—it's about being grounded.</p>
+                <div class="two-column">
+                    <div class="column"><h4>What Gravitas Looks Like</h4><ul><li>Composure under pressure</li><li>Decisive in uncertainty</li><li>Comfortable with silence</li><li>Takes up space without apology</li><li>Holds eye contact naturally</li></ul></div>
+                    <div class="column"><h4>Building Your Gravitas</h4><ul><li>Pause before responding—don't rush</li><li>State opinions as statements, not questions</li><li>Sit at the table, not against the wall</li><li>Eliminate hedge words ("just," "I think maybe")</li><li>Practice the power of the pause</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Communication Deep Dive -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Communication</span></div>
+            <div class="slide-content">
+                <span class="section-label">Pillar 2</span>
+                <h2>Communication: Speak to Influence</h2>
+                <p>It's not just what you say—it's how you say it, when you say it, and to whom.</p>
+                <div class="two-column">
+                    <div class="column"><h4>High-Impact Communication</h4><ul><li>Lead with the headline</li><li>Use concrete, specific language</li><li>Vary pace and tone intentionally</li><li>Ask powerful questions</li><li>Listen to understand, not to respond</li></ul></div>
+                    <div class="column"><h4>Common Pitfalls to Avoid</h4><ul><li>Upspeak (ending statements as questions?)</li><li>Over-explaining or over-qualifying</li><li>Apologizing for having an opinion</li><li>Letting others take credit for your ideas</li><li>Staying silent when your voice matters</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Appearance Deep Dive -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Appearance</span></div>
+            <div class="slide-content">
+                <span class="section-label">Pillar 3</span>
+                <h2>Appearance: Align the Visual</h2>
+                <p>Appearance is the most visible—and often most policed—dimension for WOC. Your goal: intentional alignment, not conformity.</p>
+                <div class="two-column">
+                    <div class="column"><h4>Questions to Ask</h4><ul><li>Does my visual presence match my role?</li><li>Am I dressing for where I am or where I'm going?</li><li>What does my presence communicate before I speak?</li><li>Where am I conforming vs. expressing authentically?</li></ul></div>
+                    <div class="column"><h4>Authentic Alignment</h4><ul><li>You don't have to assimilate to succeed</li><li>Cultural expression can be professional</li><li>Consistency builds recognition</li><li>Dress for the impact you want to make</li><li>Comfort enables confidence</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Quote -->
+        <div class="slide slide-quote" data-slide="9" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">Executive presence isn't about being someone else. It's about being more intentionally, visibly, and powerfully yourself.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Commanding the Room -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">In Practice</span>
+                <h2>Commanding the Room</h2>
+                <p>Whether it's a meeting, a presentation, or a high-stakes conversation—presence is felt before you speak a word.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Before You Speak</h4><p>Enter with intention. Make eye contact. Claim your space. Breathe. Let silence work for you.</p></div>
+                    <div class="card"><h4>When You Speak</h4><p>Lead with your point. Use "I" statements. Pause after key points. Don't apologize for contributing.</p></div>
+                    <div class="card"><h4>Under Pressure</h4><p>Slow down—don't speed up. Acknowledge the tension. Respond, don't react. Stay grounded in your body.</p></div>
+                    <div class="card"><h4>When Challenged</h4><p>Thank them for the pushback. Ask clarifying questions. Hold your ground without getting defensive.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Activity - Presence Audit -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Self-Assessment</span>
+                <h2>Executive Presence Audit</h2>
+                <p>Use the Presence Audit worksheet to honestly assess where you are across all three pillars—and identify your biggest opportunities.</p>
+                <div class="cards-grid two-col" style="margin-top: 48px;">
+                    <div class="card"><h4>Part 1: Self-Rating</h4><p>Rate yourself 1-5 across 15 presence behaviors spanning gravitas, communication, and appearance.</p></div>
+                    <div class="card"><h4>Part 2: Pattern Analysis</h4><p>Identify which pillar is your strongest and which needs the most attention.</p></div>
+                </div>
+                <div class="activity-meta">Time: 10 minutes</div>
+            </div>
+        </div>
+
+        <!-- Slide 12: The Feedback Trap -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">The Feedback Trap</span>
+                <h2>Decoding Biased Feedback</h2>
+                <p>Not all feedback about your presence is valid. Learn to distinguish between useful insight and coded bias.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>"You're Intimidating"</h4><p><strong>Translation:</strong> Your competence makes someone uncomfortable.<br><strong>Response:</strong> "Can you give me a specific example so I understand the context?"</p></div>
+                    <div class="card"><h4>"You're Too Aggressive"</h4><p><strong>Translation:</strong> You advocated for yourself/your ideas.<br><strong>Response:</strong> "I want to be effective. What specifically would you suggest I do differently?"</p></div>
+                    <div class="card"><h4>"You Need More Gravitas"</h4><p><strong>Translation:</strong> You don't match their mental model of a leader.<br><strong>Response:</strong> "Can you describe what gravitas looks like in our context?"</p></div>
+                    <div class="card"><h4>"You Should Smile More"</h4><p><strong>Translation:</strong> Your competence without pleasantness is disorienting.<br><strong>Response:</strong> "I appreciate the feedback. I focus my energy on delivering results."</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Authentic vs. Code-Switching -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Finding Your Way</span>
+                <h2>Adaptation vs. Assimilation</h2>
+                <p>There's a difference between strategic adaptation and losing yourself. The goal is intentional choice, not survival mode.</p>
+                <div class="two-column">
+                    <div class="column"><h4>Strategic Adaptation</h4><ul><li>Choosing when to dial up or down</li><li>Intentional based on goals</li><li>You're in control</li><li>Adds to your repertoire</li><li>Feels like a choice</li></ul></div>
+                    <div class="column"><h4>Exhausting Assimilation</h4><ul><li>Constant self-monitoring</li><li>Fear-based, reactive</li><li>Others are in control</li><li>Erases parts of you</li><li>Feels like survival</li></ul></div>
+                </div>
+                <div class="callout"><p><strong>The question to ask:</strong> "Am I making this choice because it serves my goals, or because I'm afraid of judgment?"</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Activity - Presence Strategy -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Strategic Planning</span>
+                <h2>Design Your Presence Strategy</h2>
+                <p>Use the Presence Strategy worksheet to define how you want to show up in key contexts—and the specific behaviors that will get you there.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Define Your Contexts</h4><p>Board meetings, team meetings, 1:1s, presentations, networking—where does presence matter most?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Set Your Intention</h4><p>For each context, what impression do you want to leave? What do you want people to feel/think?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Choose Your Behaviors</h4><p>What specific actions (body language, words, timing) will create that impact?</p></div></div>
+                </div>
+                <div class="activity-meta">Time: 15 minutes</div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Voice and Language -->
+        <div class="slide" data-slide="15">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Communication Mastery</span>
+                <h2>Language That Commands</h2>
+                <p>Small shifts in your word choice can dramatically change how you're perceived. Here's what to practice.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Instead of "I think maybe..."</h4><p>Say: <strong>"My recommendation is..."</strong> or <strong>"Based on my analysis..."</strong></p></div>
+                    <div class="card"><h4>Instead of "Does that make sense?"</h4><p>Say: <strong>"What questions do you have?"</strong> or <strong>"Let me know what resonates."</strong></p></div>
+                    <div class="card"><h4>Instead of "Sorry to interrupt..."</h4><p>Say: <strong>"I'd like to add..."</strong> or <strong>"Building on that..."</strong></p></div>
+                    <div class="card"><h4>Instead of "This might be a dumb question..."</h4><p>Say: <strong>"I'm curious about..."</strong> or simply ask the question.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Body Language -->
+        <div class="slide" data-slide="16">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Physical Presence</span>
+                <h2>Your Body Speaks First</h2>
+                <p>55% of communication is non-verbal. Before you say a word, your body has already told a story.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Posture</h4><p>Stand and sit tall. Shoulders back, feet planted. Take up the space you deserve. Resist shrinking.</p></div>
+                    <div class="card"><h4>Eye Contact</h4><p>Hold eye contact for 3-5 seconds at a time. In groups, connect with individuals, not the room.</p></div>
+                    <div class="card"><h4>Gestures</h4><p>Use purposeful hand gestures. Keep them at waist level or above. Avoid self-soothing movements.</p></div>
+                    <div class="card"><h4>Movement</h4><p>Move with intention. Pause before transitioning. Stillness is more powerful than fidgeting.</p></div>
+                    <div class="card"><h4>Facial Expression</h4><p>Your face should match your message. Neutral isn't cold—it's composed. Smile when it's genuine.</p></div>
+                    <div class="card"><h4>Voice</h4><p>Speak from your diaphragm. Vary your pace. Use the pause. End statements downward, not up.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Quote 2 -->
+        <div class="slide slide-quote" data-slide="17" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">Your presence is your first message. Make sure it's saying what you want it to say.</p>
+            </div>
+        </div>
+
+        <!-- Slide 18: 14-Day Practice -->
+        <div class="slide" data-slide="18">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Practice Plan</span>
+                <h2>The 14-Day Presence Challenge</h2>
+                <p>Executive presence is built through repetition. Use the Practice Tracker to build new habits over the next two weeks.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Daily Practice: Power Posture</h4><p>Before every meeting, stand tall for 2 minutes. Take up space. Breathe deeply. Enter with intention.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Daily Practice: One Power Phrase</h4><p>Replace one hedge phrase with a power phrase each day. Track what you changed and how it felt.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Weekly Challenge: Command One Room</h4><p>Choose one meeting each week to fully embody your presence strategy. Debrief what worked.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Summary -->
+        <div class="slide" data-slide="19">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Summary</span>
+                <h2>Key Takeaways</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Presence Is Built on Three Pillars</h4><p>Gravitas, Communication, and Appearance—master all three for full impact</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>The Double Bind Is About Them, Not You</h4><p>Learn to decode biased feedback and respond strategically</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Adaptation Is Not Assimilation</h4><p>Stay in control—make choices that serve your goals, not others' comfort</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Presence Is Practice</h4><p>Small, daily behaviors compound into commanding presence over time</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Homework -->
+        <div class="slide" data-slide="20">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 2</span></div>
+            <div class="slide-content">
+                <span class="section-label">Before Next Session</span>
+                <h2>Your Homework</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Complete Your Presence Audit</h4><p>Rate yourself across all 15 behaviors and identify your top 3 growth areas</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Design Your Presence Strategy</h4><p>Define your intention and behaviors for your top 3 professional contexts</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Complete the 14-Day Challenge</h4><p>Power posture + power phrase daily. Command one room each week. Track your progress.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Request Presence Feedback</h4><p>Ask one trusted colleague: "What's your impression of my presence in meetings?"</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Closing -->
+        <div class="slide slide-dark" data-slide="21" style="background: linear-gradient(rgba(26,26,26,0.92), rgba(26,26,26,0.92)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);"><span class="module-label" style="color: rgba(255,255,255,0.5);">Module 2 Complete</span></div>
+            <div class="slide-content">
+                <span class="section-label">Executive Leadership Lab</span>
+                <h2>Your Presence Is<br>Your Power</h2>
+                <p>You don't need to change who you are.<br>You need to show up as who you already are—with intention.</p>
+                <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="font-size: 14px; color: rgba(255,255,255,0.4);">Next Module: Build Your Strategic Brand — March</p>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+    </div>
+
+    <div class="keyboard-hint">Press <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">21</span></span>
+        <button class="nav-btn" id="nextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const progressBar = document.getElementById('progress');
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function updateProgress() { progressBar.style.width = (currentSlide / totalSlides) * 100 + '%'; }
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+        function nextSlide() { if (currentSlide < totalSlides) goToSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 1) goToSlide(currentSlide - 1); }
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].screenX; if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); } });
+        updateProgress();
+    </script>
+</body>
+</html>

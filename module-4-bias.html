@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigate Bias and Lead Through It | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        @media print {
+            body { overflow: visible; height: auto; background: white; }
+            .presentation { height: auto; }
+            .slide { position: relative; opacity: 1; visibility: visible; transform: none; page-break-after: always; height: 100vh; padding: 40px 60px; }
+            .slide::before { display: none; }
+            .nav-controls, .keyboard-hint, .progress-bar { display: none; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation { position: relative; width: 100vw; height: 100vh; }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            background: var(--bg);
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .slide > * { position: relative; z-index: 1; }
+
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover { background: var(--primary); color: var(--bg); }
+        .nav-btn:disabled { border-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        .nav-btn:disabled:hover { background: transparent; color: var(--text-muted); }
+        .nav-btn svg { width: 20px; height: 20px; }
+
+        .slide-counter { font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px; }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+            z-index: 1001;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 40px; left: 60px; right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { height: 64px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .slide-content { max-width: 960px; width: 100%; text-align: center; }
+
+        h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 56px; font-weight: 700; color: var(--primary); line-height: 1.15; letter-spacing: -1px; margin-bottom: 24px; }
+        h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 42px; font-weight: 600; color: var(--primary); line-height: 1.2; margin-bottom: 20px; }
+
+        .section-label { font-size: 11px; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 20px; display: block; }
+
+        p, .lead { font-size: 18px; line-height: 1.7; color: var(--text-light); max-width: 680px; margin: 0 auto; }
+        .lead { font-size: 20px; }
+
+        .slide-title {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 50%, #1A1A1A 100%);
+            color: var(--bg);
+        }
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/0B1A7916.jpg') center/cover no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .slide-title h1 { color: var(--bg); font-size: 64px; }
+        .slide-title p { color: rgba(255,255,255,0.6); }
+
+        .title-meta { display: flex; justify-content: center; gap: 48px; margin-top: 48px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .meta-item { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; text-align: left; }
+        .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+        .card { padding: 40px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s ease; }
+        .card:hover { border-color: var(--accent); }
+        .card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+        .card p { font-size: 15px; color: var(--text-light); margin: 0; line-height: 1.6; }
+
+        .feature-list { text-align: left; max-width: 640px; margin: 48px auto 0; }
+        .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+        .feature-item:last-child { border-bottom: none; }
+        .feature-number { width: 32px; height: 32px; background: var(--accent-warm); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; color: white; flex-shrink: 0; }
+        .feature-text h4 { font-size: 17px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+        .feature-text p { font-size: 15px; color: var(--text-light); margin: 0; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; text-align: left; max-width: 880px; margin: 48px auto 0; }
+        .column h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
+        .column ul { list-style: none; }
+        .column li { padding: 10px 0; font-size: 15px; color: var(--text-light); border-bottom: 1px solid var(--border); }
+        .column li:last-child { border-bottom: none; }
+
+        .slide-quote { background: var(--bg-warm); }
+        .quote-text { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 400; line-height: 1.5; color: var(--primary); max-width: 800px; font-style: italic; }
+        .quote-text::before { content: '"'; display: block; font-size: 72px; line-height: 1; color: var(--accent-warm); margin-bottom: 16px; }
+
+        .stats-row { display: flex; justify-content: center; gap: 80px; margin-top: 56px; }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+        .slide-dark { background: linear-gradient(135deg, #1A1A1A 0%, #252525 40%, #1A1A1A 100%); color: var(--bg); }
+        .slide-dark h2 { color: var(--bg); }
+        .slide-dark p { color: rgba(255,255,255,0.6); }
+
+        .ell-mark { position: absolute; bottom: 40px; right: 60px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; font-weight: 600; letter-spacing: 3px; color: var(--accent-warm); opacity: 0.4; }
+        .slide-dark .ell-mark { color: rgba(255,255,255,0.15); }
+        .slide-title .ell-mark { color: rgba(255,255,255,0.15); }
+
+        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .callout p { font-size: 15px; margin: 0; }
+
+        .activity-meta { display: inline-block; margin-top: 40px; padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--text-muted); }
+
+        .keyboard-hint { position: fixed; bottom: 112px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .keyboard-hint kbd { display: inline-block; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; font-family: inherit; font-size: 11px; margin: 0 2px; }
+
+        /* Bias-specific styles */
+        .scenario-card {
+            background: var(--bg-warm);
+            padding: 24px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+        }
+        .scenario-card .situation { font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .scenario-card .response { font-size: 14px; color: var(--text-light); }
+
+        .response-framework {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .framework-step {
+            text-align: center;
+            padding: 24px 16px;
+            background: var(--bg-warm);
+            border-radius: 4px;
+        }
+        .framework-step .step-number {
+            width: 32px;
+            height: 32px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+            font-weight: 600;
+        }
+        .framework-step h5 { font-size: 14px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .framework-step p { font-size: 12px; color: var(--text-light); }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active" data-slide="1">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo">
+                <span class="module-label">Executive Leadership Lab</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Module 4 — April</span>
+                <h1>Navigate Bias and<br>Lead Through It</h1>
+                <p class="lead">Recognize bias when it happens, respond strategically, and protect your energy while advancing your career.</p>
+                <div class="title-meta">
+                    <span class="meta-item">10-Month Program</span>
+                    <span class="meta-item">Coaching Women of Color</span>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 2: Welcome -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Welcome</span>
+                <h2>Bias Is Real. Your Response<br>Is Your Power.</h2>
+                <p>You can't control whether bias happens. But you can control how you recognize it, respond to it, and lead through it—without burning out or burning bridges.</p>
+                <div class="stats-row">
+                    <div class="stat-item"><div class="stat-number">64%</div><div class="stat-label">of WOC face microaggressions</div></div>
+                    <div class="stat-item"><div class="stat-number">40%</div><div class="stat-label">report being "only one"</div></div>
+                    <div class="stat-item"><div class="stat-number">You</div><div class="stat-label">choose your response</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Objectives -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Objectives</span>
+                <h2>What You'll Gain</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Recognize Bias Patterns</h4><p>Identify the common forms of bias you face and name them accurately</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Build Your Response Toolkit</h4><p>Learn strategic responses for different situations—from microaggressions to systemic barriers</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Protect Your Energy</h4><p>Develop practices to sustain yourself while navigating bias-laden environments</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Understanding Bias -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Foundation</span>
+                <h2>The Forms of Bias</h2>
+                <p>Bias shows up in different ways. Understanding the type helps you choose the right response.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Microaggressions</h4><p>Subtle, often unintentional slights that communicate hostility or derogatory attitudes. Death by a thousand cuts.</p></div>
+                    <div class="card"><h4>Stereotyping</h4><p>Assumptions about your abilities, interests, or role based on race, gender, or other identities rather than your actual work.</p></div>
+                    <div class="card"><h4>Systemic Barriers</h4><p>Policies, practices, or cultural norms that disadvantage certain groups—often invisible to those who benefit from them.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Common Microaggressions -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Recognition</span>
+                <h2>Common Microaggressions<br>WOC Leaders Face</h2>
+                <div class="cards-grid two-col" style="margin-top: 32px;">
+                    <div class="card"><h4>"You're so articulate!"</h4><p><em>Subtext:</em> I'm surprised someone like you speaks well. <em>Impact:</em> Othering, low expectations.</p></div>
+                    <div class="card"><h4>"Where are you really from?"</h4><p><em>Subtext:</em> You don't belong here. <em>Impact:</em> Perpetual foreigner status.</p></div>
+                    <div class="card"><h4>Mistaken for support staff</h4><p><em>Subtext:</em> You can't possibly be in charge. <em>Impact:</em> Invisibility, having to prove role.</p></div>
+                    <div class="card"><h4>"You're a credit to your race"</h4><p><em>Subtext:</em> You're an exception, not the rule. <em>Impact:</em> Isolation from community.</p></div>
+                    <div class="card"><h4>Being talked over or ignored</h4><p><em>Subtext:</em> Your voice doesn't matter. <em>Impact:</em> Silencing, erasure of contributions.</p></div>
+                    <div class="card"><h4>Having ideas credited to others</h4><p><em>Subtext:</em> You couldn't have thought of that. <em>Impact:</em> Stolen opportunities, invisibility.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Systemic Barriers -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Recognition</span>
+                <h2>Systemic Barriers to Watch For</h2>
+                <p>These aren't personal—they're structural. But they affect you personally.</p>
+                <div class="two-column">
+                    <div class="column"><h4>What It Looks Like</h4><ul><li>Lack of WOC in senior leadership</li><li>Unequal access to sponsors/mentors</li><li>Promotion criteria that favor majority styles</li><li>"Culture fit" that really means conformity</li><li>Invisible labor assigned to WOC</li></ul></div>
+                    <div class="column"><h4>How to Navigate</h4><ul><li>Build relationships outside the gatekeepers</li><li>Document your contributions meticulously</li><li>Seek sponsors who have power and will use it</li><li>Connect with WOC at peer and senior levels</li><li>Set boundaries on emotional labor requests</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Quote -->
+        <div class="slide slide-quote" data-slide="7" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">The goal isn't to never experience bias. It's to navigate it without losing yourself or your power.</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Response Framework -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Framework</span>
+                <h2>The PACE Response Framework</h2>
+                <p>Not every situation requires the same response. PACE helps you choose strategically.</p>
+                <div class="response-framework">
+                    <div class="framework-step">
+                        <div class="step-number">P</div>
+                        <h5>Pause</h5>
+                        <p>Take a breath. Don't react immediately. Buy yourself time to think.</p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">A</div>
+                        <h5>Assess</h5>
+                        <p>What happened? Who's involved? What's at stake? What outcome do you want?</p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">C</div>
+                        <h5>Choose</h5>
+                        <p>Select your response: Address now, address later, let go, escalate.</p>
+                    </div>
+                    <div class="framework-step">
+                        <div class="step-number">E</div>
+                        <h5>Execute</h5>
+                        <p>Deliver your response clearly and strategically. Document if needed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Response Options -->
+        <div class="slide" data-slide="9">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Strategy</span>
+                <h2>Your Response Options</h2>
+                <p>You always have choices. No option is weakness—it's strategy.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Address in the Moment</h4><p>"Can you say more about what you mean by that?" or "I'd like to add my perspective since that was originally my idea." Direct, immediate, clarifying.</p></div>
+                    <div class="card"><h4>Address Later Privately</h4><p>Pull the person aside afterward. "I wanted to follow up on what you said in the meeting..." Less confrontational, still impactful.</p></div>
+                    <div class="card"><h4>Let It Go (Strategically)</h4><p>Sometimes the cost isn't worth the battle. This isn't weakness—it's choosing your fights wisely. Document and move on.</p></div>
+                    <div class="card"><h4>Escalate</h4><p>When the behavior is severe, repeated, or dangerous, involve HR, leadership, or formal channels. Document everything.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Scripts -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Practical Scripts</span>
+                <h2>What to Say</h2>
+                <p>Having pre-prepared language makes it easier to respond in the moment.</p>
+                <div class="two-column" style="margin-top: 32px;">
+                    <div class="column"><h4>For Microaggressions</h4><ul><li>"What do you mean by that?"</li><li>"Can you help me understand?"</li><li>"That landed differently than you probably intended."</li><li>"I'm sure you didn't mean it this way, but..."</li></ul></div>
+                    <div class="column"><h4>For Idea Theft</h4><ul><li>"Thanks for building on what I said earlier."</li><li>"I'm glad you're supporting my recommendation."</li><li>"To clarify, I first raised this point when..."</li><li>"I'd like to expand on my original idea..."</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Activity - Bias Log -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Self-Awareness</span>
+                <h2>Your Bias Log</h2>
+                <p>Use the Bias Log worksheet to track incidents over the next 2 weeks. Pattern recognition helps you respond strategically.</p>
+                <div class="cards-grid two-col" style="margin-top: 48px;">
+                    <div class="card"><h4>What to Track</h4><p>Date, situation, what was said/done, who was involved, your emotional response, what you did, outcome.</p></div>
+                    <div class="card"><h4>Why It Matters</h4><p>Documentation creates evidence. Patterns reveal whether incidents are random or systemic. Data informs decisions.</p></div>
+                </div>
+                <div class="activity-meta">Time: Ongoing for 2 weeks</div>
+            </div>
+        </div>
+
+        <!-- Slide 12: The Energy Tax -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Self-Care</span>
+                <h2>The Energy Tax Is Real</h2>
+                <p>Navigating bias takes energy—mental, emotional, physical. You need strategies to replenish.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Emotional Tax</h4><p>The constant vigilance, self-monitoring, and managing others' discomfort that WOC carry daily.</p></div>
+                    <div class="card"><h4>Cognitive Load</h4><p>The mental energy spent deciding when to speak up, how to respond, and what battles to fight.</p></div>
+                    <div class="card"><h4>Physical Impact</h4><p>Chronic stress from navigating bias contributes to real health consequences. Rest is resistance.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Energy Protection -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Protection</span>
+                <h2>Protecting Your Energy</h2>
+                <p>You can't pour from an empty cup. Build practices that sustain you.</p>
+                <div class="two-column">
+                    <div class="column"><h4>Daily Practices</h4><ul><li>Morning intention setting</li><li>Micro-breaks to decompress</li><li>Movement and breathwork</li><li>Evening processing ritual</li><li>Screen boundaries</li></ul></div>
+                    <div class="column"><h4>Community & Support</h4><ul><li>Connect with WOC peers regularly</li><li>Find your "people who get it"</li><li>Therapy or coaching support</li><li>Mentors who've navigated similar</li><li>Spaces where you're the norm</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Activity - Energy Plan -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Self-Care Planning</span>
+                <h2>Your Energy Protection Plan</h2>
+                <p>Use the Energy Protection worksheet to build a personalized sustainability strategy.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Identify Your Drains</h4><p>What situations, people, or patterns cost you the most energy?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Map Your Resources</h4><p>What restores you? Who supports you? Where do you feel whole?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Build Your Routine</h4><p>Create daily, weekly, and monthly practices that protect your energy.</p></div></div>
+                </div>
+                <div class="activity-meta">Time: 15 minutes</div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Allies and Sponsors -->
+        <div class="slide" data-slide="15">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Strategic Relationships</span>
+                <h2>Leveraging Allies</h2>
+                <p>You shouldn't have to fight every battle alone. Real allies take action, not just intentions.</p>
+                <div class="two-column">
+                    <div class="column"><h4>What Real Allies Do</h4><ul><li>Speak up when you're not in the room</li><li>Credit your ideas publicly</li><li>Use their privilege to open doors</li><li>Educate themselves—don't ask you to</li><li>Accept feedback without defensiveness</li></ul></div>
+                    <div class="column"><h4>How to Cultivate Allies</h4><ul><li>Identify who has power and influence</li><li>Build genuine relationships first</li><li>Be specific about what support looks like</li><li>Give feedback when allyship falls short</li><li>Recognize and appreciate their efforts</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Quote 2 -->
+        <div class="slide slide-quote" data-slide="16" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">You are not too sensitive. You are not imagining things. You are responding to real experiences—and you get to decide how.</p>
+            </div>
+        </div>
+
+        <!-- Slide 17: When to Leave -->
+        <div class="slide" data-slide="17">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Hard Truth</span>
+                <h2>When the Environment<br>Won't Change</h2>
+                <p>Sometimes the most strategic move is to leave. Knowing when is wisdom, not weakness.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Signs It May Be Time</h4><p>Persistent patterns despite feedback. Health impacts. No WOC in senior roles. Leadership tolerates bias. You've lost your spark.</p></div>
+                    <div class="card"><h4>Before You Go</h4><p>Document everything. Build your brand externally. Line up references. Leave on your terms. Don't burn bridges you might need.</p></div>
+                </div>
+                <div class="callout"><p><strong>Remember:</strong> Leaving a toxic environment isn't giving up—it's choosing yourself. Your career is a long game, and some environments aren't worth the cost.</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Summary -->
+        <div class="slide" data-slide="18">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Summary</span>
+                <h2>Key Takeaways</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Naming It Matters</h4><p>Recognizing bias for what it is—microaggressions, stereotyping, systemic barriers—is the first step to responding strategically</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>You Always Have Options</h4><p>Use PACE to pause, assess, choose, and execute. Not every situation requires the same response.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Protect Your Energy</h4><p>The energy tax is real. Build daily practices and community support to sustain yourself.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>You Deserve Better</h4><p>If the environment won't change, sometimes leaving is the most powerful choice.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Homework -->
+        <div class="slide" data-slide="19">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 4</span></div>
+            <div class="slide-content">
+                <span class="section-label">Before Next Session</span>
+                <h2>Your Homework</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Keep Your Bias Log</h4><p>Track incidents for 2 weeks. Note patterns in who, what, when, and your responses.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Complete Your Energy Plan</h4><p>Map your drains and resources. Build daily, weekly, and monthly protection practices.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Practice One Response Script</h4><p>Choose a script and practice saying it out loud. Use it in a real situation if one arises.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Connect with Your People</h4><p>Reach out to one person who "gets it." Share your experiences. Let yourself be supported.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Closing -->
+        <div class="slide slide-dark" data-slide="20" style="background: linear-gradient(rgba(26,26,26,0.92), rgba(26,26,26,0.92)), url('https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);"><span class="module-label" style="color: rgba(255,255,255,0.5);">Module 4 Complete</span></div>
+            <div class="slide-content">
+                <span class="section-label">Executive Leadership Lab</span>
+                <h2>Navigate Bias.<br>Protect Your Power.</h2>
+                <p>You are not the problem. You are the solution—<br>for yourself and for those coming behind you.</p>
+                <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="font-size: 14px; color: rgba(255,255,255,0.4);">Next Module: Amplify Your Voice — May</p>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+    </div>
+
+    <div class="keyboard-hint">Press <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">20</span></span>
+        <button class="nav-btn" id="nextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const progressBar = document.getElementById('progress');
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function updateProgress() { progressBar.style.width = (currentSlide / totalSlides) * 100 + '%'; }
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+        function nextSlide() { if (currentSlide < totalSlides) goToSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 1) goToSlide(currentSlide - 1); }
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].screenX; if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); } });
+        updateProgress();
+    </script>
+</body>
+</html>

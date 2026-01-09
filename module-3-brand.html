@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Strategic Brand | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        @media print {
+            body { overflow: visible; height: auto; background: white; }
+            .presentation { height: auto; }
+            .slide { position: relative; opacity: 1; visibility: visible; transform: none; page-break-after: always; height: 100vh; padding: 40px 60px; }
+            .slide::before { display: none; }
+            .nav-controls, .keyboard-hint, .progress-bar { display: none; }
+            .slide-title, .slide-dark { background: var(--primary) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation { position: relative; width: 100vw; height: 100vh; }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 120px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            background: var(--bg);
+        }
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .slide > * { position: relative; z-index: 1; }
+
+        .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .nav-controls {
+            position: fixed;
+            bottom: 48px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover { background: var(--primary); color: var(--bg); }
+        .nav-btn:disabled { border-color: var(--border); color: var(--text-muted); cursor: not-allowed; }
+        .nav-btn:disabled:hover { background: transparent; color: var(--text-muted); }
+        .nav-btn svg { width: 20px; height: 20px; }
+
+        .slide-counter { font-size: 13px; font-weight: 500; color: var(--text-muted); letter-spacing: 0.5px; }
+
+        .progress-bar {
+            position: fixed; top: 0; left: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.4s ease;
+            z-index: 1001;
+        }
+
+        .slide-header {
+            position: absolute;
+            top: 40px; left: 60px; right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { height: 64px; }
+        .module-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; }
+
+        .slide-content { max-width: 960px; width: 100%; text-align: center; }
+
+        h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 56px; font-weight: 700;
+            color: var(--primary);
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        h2 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 42px; font-weight: 600;
+            color: var(--primary);
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-size: 11px; font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        p, .lead { font-size: 18px; line-height: 1.7; color: var(--text-light); max-width: 680px; margin: 0 auto; }
+        .lead { font-size: 20px; }
+
+        .slide-title {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2d2d2d 50%, #1A1A1A 100%);
+            color: var(--bg);
+            position: relative;
+        }
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/0B1A7916.jpg') center/cover no-repeat;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .slide-title h1 { color: var(--bg); font-size: 64px; }
+        .slide-title p { color: rgba(255,255,255,0.6); }
+
+        .title-meta {
+            display: flex; justify-content: center; gap: 48px;
+            margin-top: 48px; padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .meta-item { font-size: 13px; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+
+        .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; text-align: left; }
+        .cards-grid.two-col { grid-template-columns: repeat(2, 1fr); }
+
+        .card { padding: 40px; border: 1px solid var(--border); border-radius: 4px; transition: all 0.2s ease; }
+        .card:hover { border-color: var(--accent); }
+        .card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+        .card p { font-size: 15px; color: var(--text-light); margin: 0; line-height: 1.6; }
+
+        .feature-list { text-align: left; max-width: 640px; margin: 48px auto 0; }
+        .feature-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+        .feature-item:last-child { border-bottom: none; }
+
+        .feature-number {
+            width: 32px; height: 32px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 600; color: white;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 { font-size: 17px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+        .feature-text p { font-size: 15px; color: var(--text-light); margin: 0; }
+
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; text-align: left; max-width: 880px; margin: 48px auto 0; }
+        .column h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary); }
+        .column ul { list-style: none; }
+        .column li { padding: 10px 0; font-size: 15px; color: var(--text-light); border-bottom: 1px solid var(--border); }
+        .column li:last-child { border-bottom: none; }
+
+        .slide-quote { background: var(--bg-warm); }
+        .quote-text {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px; font-weight: 400;
+            line-height: 1.5; color: var(--primary);
+            max-width: 800px; font-style: italic;
+        }
+        .quote-text::before { content: '"'; display: block; font-size: 72px; line-height: 1; color: var(--accent-warm); margin-bottom: 16px; }
+
+        .stats-row { display: flex; justify-content: center; gap: 80px; margin-top: 56px; }
+        .stat-item { text-align: center; }
+        .stat-number { font-family: 'Source Serif 4', Georgia, serif; font-size: 48px; font-weight: 700; color: var(--primary); }
+        .stat-label { font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+        .slide-dark {
+            background: linear-gradient(135deg, #1A1A1A 0%, #252525 40%, #1A1A1A 100%);
+            color: var(--bg);
+        }
+        .slide-dark h2 { color: var(--bg); }
+        .slide-dark p { color: rgba(255,255,255,0.6); }
+
+        .ell-mark {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: var(--accent-warm);
+            opacity: 0.4;
+        }
+        .slide-dark .ell-mark { color: rgba(255,255,255,0.15); }
+        .slide-title .ell-mark { color: rgba(255,255,255,0.15); }
+
+        .callout { background: var(--bg-warm); border-left: 3px solid var(--accent-warm); padding: 24px 32px; margin-top: 40px; text-align: left; max-width: 640px; margin-left: auto; margin-right: auto; }
+        .callout p { font-size: 15px; margin: 0; }
+
+        .activity-meta { display: inline-block; margin-top: 40px; padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--text-muted); }
+
+        .keyboard-hint { position: fixed; bottom: 112px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+        .keyboard-hint kbd { display: inline-block; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; font-family: inherit; font-size: 11px; margin: 0 2px; }
+
+        /* Brand-specific styles */
+        .brand-formula {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 48px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .brand-formula .plus { color: var(--accent-warm); }
+        .brand-formula .equals { color: var(--accent); }
+
+        .venn-diagram {
+            display: flex;
+            justify-content: center;
+            gap: -40px;
+            margin-top: 48px;
+        }
+        .venn-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 20px;
+        }
+        .venn-circle.strength { background: rgba(42, 123, 140, 0.2); margin-right: -40px; }
+        .venn-circle.passion { background: rgba(212, 165, 116, 0.2); margin-right: -40px; }
+        .venn-circle.market { background: rgba(26, 26, 26, 0.1); }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <div class="presentation" id="presentation">
+
+        <!-- Slide 1: Title -->
+        <div class="slide slide-title active" data-slide="1">
+            <div class="slide-header">
+                <img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo">
+                <span class="module-label">Executive Leadership Lab</span>
+            </div>
+            <div class="slide-content">
+                <span class="section-label">Module 3 — March</span>
+                <h1>Build Your<br>Strategic Brand</h1>
+                <p class="lead">Define what you're known for, own your narrative, and position yourself for the opportunities you want.</p>
+                <div class="title-meta">
+                    <span class="meta-item">10-Month Program</span>
+                    <span class="meta-item">Coaching Women of Color</span>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+
+        <!-- Slide 2: Welcome -->
+        <div class="slide" data-slide="2">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Welcome</span>
+                <h2>You Have a Brand.<br>The Question Is: Who's Defining It?</h2>
+                <p>Your brand already exists—it's what people say about you when you're not in the room. The question isn't whether to have a brand. It's whether you're intentionally shaping it or letting others define it for you.</p>
+                <div class="stats-row">
+                    <div class="stat-item"><div class="stat-number">70%</div><div class="stat-label">of employers screen on social</div></div>
+                    <div class="stat-item"><div class="stat-number">7 sec</div><div class="stat-label">first impression forms</div></div>
+                    <div class="stat-item"><div class="stat-number">You</div><div class="stat-label">control the narrative</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Objectives -->
+        <div class="slide" data-slide="3">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Objectives</span>
+                <h2>What You'll Gain</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Clarify Your Brand Identity</h4><p>Discover what makes you uniquely valuable and how to articulate it compellingly</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Craft Your Brand Statement</h4><p>Create a clear, memorable positioning statement that opens doors</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Build Your Visibility Strategy</h4><p>Identify specific ways to amplify your brand to the right audiences</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Challenge -->
+        <div class="slide" data-slide="4">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">The Challenge</span>
+                <h2>Why WOC Leaders Need<br>Intentional Branding</h2>
+                <p>Excellence alone doesn't create recognition. For WOC, being "good at your job" often means being invisible. Your brand closes the gap between your impact and your recognition.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>The Visibility Tax</h4><p>You do the work, others get the credit. Without a clear brand, your contributions disappear.</p></div>
+                    <div class="card"><h4>The Assumption Gap</h4><p>Others assume what you're capable of based on bias. Your brand pre-corrects those assumptions.</p></div>
+                    <div class="card"><h4>The Opportunity Filter</h4><p>Decision-makers remember brands, not resumes. If you're not top of mind, you're not in the running.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: What Is Personal Brand -->
+        <div class="slide" data-slide="5">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Foundation</span>
+                <h2>What Is a Personal Brand?</h2>
+                <p>Your brand is not a logo or a tagline. It's the consistent experience people have of you—the story they tell themselves and others about who you are and what you deliver.</p>
+                <div class="brand-formula">
+                    <span>Reputation</span>
+                    <span class="plus">+</span>
+                    <span>Visibility</span>
+                    <span class="equals">=</span>
+                    <span>Brand</span>
+                </div>
+                <div class="callout" style="margin-top: 48px;"><p><strong>Your brand answers three questions:</strong> What are you known for? Who knows it? And what do they do with that knowledge?</p></div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Brand Sweet Spot -->
+        <div class="slide" data-slide="6">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Framework</span>
+                <h2>Finding Your Brand Sweet Spot</h2>
+                <p>Your most powerful brand lives at the intersection of three elements. When all three align, you're unstoppable.</p>
+                <div class="cards-grid">
+                    <div class="card" style="border-color: var(--accent);">
+                        <h4>Your Strengths</h4>
+                        <p>What you're genuinely great at—the skills, experiences, and capabilities where you have proven expertise.</p>
+                    </div>
+                    <div class="card" style="border-color: var(--accent-warm);">
+                        <h4>Your Passions</h4>
+                        <p>What energizes you—the work that doesn't feel like work, the problems you love to solve.</p>
+                    </div>
+                    <div class="card" style="border-color: var(--primary);">
+                        <h4>Market Needs</h4>
+                        <p>What's valued—the problems organizations pay to solve, the gaps that need filling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Brand Audit -->
+        <div class="slide" data-slide="7">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Current State</span>
+                <h2>Your Brand Audit</h2>
+                <p>Before building, take stock. What's your brand today—whether intentional or not?</p>
+                <div class="two-column">
+                    <div class="column"><h4>Questions to Ask Yourself</h4><ul><li>What am I most often asked to help with?</li><li>What do people praise me for?</li><li>What feedback do I get repeatedly?</li><li>What do colleagues introduce me as?</li><li>What would my LinkedIn say if I were honest?</li></ul></div>
+                    <div class="column"><h4>Questions to Ask Others</h4><ul><li>What 3 words would you use to describe me?</li><li>What do you think I'm best at?</li><li>What's my superpower?</li><li>What would you recommend me for?</li><li>What do you think I should be known for?</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Activity - Brand Discovery -->
+        <div class="slide" data-slide="8">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Self-Assessment</span>
+                <h2>Brand Discovery Worksheet</h2>
+                <p>Use the Brand Discovery worksheet to map your strengths, passions, and market needs. Find where they overlap—that's your brand territory.</p>
+                <div class="cards-grid two-col" style="margin-top: 48px;">
+                    <div class="card"><h4>Part 1: Internal Audit</h4><p>List your top skills, signature experiences, and what energizes you most at work.</p></div>
+                    <div class="card"><h4>Part 2: External Research</h4><p>Gather feedback from 3-5 trusted colleagues. Notice patterns in how others see you.</p></div>
+                </div>
+                <div class="activity-meta">Time: 20 minutes (+ external feedback gathering)</div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Quote -->
+        <div class="slide slide-quote" data-slide="9" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">Your brand is a story people tell about you. Make sure you gave them the right material.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Brand Positioning -->
+        <div class="slide" data-slide="10">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Positioning</span>
+                <h2>The Brand Positioning Statement</h2>
+                <p>A clear positioning statement makes it easy for others to understand—and remember—what you bring. Use this formula to draft yours.</p>
+                <div class="callout" style="text-align: center; max-width: 720px;">
+                    <p style="font-size: 18px; line-height: 2;"><strong>I help</strong> [target audience]<br><strong>achieve</strong> [outcome/transformation]<br><strong>by</strong> [your unique approach/method]<br><strong>which results in</strong> [concrete value/impact]</p>
+                </div>
+                <p style="margin-top: 32px;"><em>Example: I help tech startups scale their engineering teams by building inclusive hiring systems, which results in 40% faster hiring and doubled retention.</em></p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Brand Differentiators -->
+        <div class="slide" data-slide="11">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Differentiation</span>
+                <h2>What Makes You Different?</h2>
+                <p>Your differentiator isn't "working hard" or "being a team player." It's the unique combination of skills, experiences, and perspectives only you bring.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Your Unique Combination</h4><p>What 2-3 skills or experiences do you bring together that few others have? (e.g., engineering + design + leadership)</p></div>
+                    <div class="card"><h4>Your Signature Story</h4><p>What challenge have you overcome that gives you unique credibility? Your background is an asset.</p></div>
+                    <div class="card"><h4>Your Perspective</h4><p>What do you see that others miss? What contrarian or uncommon view do you hold?</p></div>
+                    <div class="card"><h4>Your Results</h4><p>What outcomes do you consistently deliver? What's your track record of impact?</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Brand for WOC -->
+        <div class="slide" data-slide="12">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Identity + Brand</span>
+                <h2>Your Identity as an Asset</h2>
+                <p>Your lived experience as a WOC isn't separate from your professional brand—it's part of what makes you valuable. The question is how to leverage it strategically.</p>
+                <div class="two-column">
+                    <div class="column"><h4>What Your Experience Brings</h4><ul><li>Code-switching fluency = adaptability</li><li>Navigating bias = resilience + strategy</li><li>Community perspective = inclusive innovation</li><li>Over-preparation habit = excellence standard</li><li>Outsider insight = fresh solutions</li></ul></div>
+                    <div class="column"><h4>Positioning Your Identity</h4><ul><li>Lead with expertise, not identity alone</li><li>Choose when and how much to share</li><li>Let your work create the opening</li><li>Build bridges through shared challenges</li><li>Use your voice for change when ready</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Activity - Brand Statement -->
+        <div class="slide" data-slide="13">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Brand Building</span>
+                <h2>Craft Your Brand Statement</h2>
+                <p>Using the Brand Statement worksheet, draft multiple versions of your positioning statement. Test them with your trusted network.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Draft 3 Versions</h4><p>Write three different brand statements using the formula. Don't self-edit yet.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Test & Refine</h4><p>Share with 2-3 trusted people. Which one lands? What questions do they have?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Create Your Final Version</h4><p>Combine the best elements into one clear, compelling statement.</p></div></div>
+                </div>
+                <div class="activity-meta">Time: 15 minutes</div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Visibility Strategy -->
+        <div class="slide" data-slide="14">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Amplification</span>
+                <h2>The Visibility Strategy</h2>
+                <p>A brand nobody sees isn't a brand. You need a strategy for getting your brand in front of the right people.</p>
+                <div class="cards-grid">
+                    <div class="card"><h4>Internal Visibility</h4><p>Speaking up in meetings, volunteering for visible projects, sharing wins with your manager, building relationships with sponsors.</p></div>
+                    <div class="card"><h4>Industry Visibility</h4><p>Conference speaking, writing articles, participating in panels, joining professional organizations, building a network of peers.</p></div>
+                    <div class="card"><h4>Digital Visibility</h4><p>LinkedIn presence, thought leadership posts, engaging with industry conversations, building your online portfolio.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Internal Visibility -->
+        <div class="slide" data-slide="15">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Internal Visibility</span>
+                <h2>Building Your Brand Inside Your Organization</h2>
+                <p>Before going external, maximize your internal visibility. This is where promotions actually happen.</p>
+                <div class="cards-grid two-col">
+                    <div class="card"><h4>Share Your Work</h4><p>Send regular updates to your manager. Highlight impact, not just activity. Make your wins visible.</p></div>
+                    <div class="card"><h4>Seek Visibility Projects</h4><p>Volunteer for cross-functional initiatives. Present to leadership. Lead something new.</p></div>
+                    <div class="card"><h4>Build Strategic Relationships</h4><p>Connect with leaders outside your direct chain. Build relationships before you need them.</p></div>
+                    <div class="card"><h4>Position Yourself for What's Next</h4><p>Talk about your aspirations. Make sure decision-makers know what you want.</p></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: Digital Presence -->
+        <div class="slide" data-slide="16">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Digital Presence</span>
+                <h2>Your LinkedIn as Brand Real Estate</h2>
+                <p>For professionals, LinkedIn is the most important digital brand platform. Make it work for you.</p>
+                <div class="two-column">
+                    <div class="column"><h4>Optimize Your Profile</h4><ul><li>Headline: Brand statement, not job title</li><li>About: Story + value + call to action</li><li>Experience: Impact, not responsibilities</li><li>Photo: Professional but approachable</li><li>Banner: Reinforce your brand</li></ul></div>
+                    <div class="column"><h4>Build Visibility</h4><ul><li>Post 1-2x per week minimum</li><li>Share insights, not just achievements</li><li>Comment thoughtfully on others' posts</li><li>Engage with your target audience</li><li>Accept connection requests strategically</li></ul></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Quote 2 -->
+        <div class="slide slide-quote" data-slide="17" style="background: linear-gradient(rgba(245,242,237,0.92), rgba(245,242,237,0.92)), url('https://images.unsplash.com/photo-1455849318743-b2233052fcff?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Reflection</span></div>
+            <div class="slide-content">
+                <p class="quote-text">Be so clear about your value that you make it impossible for anyone to overlook you.</p>
+            </div>
+        </div>
+
+        <!-- Slide 18: Activity - Visibility Plan -->
+        <div class="slide" data-slide="18">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Activity</span></div>
+            <div class="slide-content">
+                <span class="section-label">Strategic Planning</span>
+                <h2>Your Visibility Action Plan</h2>
+                <p>Use the Visibility Planner worksheet to identify specific actions across internal, industry, and digital channels.</p>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Choose Your Primary Channel</h4><p>Internal, industry, or digital—where will you focus first for maximum impact?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Set 30-Day Goals</h4><p>What specific visibility actions will you take in the next month?</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Identify Accountability</h4><p>Who will hold you to this? When will you check in?</p></div></div>
+                </div>
+                <div class="activity-meta">Time: 15 minutes</div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Summary -->
+        <div class="slide" data-slide="19">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Summary</span>
+                <h2>Key Takeaways</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>You Already Have a Brand</h4><p>The only question is whether you're intentionally shaping it or letting others define it</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Brand = Reputation + Visibility</h4><p>Excellence alone isn't enough. People need to know who you are and what you deliver.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Your Identity Is an Asset</h4><p>Your lived experience as a WOC brings unique value. Position it strategically.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Visibility Requires Strategy</h4><p>Choose your channels intentionally. Start internal, expand outward.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Homework -->
+        <div class="slide" data-slide="20">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo"><span class="module-label">Module 3</span></div>
+            <div class="slide-content">
+                <span class="section-label">Before Next Session</span>
+                <h2>Your Homework</h2>
+                <div class="feature-list">
+                    <div class="feature-item"><div class="feature-number">1</div><div class="feature-text"><h4>Complete Your Brand Discovery</h4><p>Map your strengths, passions, and market needs. Find your sweet spot.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">2</div><div class="feature-text"><h4>Gather External Feedback</h4><p>Ask 3-5 people: "What 3 words describe me? What would you recommend me for?"</p></div></div>
+                    <div class="feature-item"><div class="feature-number">3</div><div class="feature-text"><h4>Draft Your Brand Statement</h4><p>Write 3 versions. Test with trusted colleagues. Refine to one clear statement.</p></div></div>
+                    <div class="feature-item"><div class="feature-number">4</div><div class="feature-text"><h4>Update Your LinkedIn Headline</h4><p>Replace your job title with your brand statement. Make it memorable.</p></div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Closing -->
+        <div class="slide slide-dark" data-slide="21" style="background: linear-gradient(rgba(26,26,26,0.92), rgba(26,26,26,0.92)), url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=1200&q=80') center/cover no-repeat;">
+            <div class="slide-header"><img src="https://coachingwomenofcolor.com/wp-content/uploads/2021/04/CWCFinal_logo2.webp" alt="CWC" class="logo" style="filter: brightness(0) invert(1);"><span class="module-label" style="color: rgba(255,255,255,0.5);">Module 3 Complete</span></div>
+            <div class="slide-content">
+                <span class="section-label">Executive Leadership Lab</span>
+                <h2>Own Your Narrative.<br>Build Your Brand.</h2>
+                <p>Your brand is your reputation made visible.<br>Make it impossible for anyone to overlook your value.</p>
+                <div style="margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p style="font-size: 14px; color: rgba(255,255,255,0.4);">Next Module: Navigate Bias and Lead Through It — April</p>
+                </div>
+            </div>
+            <div class="ell-mark">ELL</div>
+        </div>
+    </div>
+
+    <div class="keyboard-hint">Press <kbd>←</kbd> <kbd>→</kbd> to navigate</div>
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" disabled><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+        <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">21</span></span>
+        <button class="nav-btn" id="nextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg></button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let currentSlide = 1;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const currentSlideEl = document.getElementById('currentSlide');
+        const progressBar = document.getElementById('progress');
+        document.getElementById('totalSlides').textContent = totalSlides;
+
+        function updateProgress() { progressBar.style.width = (currentSlide / totalSlides) * 100 + '%'; }
+        function goToSlide(n) {
+            if (n < 1 || n > totalSlides) return;
+            slides[currentSlide - 1].classList.remove('active');
+            currentSlide = n;
+            slides[currentSlide - 1].classList.add('active');
+            currentSlideEl.textContent = currentSlide;
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+            updateProgress();
+        }
+        function nextSlide() { if (currentSlide < totalSlides) goToSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 1) goToSlide(currentSlide - 1); }
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+            else if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; });
+        document.addEventListener('touchend', e => { const diff = touchStartX - e.changedTouches[0].screenX; if (Math.abs(diff) > 50) { diff > 0 ? nextSlide() : prevSlide(); } });
+        updateProgress();
+    </script>
+</body>
+</html>

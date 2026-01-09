@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Presence Audit | Module 2 Worksheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        @media print {
+            body { background: white; }
+            .no-print { display: none; }
+            .worksheet { box-shadow: none; }
+            .page-break { page-break-before: always; }
+        }
+
+        .worksheet {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            background: white;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .header-left h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .header-left p {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .module-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .instructions {
+            background: var(--bg-warm);
+            padding: 24px;
+            border-radius: 4px;
+            margin-bottom: 40px;
+        }
+
+        .instructions h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .instructions p {
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-number {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-warm);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .pillar-header {
+            background: var(--primary);
+            color: white;
+            padding: 16px 24px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 0;
+            border-radius: 4px 4px 0 0;
+        }
+
+        .rating-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 32px;
+        }
+
+        .rating-table th,
+        .rating-table td {
+            padding: 16px;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .rating-table th {
+            background: var(--bg-warm);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        .rating-table td {
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .behavior-name {
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .behavior-desc {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .rating-cell {
+            text-align: center;
+            width: 60px;
+        }
+
+        .rating-input {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .rating-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 8px;
+            padding: 0 16px;
+        }
+
+        .score-summary {
+            background: var(--bg-warm);
+            padding: 24px;
+            border-radius: 4px;
+            margin-top: 24px;
+        }
+
+        .score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .score-row:last-child {
+            border-bottom: none;
+            font-weight: 600;
+        }
+
+        .score-label {
+            font-size: 15px;
+            color: var(--text);
+        }
+
+        .score-value {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .score-input {
+            width: 60px;
+            padding: 8px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .reflection-box {
+            width: 100%;
+            min-height: 120px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            margin-top: 16px;
+        }
+
+        .reflection-box:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .reflection-prompt {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .reflection-hint {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer-page {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <div class="header-left">
+                <h1>Executive Presence Audit</h1>
+                <p>Module 2: Master Your Executive Presence</p>
+            </div>
+            <div class="header-right">
+                <span class="module-badge">Worksheet</span>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>How to Use This Audit</h3>
+            <p>Rate yourself honestly on each behavior from 1-5. There are no "right" answers—this is about understanding where you are today so you can be intentional about where you're going. Your lowest-scoring pillar is your biggest opportunity.</p>
+            <div class="rating-scale">
+                <span>1 = Never/Rarely</span>
+                <span>2 = Sometimes</span>
+                <span>3 = Often</span>
+                <span>4 = Usually</span>
+                <span>5 = Always/Consistently</span>
+            </div>
+        </div>
+
+        <!-- Gravitas Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">G</div>
+                <h2 class="section-title">Gravitas</h2>
+            </div>
+
+            <table class="rating-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">Behavior</th>
+                        <th class="rating-cell">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Composure Under Pressure</div>
+                            <div class="behavior-desc">I remain calm and collected when facing challenges, criticism, or high-stakes situations</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input gravitas-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Decisiveness</div>
+                            <div class="behavior-desc">I make decisions confidently and stand by them, even with incomplete information</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input gravitas-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Comfortable with Silence</div>
+                            <div class="behavior-desc">I can sit in silence without rushing to fill the space; I use pauses strategically</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input gravitas-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Physical Presence</div>
+                            <div class="behavior-desc">I take up appropriate space, sit at the table (not against the wall), and carry myself with confidence</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input gravitas-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Confidence Without Arrogance</div>
+                            <div class="behavior-desc">I project self-assurance while remaining open to other perspectives and feedback</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input gravitas-rating" min="1" max="5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Communication Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">C</div>
+                <h2 class="section-title">Communication</h2>
+            </div>
+
+            <table class="rating-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">Behavior</th>
+                        <th class="rating-cell">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Clear and Concise</div>
+                            <div class="behavior-desc">I communicate my ideas clearly, leading with the headline and avoiding over-explanation</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input communication-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Authoritative Language</div>
+                            <div class="behavior-desc">I speak in statements rather than questions; I avoid hedge words like "just," "I think maybe"</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input communication-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Active Listening</div>
+                            <div class="behavior-desc">I listen to understand, not to respond; I ask thoughtful follow-up questions</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input communication-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Speaking Up</div>
+                            <div class="behavior-desc">I contribute my perspective in meetings, even when I'm not asked directly</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input communication-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Vocal Variety</div>
+                            <div class="behavior-desc">I vary my tone, pace, and volume intentionally; I don't use upspeak</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input communication-rating" min="1" max="5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Appearance Section -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">A</div>
+                <h2 class="section-title">Appearance</h2>
+            </div>
+
+            <table class="rating-table">
+                <thead>
+                    <tr>
+                        <th style="width: 70%;">Behavior</th>
+                        <th class="rating-cell">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Role-Appropriate Presentation</div>
+                            <div class="behavior-desc">My visual presentation matches (or exceeds) the expectations of my current role</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input appearance-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Intentional Visual Brand</div>
+                            <div class="behavior-desc">My appearance communicates something specific about who I am as a leader</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input appearance-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Consistent Professional Image</div>
+                            <div class="behavior-desc">I maintain a consistent look that people recognize and associate with me</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input appearance-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Authentic Expression</div>
+                            <div class="behavior-desc">My appearance reflects my authentic self rather than just conforming to expectations</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input appearance-rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="behavior-name">Confidence in Presentation</div>
+                            <div class="behavior-desc">I feel confident and comfortable in how I present myself visually</div>
+                        </td>
+                        <td class="rating-cell"><input type="number" class="rating-input appearance-rating" min="1" max="5"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Score Summary -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">S</div>
+                <h2 class="section-title">Score Summary</h2>
+            </div>
+
+            <div class="score-summary">
+                <div class="score-row">
+                    <span class="score-label">Gravitas Total (out of 25)</span>
+                    <div class="score-value">
+                        <input type="number" class="score-input" id="gravitas-total" readonly> / 25
+                    </div>
+                </div>
+                <div class="score-row">
+                    <span class="score-label">Communication Total (out of 25)</span>
+                    <div class="score-value">
+                        <input type="number" class="score-input" id="communication-total" readonly> / 25
+                    </div>
+                </div>
+                <div class="score-row">
+                    <span class="score-label">Appearance Total (out of 25)</span>
+                    <div class="score-value">
+                        <input type="number" class="score-input" id="appearance-total" readonly> / 25
+                    </div>
+                </div>
+                <div class="score-row">
+                    <span class="score-label">Overall Presence Score (out of 75)</span>
+                    <div class="score-value">
+                        <input type="number" class="score-input" id="overall-total" readonly> / 75
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reflection -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">R</div>
+                <h2 class="section-title">Reflection</h2>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <p class="reflection-prompt">Which pillar is your strongest?</p>
+                <p class="reflection-hint">What makes this a strength? How can you leverage it more?</p>
+                <textarea class="reflection-box" placeholder="Write your reflection here..."></textarea>
+            </div>
+
+            <div style="margin-bottom: 24px;">
+                <p class="reflection-prompt">Which pillar needs the most attention?</p>
+                <p class="reflection-hint">What's holding you back in this area? What would change if you improved here?</p>
+                <textarea class="reflection-box" placeholder="Write your reflection here..."></textarea>
+            </div>
+
+            <div>
+                <p class="reflection-prompt">What are your top 3 behaviors to focus on improving?</p>
+                <p class="reflection-hint">Be specific—these will become your practice priorities.</p>
+                <textarea class="reflection-box" placeholder="1.
+2.
+3. "></textarea>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-logo">Coaching Women of Color | Executive Leadership Lab</span>
+            <span class="footer-page">Module 2 Worksheet</span>
+        </div>
+    </div>
+
+    <script>
+        // Auto-calculate totals
+        function calculateTotals() {
+            const gravitasInputs = document.querySelectorAll('.gravitas-rating');
+            const communicationInputs = document.querySelectorAll('.communication-rating');
+            const appearanceInputs = document.querySelectorAll('.appearance-rating');
+
+            let gravitasTotal = 0;
+            let communicationTotal = 0;
+            let appearanceTotal = 0;
+
+            gravitasInputs.forEach(input => {
+                gravitasTotal += parseInt(input.value) || 0;
+            });
+
+            communicationInputs.forEach(input => {
+                communicationTotal += parseInt(input.value) || 0;
+            });
+
+            appearanceInputs.forEach(input => {
+                appearanceTotal += parseInt(input.value) || 0;
+            });
+
+            document.getElementById('gravitas-total').value = gravitasTotal;
+            document.getElementById('communication-total').value = communicationTotal;
+            document.getElementById('appearance-total').value = appearanceTotal;
+            document.getElementById('overall-total').value = gravitasTotal + communicationTotal + appearanceTotal;
+        }
+
+        // Add event listeners
+        document.querySelectorAll('.rating-input').forEach(input => {
+            input.addEventListener('input', calculateTotals);
+        });
+    </script>
+</body>
+</html>

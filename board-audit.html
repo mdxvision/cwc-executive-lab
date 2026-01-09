@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board of Advisors Audit | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .worksheet {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 48px;
+        }
+
+        .intro {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .intro p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .board-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .role-card {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 28px;
+            border: 2px solid var(--border);
+        }
+
+        .role-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .role-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .role-header h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+        }
+
+        .role-header p {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            margin-top: 2px;
+        }
+
+        .role-card label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 6px;
+            margin-top: 16px;
+        }
+
+        .role-card label:first-of-type {
+            margin-top: 0;
+        }
+
+        .role-card input,
+        .role-card textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .role-card textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        .role-card input:focus,
+        .role-card textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .strength-indicator {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .strength-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .strength-btn:hover {
+            border-color: var(--accent);
+        }
+
+        .strength-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .strength-btn.gap.active {
+            background: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .strength-btn.developing.active {
+            background: var(--accent-warm);
+            border-color: var(--accent-warm);
+        }
+
+        .gap-analysis {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .gap-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gap-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .gap-item h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .gap-item textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .gap-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .diversity-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .diversity-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .diversity-section > p {
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .diversity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .diversity-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .diversity-item label {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .diversity-item input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .priority-section {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .priority-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .priority-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .priority-item {
+            display: grid;
+            grid-template-columns: auto 1fr 1fr;
+            gap: 16px;
+            align-items: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .priority-number {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .priority-item input {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 48px;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .worksheet { box-shadow: none; }
+            .role-card { page-break-inside: avoid; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 1.75rem; }
+            .content { padding: 24px; }
+            .board-grid { grid-template-columns: 1fr; }
+            .gap-grid { grid-template-columns: 1fr; }
+            .diversity-grid { grid-template-columns: 1fr; }
+            .priority-item { grid-template-columns: auto 1fr; }
+            .priority-item input:last-child { grid-column: 2; }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <h1>Board of Advisors Audit</h1>
+            <p>Module 6: Build Your Board of Advisors | June</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>Map your current network of advisors and identify gaps. A complete board has six key roles—you may have multiple people in some roles and gaps in others. The goal is awareness, then intentional action.</p>
+            </div>
+
+            <!-- Current Board -->
+            <div class="section">
+                <h2 class="section-title">Part 1: Your Current Board</h2>
+                <div class="board-grid">
+                    <!-- Sponsor -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🎯</div>
+                            <div>
+                                <h3>The Sponsor</h3>
+                                <p>Advocates for you in rooms you're not in</p>
+                            </div>
+                        </div>
+                        <label>Current Sponsor(s):</label>
+                        <input type="text" placeholder="Name(s) or 'Gap'">
+                        <label>How do they advocate for you?</label>
+                        <textarea placeholder="Specific examples of sponsorship"></textarea>
+                        <label>Relationship Strength:</label>
+                        <div class="strength-indicator">
+                            <button class="strength-btn gap" onclick="selectStrength(this)">Gap</button>
+                            <button class="strength-btn developing" onclick="selectStrength(this)">Developing</button>
+                            <button class="strength-btn strong" onclick="selectStrength(this)">Strong</button>
+                        </div>
+                    </div>
+
+                    <!-- Mentor -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🧭</div>
+                            <div>
+                                <h3>The Mentor</h3>
+                                <p>Shares wisdom and guides decisions</p>
+                            </div>
+                        </div>
+                        <label>Current Mentor(s):</label>
+                        <input type="text" placeholder="Name(s) or 'Gap'">
+                        <label>What guidance do they provide?</label>
+                        <textarea placeholder="Areas where they advise you"></textarea>
+                        <label>Relationship Strength:</label>
+                        <div class="strength-indicator">
+                            <button class="strength-btn gap" onclick="selectStrength(this)">Gap</button>
+                            <button class="strength-btn developing" onclick="selectStrength(this)">Developing</button>
+                            <button class="strength-btn strong" onclick="selectStrength(this)">Strong</button>
+                        </div>
+                    </div>
+
+                    <!-- Connector -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🔌</div>
+                            <div>
+                                <h3>The Connector</h3>
+                                <p>Opens doors and makes introductions</p>
+                            </div>
+                        </div>
+                        <label>Current Connector(s):</label>
+                        <input type="text" placeholder="Name(s) or 'Gap'">
+                        <label>Who have they introduced you to?</label>
+                        <textarea placeholder="Recent connections they've made"></textarea>
+                        <label>Relationship Strength:</label>
+                        <div class="strength-indicator">
+                            <button class="strength-btn gap" onclick="selectStrength(this)">Gap</button>
+                            <button class="strength-btn developing" onclick="selectStrength(this)">Developing</button>
+                            <button class="strength-btn strong" onclick="selectStrength(this)">Strong</button>
+                        </div>
+                    </div>
+
+                    <!-- Truth-Teller -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🪞</div>
+                            <div>
+                                <h3>The Truth-Teller</h3>
+                                <p>Gives honest feedback even when hard</p>
+                            </div>
+                        </div>
+                        <label>Current Truth-Teller(s):</label>
+                        <input type="text" placeholder="Name(s) or 'Gap'">
+                        <label>What hard truths have they shared?</label>
+                        <textarea placeholder="Feedback they've given"></textarea>
+                        <label>Relationship Strength:</label>
+                        <div class="strength-indicator">
+                            <button class="strength-btn gap" onclick="selectStrength(this)">Gap</button>
+                            <button class="strength-btn developing" onclick="selectStrength(this)">Developing</button>
+                            <button class="strength-btn strong" onclick="selectStrength(this)">Strong</button>
+                        </div>
+                    </div>
+
+                    <!-- Role Model -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🌱</div>
+                            <div>
+                                <h3>The Role Model</h3>
+                                <p>Shows what's possible for your path</p>
+                            </div>
+                        </div>
+                        <label>Current Role Model(s):</label>
+                        <input type="text" placeholder="Name(s) - can be distant figures">
+                        <label>What about their journey inspires you?</label>
+                        <textarea placeholder="What you learn from their example"></textarea>
+                        <label>Relationship Strength:</label>
+                        <div class="strength-indicator">
+                            <button class="strength-btn gap" onclick="selectStrength(this)">Gap</button>
+                            <button class="strength-btn developing" onclick="selectStrength(this)">Developing</button>
+                            <button class="strength-btn strong" onclick="selectStrength(this)">Strong</button>
+                        </div>
+                    </div>
+
+                    <!-- Peer Ally -->
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon">🤝</div>
+                            <div>
+                                <h3>The Peer Ally</h3>
+                                <p>Navigates similar challenges alongside you</p>
+                            </div>
+                        </div>
+                        <label>Current Peer Ally/Allies:</label>
+                        <input type="text" placeholder="Name(s) or 'Gap'">
+                        <label>How do you support each other?</label>
+                        <textarea placeholder="What you give and receive"></textarea>
+                        <label>Relationship Strength:</label>
+                        <div class="strength-indicator">
+                            <button class="strength-btn gap" onclick="selectStrength(this)">Gap</button>
+                            <button class="strength-btn developing" onclick="selectStrength(this)">Developing</button>
+                            <button class="strength-btn strong" onclick="selectStrength(this)">Strong</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gap Analysis -->
+            <div class="section">
+                <h2 class="section-title">Part 2: Gap Analysis</h2>
+                <div class="gap-analysis">
+                    <div class="gap-grid">
+                        <div class="gap-item">
+                            <h4>Biggest Gap</h4>
+                            <textarea placeholder="Which role is most missing? Why does this gap exist?"></textarea>
+                        </div>
+                        <div class="gap-item">
+                            <h4>Impact of Gap</h4>
+                            <textarea placeholder="How is this gap affecting your career progress?"></textarea>
+                        </div>
+                        <div class="gap-item">
+                            <h4>Potential Candidates</h4>
+                            <textarea placeholder="Who could you approach to fill this gap?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diversity Check -->
+            <div class="section">
+                <div class="diversity-section">
+                    <h3>Part 3: Diversity Audit</h3>
+                    <p>A diverse board brings broader perspectives. Assess the diversity across your current advisors:</p>
+                    <div class="diversity-grid">
+                        <div class="diversity-item">
+                            <label>Seniority levels represented:</label>
+                            <input type="text" placeholder="e.g., Peer, Director, VP, C-Suite">
+                        </div>
+                        <div class="diversity-item">
+                            <label>Functions/Industries represented:</label>
+                            <input type="text" placeholder="e.g., Marketing, Finance, Tech, Healthcare">
+                        </div>
+                        <div class="diversity-item">
+                            <label>Inside vs. Outside your organization:</label>
+                            <input type="text" placeholder="e.g., 4 internal, 2 external">
+                        </div>
+                        <div class="diversity-item">
+                            <label>Background diversity:</label>
+                            <input type="text" placeholder="e.g., Gender, race, generation, geography">
+                        </div>
+                        <div class="diversity-item">
+                            <label>What perspective is missing?</label>
+                            <input type="text" placeholder="e.g., Senior woman in tech, industry outsider">
+                        </div>
+                        <div class="diversity-item">
+                            <label>Who could bring that perspective?</label>
+                            <input type="text" placeholder="Specific names or places to find them">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priorities -->
+            <div class="section">
+                <div class="priority-section">
+                    <h3>Part 4: Your Top 3 Board-Building Priorities</h3>
+                    <div class="priority-grid">
+                        <div class="priority-item">
+                            <div class="priority-number">1</div>
+                            <input type="text" placeholder="Role to fill or strengthen">
+                            <input type="text" placeholder="Target person or approach">
+                        </div>
+                        <div class="priority-item">
+                            <div class="priority-number">2</div>
+                            <input type="text" placeholder="Role to fill or strengthen">
+                            <input type="text" placeholder="Target person or approach">
+                        </div>
+                        <div class="priority-item">
+                            <div class="priority-number">3</div>
+                            <input type="text" placeholder="Role to fill or strengthen">
+                            <input type="text" placeholder="Target person or approach">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Executive Leadership Lab | Module 6: Build Your Board of Advisors</p>
+        </div>
+    </div>
+
+    <script>
+        function selectStrength(btn) {
+            const group = btn.parentElement;
+            group.querySelectorAll('.strength-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

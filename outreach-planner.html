@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Outreach Planner | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .worksheet {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 48px;
+        }
+
+        .intro {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .intro p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .outreach-card {
+            background: var(--bg);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 1px solid var(--border);
+        }
+
+        .outreach-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .outreach-header h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.375rem;
+            color: var(--primary);
+        }
+
+        .outreach-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+
+        .form-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 16px;
+            align-items: start;
+        }
+
+        .form-row label {
+            font-weight: 500;
+            color: var(--text);
+            padding-top: 12px;
+            font-size: 0.9375rem;
+        }
+
+        .form-row input,
+        .form-row textarea,
+        .form-row select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background: white;
+        }
+
+        .form-row textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row input:focus,
+        .form-row textarea:focus,
+        .form-row select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .role-select {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .role-option {
+            position: relative;
+        }
+
+        .role-option input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .role-option label {
+            display: block;
+            padding: 8px 16px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .role-option label:hover {
+            border-color: var(--accent);
+        }
+
+        .role-option input:checked + label {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .message-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 24px;
+            border: 2px solid var(--accent);
+        }
+
+        .message-section h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            color: var(--accent);
+            margin-bottom: 16px;
+            font-size: 1.125rem;
+        }
+
+        .message-section textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        .message-section textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .message-tips {
+            margin-top: 16px;
+            padding: 16px;
+            background: var(--bg-warm);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--text-light);
+        }
+
+        .message-tips strong {
+            color: var(--text);
+        }
+
+        .tracking-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .tracking-item {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .tracking-item label {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .tracking-item input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9375rem;
+        }
+
+        .tracking-item input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .follow-up-section {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .follow-up-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .follow-up-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .follow-up-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .follow-up-item h4 {
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .follow-up-item textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            resize: vertical;
+        }
+
+        .follow-up-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .scripts-reference {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .scripts-reference h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 24px;
+        }
+
+        .script-example {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .script-example:last-child {
+            margin-bottom: 0;
+        }
+
+        .script-example h4 {
+            font-size: 0.9375rem;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .script-example p {
+            font-style: italic;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .commitment-section {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .commitment-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .commitment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .commitment-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .commitment-item label {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .commitment-item input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 0.9375rem;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 48px;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .worksheet { box-shadow: none; }
+            .outreach-card { page-break-inside: avoid; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 1.75rem; }
+            .content { padding: 24px; }
+            .form-row { grid-template-columns: 1fr; gap: 8px; }
+            .tracking-section { grid-template-columns: 1fr; }
+            .follow-up-grid { grid-template-columns: 1fr; }
+            .commitment-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <h1>Relationship Outreach Planner</h1>
+            <p>Module 6: Build Your Board of Advisors | June</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>Use this planner to prepare thoughtful, strategic outreach to potential advisors. Planning your approach increases the likelihood of a positive response and helps build authentic relationships from the start.</p>
+            </div>
+
+            <!-- Outreach 1 -->
+            <div class="section">
+                <h2 class="section-title">Planned Outreach</h2>
+
+                <div class="outreach-card">
+                    <div class="outreach-header">
+                        <h3>Outreach 1</h3>
+                        <div class="outreach-number">1</div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label>Person's Name:</label>
+                            <input type="text" placeholder="Full name">
+                        </div>
+                        <div class="form-row">
+                            <label>Their Role/Company:</label>
+                            <input type="text" placeholder="Title, Organization">
+                        </div>
+                        <div class="form-row">
+                            <label>Role They'd Fill:</label>
+                            <div class="role-select">
+                                <div class="role-option">
+                                    <input type="checkbox" id="o1-sponsor" name="o1-role">
+                                    <label for="o1-sponsor">Sponsor</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o1-mentor" name="o1-role">
+                                    <label for="o1-mentor">Mentor</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o1-connector" name="o1-role">
+                                    <label for="o1-connector">Connector</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o1-truth" name="o1-role">
+                                    <label for="o1-truth">Truth-Teller</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o1-peer" name="o1-role">
+                                    <label for="o1-peer">Peer Ally</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label>Why Them?</label>
+                            <textarea placeholder="What specifically draws you to this person? What do they have that you need?"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Connection Point:</label>
+                            <textarea placeholder="How did you find them? Any mutual connections? Shared experiences?"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Your Ask:</label>
+                            <textarea placeholder="What specifically will you ask for? (Keep it small and easy to say yes to)"></textarea>
+                        </div>
+                    </div>
+                    <div class="message-section">
+                        <h4>Draft Your Outreach Message</h4>
+                        <textarea placeholder="Write your full message here. Remember: genuine appreciation, relevance, specific small ask."></textarea>
+                        <div class="message-tips">
+                            <strong>Tips:</strong> Keep it under 150 words. Reference something specific about their work. Make your ask easy to accept (15-20 min call, one question, etc.).
+                        </div>
+                    </div>
+                    <div class="tracking-section">
+                        <div class="tracking-item">
+                            <label>Outreach Channel</label>
+                            <input type="text" placeholder="LinkedIn, Email, etc.">
+                        </div>
+                        <div class="tracking-item">
+                            <label>Date Sent</label>
+                            <input type="text" placeholder="MM/DD">
+                        </div>
+                        <div class="tracking-item">
+                            <label>Response/Status</label>
+                            <input type="text" placeholder="Pending, Accepted, etc.">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outreach 2 -->
+                <div class="outreach-card">
+                    <div class="outreach-header">
+                        <h3>Outreach 2</h3>
+                        <div class="outreach-number">2</div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label>Person's Name:</label>
+                            <input type="text" placeholder="Full name">
+                        </div>
+                        <div class="form-row">
+                            <label>Their Role/Company:</label>
+                            <input type="text" placeholder="Title, Organization">
+                        </div>
+                        <div class="form-row">
+                            <label>Role They'd Fill:</label>
+                            <div class="role-select">
+                                <div class="role-option">
+                                    <input type="checkbox" id="o2-sponsor" name="o2-role">
+                                    <label for="o2-sponsor">Sponsor</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o2-mentor" name="o2-role">
+                                    <label for="o2-mentor">Mentor</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o2-connector" name="o2-role">
+                                    <label for="o2-connector">Connector</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o2-truth" name="o2-role">
+                                    <label for="o2-truth">Truth-Teller</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o2-peer" name="o2-role">
+                                    <label for="o2-peer">Peer Ally</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label>Why Them?</label>
+                            <textarea placeholder="What specifically draws you to this person?"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Connection Point:</label>
+                            <textarea placeholder="How will you establish relevance?"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Your Ask:</label>
+                            <textarea placeholder="What specifically will you ask for?"></textarea>
+                        </div>
+                    </div>
+                    <div class="message-section">
+                        <h4>Draft Your Outreach Message</h4>
+                        <textarea placeholder="Write your full message here."></textarea>
+                        <div class="message-tips">
+                            <strong>Tips:</strong> Keep it under 150 words. Reference something specific about their work. Make your ask easy to accept.
+                        </div>
+                    </div>
+                    <div class="tracking-section">
+                        <div class="tracking-item">
+                            <label>Outreach Channel</label>
+                            <input type="text" placeholder="LinkedIn, Email, etc.">
+                        </div>
+                        <div class="tracking-item">
+                            <label>Date Sent</label>
+                            <input type="text" placeholder="MM/DD">
+                        </div>
+                        <div class="tracking-item">
+                            <label>Response/Status</label>
+                            <input type="text" placeholder="Pending, Accepted, etc.">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Outreach 3 -->
+                <div class="outreach-card">
+                    <div class="outreach-header">
+                        <h3>Outreach 3</h3>
+                        <div class="outreach-number">3</div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label>Person's Name:</label>
+                            <input type="text" placeholder="Full name">
+                        </div>
+                        <div class="form-row">
+                            <label>Their Role/Company:</label>
+                            <input type="text" placeholder="Title, Organization">
+                        </div>
+                        <div class="form-row">
+                            <label>Role They'd Fill:</label>
+                            <div class="role-select">
+                                <div class="role-option">
+                                    <input type="checkbox" id="o3-sponsor" name="o3-role">
+                                    <label for="o3-sponsor">Sponsor</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o3-mentor" name="o3-role">
+                                    <label for="o3-mentor">Mentor</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o3-connector" name="o3-role">
+                                    <label for="o3-connector">Connector</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o3-truth" name="o3-role">
+                                    <label for="o3-truth">Truth-Teller</label>
+                                </div>
+                                <div class="role-option">
+                                    <input type="checkbox" id="o3-peer" name="o3-role">
+                                    <label for="o3-peer">Peer Ally</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label>Why Them?</label>
+                            <textarea placeholder="What specifically draws you to this person?"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Connection Point:</label>
+                            <textarea placeholder="How will you establish relevance?"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <label>Your Ask:</label>
+                            <textarea placeholder="What specifically will you ask for?"></textarea>
+                        </div>
+                    </div>
+                    <div class="message-section">
+                        <h4>Draft Your Outreach Message</h4>
+                        <textarea placeholder="Write your full message here."></textarea>
+                        <div class="message-tips">
+                            <strong>Tips:</strong> Keep it under 150 words. Reference something specific about their work. Make your ask easy to accept.
+                        </div>
+                    </div>
+                    <div class="tracking-section">
+                        <div class="tracking-item">
+                            <label>Outreach Channel</label>
+                            <input type="text" placeholder="LinkedIn, Email, etc.">
+                        </div>
+                        <div class="tracking-item">
+                            <label>Date Sent</label>
+                            <input type="text" placeholder="MM/DD">
+                        </div>
+                        <div class="tracking-item">
+                            <label>Response/Status</label>
+                            <input type="text" placeholder="Pending, Accepted, etc.">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Follow-Up Strategy -->
+            <div class="section">
+                <div class="follow-up-section">
+                    <h3>Nurturing Strategy: Monthly Touch Points</h3>
+                    <p style="color: var(--text-light); margin-bottom: 24px;">Plan how you'll stay connected with your board after initial outreach:</p>
+                    <div class="follow-up-grid">
+                        <div class="follow-up-item">
+                            <h4>Week 1</h4>
+                            <textarea placeholder="e.g., Send thank-you note after conversation"></textarea>
+                        </div>
+                        <div class="follow-up-item">
+                            <h4>Week 2</h4>
+                            <textarea placeholder="e.g., Share relevant article"></textarea>
+                        </div>
+                        <div class="follow-up-item">
+                            <h4>Week 3</h4>
+                            <textarea placeholder="e.g., Update on how their advice helped"></textarea>
+                        </div>
+                        <div class="follow-up-item">
+                            <h4>Week 4</h4>
+                            <textarea placeholder="e.g., Congratulate on their achievement"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scripts Reference -->
+            <div class="section">
+                <div class="scripts-reference">
+                    <h3>Outreach Templates for Reference</h3>
+                    <div class="script-example">
+                        <h4>To a Potential Mentor (Cold Outreach)</h4>
+                        <p>"Hi [Name], I've followed your work at [Company] and was particularly inspired by [specific accomplishment]. As a [your role] working toward [aspiration], I'd love to learn from your experience. Would you be open to a 20-minute call? I'd be grateful for any insights you'd share."</p>
+                    </div>
+                    <div class="script-example">
+                        <h4>To an Internal Senior Leader</h4>
+                        <p>"Hi [Name], I'm [Your Name] from [Team]. I've admired how you [specific observation] and would value learning from your perspective on [topic]. Would you have 15 minutes for coffee? I'm developing my skills in [area] and your experience would be incredibly helpful."</p>
+                    </div>
+                    <div class="script-example">
+                        <h4>To a Potential Peer Ally</h4>
+                        <p>"Hi [Name], I've noticed we're both navigating [similar challenge]. I'm building a small group of peers for mutual support and idea-sharing. Would you be interested in connecting? I think we could learn a lot from each other."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment -->
+            <div class="section">
+                <div class="commitment-section">
+                    <h3>My Outreach Commitment</h3>
+                    <div class="commitment-grid">
+                        <div class="commitment-item">
+                            <label>Outreach Goal This Month:</label>
+                            <input type="text" placeholder="e.g., 3 people">
+                        </div>
+                        <div class="commitment-item">
+                            <label>First Outreach By:</label>
+                            <input type="text" placeholder="Date">
+                        </div>
+                        <div class="commitment-item">
+                            <label>Accountability Partner:</label>
+                            <input type="text" placeholder="Who will you tell?">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Executive Leadership Lab | Module 6: Build Your Board of Advisors</p>
+        </div>
+    </div>
+</body>
+</html>

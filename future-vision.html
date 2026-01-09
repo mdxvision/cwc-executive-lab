@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Vision & Career Planner | Executive Leadership Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600;8..60,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 40px 20px;
+        }
+
+        .worksheet {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 48px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 2.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 48px;
+        }
+
+        .intro {
+            background: var(--bg-warm);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .intro p {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .vision-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d2d2d 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .vision-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .vision-prompt {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            font-style: italic;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .vision-section textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 20px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            background: rgba(255,255,255,0.95);
+            line-height: 1.8;
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .dimension-card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .dimension-card h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.125rem;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .dimension-card textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .dimension-card textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .timeline-section {
+            background: var(--bg-warm);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .timeline-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .timeline-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border-top: 4px solid var(--accent);
+            text-align: center;
+        }
+
+        .timeline-item h4 {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .timeline-item textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            resize: vertical;
+            text-align: left;
+        }
+
+        .timeline-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .success-section {
+            background: linear-gradient(135deg, var(--accent) 0%, #1e6270 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .success-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .success-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .success-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .success-item label {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .success-item textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .boundaries-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .boundary-card {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border);
+        }
+
+        .boundary-card h4 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .boundary-card textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+        }
+
+        .boundary-card textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .legacy-section {
+            background: linear-gradient(135deg, var(--accent-warm) 0%, #c49660 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .legacy-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+        }
+
+        .legacy-section > p {
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .legacy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .legacy-item {
+            background: rgba(255,255,255,0.15);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .legacy-item label {
+            display: block;
+            font-size: 0.875rem;
+            margin-bottom: 8px;
+            opacity: 0.9;
+        }
+
+        .legacy-item textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.9375rem;
+            resize: vertical;
+            background: rgba(255,255,255,0.95);
+        }
+
+        .action-section {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .action-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 24px;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .action-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .action-item h4 {
+            font-size: 0.9375rem;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+
+        .action-item textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 0.875rem;
+            resize: vertical;
+        }
+
+        .action-item textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .commitment-section {
+            background: var(--primary);
+            color: white;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .commitment-section h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+        }
+
+        .commitment-text {
+            font-size: 1.125rem;
+            line-height: 2;
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .commitment-text input {
+            border: none;
+            border-bottom: 2px solid rgba(255,255,255,0.5);
+            background: transparent;
+            color: white;
+            font-size: inherit;
+            font-family: inherit;
+            padding: 4px 8px;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .commitment-text input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .commitment-text input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-warm);
+        }
+
+        .signature-line {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin-top: 32px;
+        }
+
+        .signature-item {
+            text-align: center;
+        }
+
+        .signature-item input {
+            border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.5);
+            background: transparent;
+            color: white;
+            padding: 8px 24px;
+            font-size: 1rem;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .signature-item input:focus {
+            outline: none;
+            border-bottom-color: var(--accent-warm);
+        }
+
+        .signature-item label {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 48px;
+            background: var(--bg-warm);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            color: var(--text-light);
+            font-size: 0.875rem;
+        }
+
+        .footer p:first-child {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 1.125rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        @media print {
+            body { padding: 0; background: white; }
+            .worksheet { box-shadow: none; }
+        }
+
+        @media (max-width: 768px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 1.75rem; }
+            .content { padding: 24px; }
+            .dimension-grid { grid-template-columns: 1fr; }
+            .timeline-grid { grid-template-columns: 1fr; }
+            .success-grid { grid-template-columns: 1fr; }
+            .boundaries-grid { grid-template-columns: 1fr; }
+            .legacy-grid { grid-template-columns: 1fr; }
+            .action-grid { grid-template-columns: 1fr; }
+            .signature-line { flex-direction: column; gap: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <h1>Future Vision & Career Planner</h1>
+            <p>Module 10: Set the Table for Your Future | October</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <p>This is your capstone planning document. Use it to crystallize your vision, plan your path, and commit to your future. Revisit this quarterly to stay aligned with what matters most to you.</p>
+            </div>
+
+            <!-- Vision -->
+            <div class="section">
+                <h2 class="section-title">Part 1: Your 5-Year Vision</h2>
+                <div class="vision-section">
+                    <h3>Imagine yourself 5 years from today...</h3>
+                    <p class="vision-prompt">What does "making it" look like for you? Paint a vivid picture of your ideal future—your role, your impact, your life. Be specific and dream boldly.</p>
+                    <textarea placeholder="In 5 years, I see myself...
+
+Describe your role, your daily work, your team, your impact. Where are you working? What challenges are you solving? How do you feel about your work? What's your life outside work like?
+
+Write as if it has already happened. Be specific. Be bold."></textarea>
+                </div>
+            </div>
+
+            <!-- Dimensions of Success -->
+            <div class="section">
+                <h2 class="section-title">Part 2: Dimensions of Your Vision</h2>
+                <div class="dimension-grid">
+                    <div class="dimension-card">
+                        <h4>Career & Role</h4>
+                        <textarea placeholder="What role am I in? What's my scope? What's my compensation? What am I known for?"></textarea>
+                    </div>
+                    <div class="dimension-card">
+                        <h4>Impact & Contribution</h4>
+                        <textarea placeholder="What difference am I making? Who am I helping? What problems am I solving? What has changed because of me?"></textarea>
+                    </div>
+                    <div class="dimension-card">
+                        <h4>Growth & Learning</h4>
+                        <textarea placeholder="What new skills have I developed? What have I learned? How have I grown as a leader?"></textarea>
+                    </div>
+                    <div class="dimension-card">
+                        <h4>Relationships & Network</h4>
+                        <textarea placeholder="Who's on my board? What's my network like? Who have I mentored or sponsored?"></textarea>
+                    </div>
+                    <div class="dimension-card">
+                        <h4>Life & Wellbeing</h4>
+                        <textarea placeholder="What's my life outside work like? Health? Relationships? Hobbies? How do I spend my time?"></textarea>
+                    </div>
+                    <div class="dimension-card">
+                        <h4>Financial Security</h4>
+                        <textarea placeholder="What's my financial position? Am I building wealth? Do I have options and freedom?"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reverse Timeline -->
+            <div class="section">
+                <div class="timeline-section">
+                    <h3>Part 3: Your Career Timeline (Working Backwards)</h3>
+                    <div class="timeline-grid">
+                        <div class="timeline-item">
+                            <h4>Year 5 (Vision)</h4>
+                            <textarea placeholder="I am [role] at [company/context], leading [scope], known for [accomplishment]"></textarea>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Year 3 (Milestone)</h4>
+                            <textarea placeholder="To reach Year 5, by Year 3 I need to be [position/accomplishment]"></textarea>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Year 1 (Foundation)</h4>
+                            <textarea placeholder="To reach Year 3, by next year I need to [specific achievements]"></textarea>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Next 90 Days</h4>
+                            <textarea placeholder="To start this journey, in the next 90 days I will [specific actions]"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success Definition -->
+            <div class="section">
+                <div class="success-section">
+                    <h3>Part 4: Defining Success on Your Terms</h3>
+                    <div class="success-grid">
+                        <div class="success-item">
+                            <label>My personal definition of success is:</label>
+                            <textarea placeholder="Beyond titles and money, what does success really mean to you?"></textarea>
+                        </div>
+                        <div class="success-item">
+                            <label>How I'll know I've "made it":</label>
+                            <textarea placeholder="What specific markers will tell you you've achieved your vision?"></textarea>
+                        </div>
+                        <div class="success-item">
+                            <label>What I'm NOT willing to sacrifice:</label>
+                            <textarea placeholder="What's non-negotiable? Health? Family time? Values?"></textarea>
+                        </div>
+                        <div class="success-item">
+                            <label>How I want to feel in my career:</label>
+                            <textarea placeholder="Challenged? Respected? Joyful? Balanced? What matters?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boundaries -->
+            <div class="section">
+                <h2 class="section-title">Part 5: Protecting What Matters</h2>
+                <div class="boundaries-grid">
+                    <div class="boundary-card">
+                        <h4>My Non-Negotiables</h4>
+                        <textarea placeholder="What commitments (health, family, values) will I never compromise for work?"></textarea>
+                    </div>
+                    <div class="boundary-card">
+                        <h4>What I'll Say No To</h4>
+                        <textarea placeholder="What drains me that I need to stop accepting? What requests will I decline?"></textarea>
+                    </div>
+                    <div class="boundary-card">
+                        <h4>How I'll Protect My Energy</h4>
+                        <textarea placeholder="What practices will I maintain? What boundaries will I set?"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legacy -->
+            <div class="section">
+                <div class="legacy-section">
+                    <h3>Part 6: Your Legacy</h3>
+                    <p>What do you want to be remembered for? What impact will outlast your title?</p>
+                    <div class="legacy-grid">
+                        <div class="legacy-item">
+                            <label>The leaders I will develop:</label>
+                            <textarea placeholder="Who will you mentor, sponsor, or champion? What will be different because you invested in them?"></textarea>
+                        </div>
+                        <div class="legacy-item">
+                            <label>The change I will create:</label>
+                            <textarea placeholder="What systems will you improve? What barriers will you remove? What paths will you open?"></textarea>
+                        </div>
+                        <div class="legacy-item">
+                            <label>What people will say about me:</label>
+                            <textarea placeholder="When you've moved on, what do you want people to say about your impact and how you led?"></textarea>
+                        </div>
+                        <div class="legacy-item">
+                            <label>How I'll pay it forward:</label>
+                            <textarea placeholder="How will you lift others as you rise? What will you do to make it easier for those who follow?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Plan -->
+            <div class="section">
+                <div class="action-section">
+                    <h3>Part 7: Immediate Action Plan</h3>
+                    <div class="action-grid">
+                        <div class="action-item">
+                            <h4>This Week</h4>
+                            <textarea placeholder="3 specific actions I'll take in the next 7 days to start moving toward my vision"></textarea>
+                        </div>
+                        <div class="action-item">
+                            <h4>This Month</h4>
+                            <textarea placeholder="Key milestones and actions for the next 30 days"></textarea>
+                        </div>
+                        <div class="action-item">
+                            <h4>This Quarter</h4>
+                            <textarea placeholder="Major priorities and commitments for the next 90 days"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Commitment -->
+            <div class="section">
+                <div class="commitment-section">
+                    <h3>My Commitment to My Future</h3>
+                    <p class="commitment-text">
+                        I, <input type="text" placeholder="[your name]">, commit to taking ownership of my career journey.
+                        I will pursue my vision with intention and courage. I will ask for what I deserve.
+                        I will lead authentically. I will lift others as I rise. I will build a legacy I am proud of.
+                        In <input type="text" placeholder="[# years]"> years, I will be <input type="text" placeholder="[your vision]">.
+                        I start today.
+                    </p>
+                    <div class="signature-line">
+                        <div class="signature-item">
+                            <input type="text" placeholder="">
+                            <label>Signature</label>
+                        </div>
+                        <div class="signature-item">
+                            <input type="text" placeholder="">
+                            <label>Date</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Congratulations on completing the Executive Leadership Lab</p>
+            <p>Your journey is just beginning. Lead boldly. The world needs your leadership.</p>
+        </div>
+    </div>
+</body>
+</html>

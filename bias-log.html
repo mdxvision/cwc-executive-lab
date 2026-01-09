@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bias Log & Response Tracker | Module 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+        @media print { body { background: white; } .worksheet { box-shadow: none; } .entry-card { page-break-inside: avoid; } }
+        .worksheet { max-width: 850px; margin: 0 auto; padding: 60px; background: white; min-height: 100vh; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; padding-bottom: 24px; border-bottom: 2px solid var(--primary); }
+        .header-left h1 { font-family: 'Source Serif 4', Georgia, serif; font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
+        .header-left p { font-size: 14px; color: var(--text-muted); }
+        .module-badge { display: inline-block; padding: 6px 12px; background: var(--accent); color: white; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border-radius: 2px; }
+        .intro { background: var(--bg-warm); padding: 24px; border-radius: 4px; margin-bottom: 40px; }
+        .intro h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; margin-bottom: 12px; color: var(--primary); }
+        .intro p { font-size: 14px; color: var(--text-light); }
+        .section { margin-bottom: 48px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .section-number { width: 36px; height: 36px; background: var(--accent-warm); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 16px; }
+        .section-title { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 600; color: var(--primary); }
+        .entry-card { border: 1px solid var(--border); border-radius: 4px; margin-bottom: 32px; overflow: hidden; }
+        .entry-header { background: var(--primary); color: white; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .entry-header h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 600; }
+        .entry-body { padding: 24px; }
+        .field-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+        .field-group { margin-bottom: 16px; }
+        .field-group:last-child { margin-bottom: 0; }
+        .field-label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .field-input { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 14px; }
+        .field-input:focus { outline: none; border-color: var(--accent); }
+        .field-textarea { width: 100%; min-height: 80px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 14px; resize: vertical; }
+        .field-textarea:focus { outline: none; border-color: var(--accent); }
+        .field-select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 14px; background: white; }
+        .response-section { background: var(--bg-warm); padding: 16px; border-radius: 4px; margin-top: 16px; }
+        .response-section h5 { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 12px; }
+        .patterns-box { border: 2px dashed var(--accent-warm); border-radius: 4px; padding: 24px; text-align: center; }
+        .patterns-box h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--primary); margin-bottom: 16px; }
+        .patterns-textarea { width: 100%; min-height: 120px; padding: 16px; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; font-size: 14px; resize: vertical; }
+        .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .footer-logo { font-size: 12px; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div class="worksheet">
+        <div class="header">
+            <div class="header-left">
+                <h1>Bias Log & Response Tracker</h1>
+                <p>Module 4: Navigate Bias and Lead Through It</p>
+            </div>
+            <div class="header-right">
+                <span class="module-badge">Worksheet</span>
+            </div>
+        </div>
+
+        <div class="intro">
+            <h3>Why Track Bias Incidents?</h3>
+            <p>Documentation serves multiple purposes: it validates your experience, reveals patterns, informs your response strategy, and creates a record if escalation becomes necessary. Track incidents for at least 2 weeks to identify patterns.</p>
+        </div>
+
+        <!-- Entry 1 -->
+        <div class="section">
+            <div class="entry-card">
+                <div class="entry-header">
+                    <h4>Incident 1</h4>
+                </div>
+                <div class="entry-body">
+                    <div class="field-row">
+                        <div class="field-group">
+                            <div class="field-label">Date</div>
+                            <input type="date" class="field-input">
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">Type of Bias</div>
+                            <select class="field-select">
+                                <option value="">Select...</option>
+                                <option value="microaggression">Microaggression</option>
+                                <option value="stereotype">Stereotyping</option>
+                                <option value="exclusion">Exclusion</option>
+                                <option value="idea-theft">Idea Theft</option>
+                                <option value="systemic">Systemic Barrier</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">What Happened (Be Specific)</div>
+                        <textarea class="field-textarea" placeholder="Describe the situation: what was said or done, where, who was involved"></textarea>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <div class="field-label">Who Was Involved</div>
+                            <input type="text" class="field-input" placeholder="Role/relationship (not name for privacy)">
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">Witnesses Present</div>
+                            <input type="text" class="field-input" placeholder="Yes/No - if yes, who?">
+                        </div>
+                    </div>
+                    <div class="response-section">
+                        <h5>Your Response</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <div class="field-label">Emotional Impact (1-10)</div>
+                                <input type="number" class="field-input" min="1" max="10" placeholder="1 = minimal, 10 = severe">
+                            </div>
+                            <div class="field-group">
+                                <div class="field-label">How Did You Respond?</div>
+                                <select class="field-select">
+                                    <option value="">Select...</option>
+                                    <option value="addressed-now">Addressed in the Moment</option>
+                                    <option value="addressed-later">Addressed Later</option>
+                                    <option value="let-go">Let It Go</option>
+                                    <option value="escalated">Escalated</option>
+                                    <option value="froze">Froze/Didn't Respond</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">What Did You Say/Do?</div>
+                            <textarea class="field-textarea" placeholder="Describe your response or lack thereof"></textarea>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">What Would You Do Differently?</div>
+                            <textarea class="field-textarea" placeholder="If this happened again, how might you respond?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entry 2 -->
+            <div class="entry-card">
+                <div class="entry-header">
+                    <h4>Incident 2</h4>
+                </div>
+                <div class="entry-body">
+                    <div class="field-row">
+                        <div class="field-group">
+                            <div class="field-label">Date</div>
+                            <input type="date" class="field-input">
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">Type of Bias</div>
+                            <select class="field-select">
+                                <option value="">Select...</option>
+                                <option value="microaggression">Microaggression</option>
+                                <option value="stereotype">Stereotyping</option>
+                                <option value="exclusion">Exclusion</option>
+                                <option value="idea-theft">Idea Theft</option>
+                                <option value="systemic">Systemic Barrier</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">What Happened</div>
+                        <textarea class="field-textarea" placeholder=""></textarea>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <div class="field-label">Who Was Involved</div>
+                            <input type="text" class="field-input" placeholder="">
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">Witnesses Present</div>
+                            <input type="text" class="field-input" placeholder="">
+                        </div>
+                    </div>
+                    <div class="response-section">
+                        <h5>Your Response</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <div class="field-label">Emotional Impact (1-10)</div>
+                                <input type="number" class="field-input" min="1" max="10">
+                            </div>
+                            <div class="field-group">
+                                <div class="field-label">How Did You Respond?</div>
+                                <select class="field-select">
+                                    <option value="">Select...</option>
+                                    <option value="addressed-now">Addressed in the Moment</option>
+                                    <option value="addressed-later">Addressed Later</option>
+                                    <option value="let-go">Let It Go</option>
+                                    <option value="escalated">Escalated</option>
+                                    <option value="froze">Froze/Didn't Respond</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">What Did You Say/Do?</div>
+                            <textarea class="field-textarea" placeholder=""></textarea>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">What Would You Do Differently?</div>
+                            <textarea class="field-textarea" placeholder=""></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Entry 3 -->
+            <div class="entry-card">
+                <div class="entry-header">
+                    <h4>Incident 3</h4>
+                </div>
+                <div class="entry-body">
+                    <div class="field-row">
+                        <div class="field-group">
+                            <div class="field-label">Date</div>
+                            <input type="date" class="field-input">
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">Type of Bias</div>
+                            <select class="field-select">
+                                <option value="">Select...</option>
+                                <option value="microaggression">Microaggression</option>
+                                <option value="stereotype">Stereotyping</option>
+                                <option value="exclusion">Exclusion</option>
+                                <option value="idea-theft">Idea Theft</option>
+                                <option value="systemic">Systemic Barrier</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">What Happened</div>
+                        <textarea class="field-textarea" placeholder=""></textarea>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <div class="field-label">Who Was Involved</div>
+                            <input type="text" class="field-input" placeholder="">
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">Witnesses Present</div>
+                            <input type="text" class="field-input" placeholder="">
+                        </div>
+                    </div>
+                    <div class="response-section">
+                        <h5>Your Response</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <div class="field-label">Emotional Impact (1-10)</div>
+                                <input type="number" class="field-input" min="1" max="10">
+                            </div>
+                            <div class="field-group">
+                                <div class="field-label">How Did You Respond?</div>
+                                <select class="field-select">
+                                    <option value="">Select...</option>
+                                    <option value="addressed-now">Addressed in the Moment</option>
+                                    <option value="addressed-later">Addressed Later</option>
+                                    <option value="let-go">Let It Go</option>
+                                    <option value="escalated">Escalated</option>
+                                    <option value="froze">Froze/Didn't Respond</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">What Did You Say/Do?</div>
+                            <textarea class="field-textarea" placeholder=""></textarea>
+                        </div>
+                        <div class="field-group">
+                            <div class="field-label">What Would You Do Differently?</div>
+                            <textarea class="field-textarea" placeholder=""></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pattern Analysis -->
+        <div class="section">
+            <div class="section-header">
+                <div class="section-number">P</div>
+                <h2 class="section-title">Pattern Analysis</h2>
+            </div>
+            <div class="patterns-box">
+                <h4>After 2 Weeks: What Patterns Do You Notice?</h4>
+                <div style="text-align: left; margin-top: 16px;">
+                    <div class="field-group">
+                        <div class="field-label">Who are the repeat offenders (roles, not names)?</div>
+                        <textarea class="patterns-textarea" placeholder="e.g., Senior male leaders, certain team members, specific meetings..."></textarea>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">What types of bias occur most frequently?</div>
+                        <textarea class="patterns-textarea" placeholder="e.g., Microaggressions in meetings, exclusion from decisions, idea theft..."></textarea>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">What situations/contexts trigger incidents?</div>
+                        <textarea class="patterns-textarea" placeholder="e.g., Large meetings, one-on-ones, email, presentations..."></textarea>
+                    </div>
+                    <div class="field-group">
+                        <div class="field-label">Based on these patterns, what strategic actions will you take?</div>
+                        <textarea class="patterns-textarea" placeholder="e.g., Prepare scripts for specific situations, seek allies, document for escalation, avoid certain contexts..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="footer-logo">Coaching Women of Color | Executive Leadership Lab</span>
+            <span class="footer-page">Module 4 Worksheet</span>
+        </div>
+    </div>
+</body>
+</html>
