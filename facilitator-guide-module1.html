@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facilitator Guide | Module 1: Break Through Career Plateaus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 48px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media print {
+            body { padding: 24px; }
+            .slide-block { page-break-inside: avoid; }
+        }
+
+        .header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 3px solid var(--primary);
+        }
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .header p { font-size: 14px; color: var(--text-light); }
+        .header .module-info {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--bg);
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 12px;
+        }
+
+        .intro-box {
+            background: var(--bg-warm);
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+        .intro-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        .intro-box p { font-size: 14px; color: var(--text-light); margin-bottom: 8px; }
+        .intro-box ul { margin-left: 20px; font-size: 14px; color: var(--text-light); }
+        .intro-box li { margin-bottom: 4px; }
+
+        .section-header {
+            background: var(--primary);
+            color: var(--bg);
+            padding: 16px 24px;
+            margin: 48px 0 24px 0;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .section-header span {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .slide-block {
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+            background: white;
+        }
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--border);
+        }
+        .slide-number {
+            background: var(--accent);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .slide-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            flex: 1;
+            margin-left: 16px;
+        }
+        .slide-duration {
+            font-size: 12px;
+            color: var(--text-muted);
+            background: var(--border);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .slide-content {
+            padding: 24px;
+        }
+        .talking-points {
+            margin-bottom: 20px;
+        }
+        .talking-points h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        .talking-points ul {
+            list-style: none;
+        }
+        .talking-points li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: var(--text);
+        }
+        .talking-points li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--accent-warm);
+            font-weight: bold;
+        }
+
+        .participant-action {
+            background: #FFF8E7;
+            border: 2px solid var(--accent-warm);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-top: 16px;
+        }
+        .participant-action h4 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .participant-action h4::before {
+            content: "||";
+            font-weight: 900;
+        }
+        .participant-action p {
+            font-size: 14px;
+            color: var(--text);
+        }
+        .participant-action .worksheet-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .participant-action .time {
+            display: inline-block;
+            background: var(--accent-warm);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .transition-note {
+            background: var(--bg-warm);
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .key-message {
+            background: var(--primary);
+            color: var(--bg);
+            padding: 12px 16px;
+            margin-top: 16px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .key-message strong {
+            color: var(--accent-warm);
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Facilitator Talking Points</h1>
+    <p>Module 1: Break Through Career Plateaus | Executive Leadership Lab</p>
+    <span class="module-info">12-Month Program | January</span>
+</div>
+
+<div class="intro-box">
+    <h3>Before You Begin</h3>
+    <p>This guide provides talking points for recording your video walkthrough of Module 1. Total estimated time: 45-60 minutes (including worksheet pauses).</p>
+    <p><strong>Worksheets referenced in this module:</strong></p>
+    <ul>
+        <li>Plateau Diagnostic (Slide 11)</li>
+        <li>Stuck Loop Worksheet (Slide 13)</li>
+        <li>Career Growth Roadmap (Slides 14-15)</li>
+        <li>Relationship Baseline Map (Slide 16)</li>
+        <li>14-Day Momentum Planner (Slide 17)</li>
+    </ul>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 1: SLIDES 1-3 -->
+<!-- ============================================ -->
+
+<div class="section-header">
+    <span>Section 1</span>
+    Introduction & Welcome (Slides 1-3)
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">1</div>
+        <div class="slide-title">Cover Slide</div>
+        <span class="slide-duration">1-2 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Welcome to the Executive Leadership Lab. I'm so glad you're here.</li>
+                <li>This is Module 1: Break Through Career Plateaus - the foundation of our 12-month journey together.</li>
+                <li>This module is about transforming stagnation into strategic momentum.</li>
+                <li>By the end of today, you'll have clarity on what's been holding you back - and a concrete plan to move forward.</li>
+                <li>Let's get started.</li>
+            </ul>
+        </div>
+        <div class="transition-note">
+            Transition: "First, let me share why this module matters..."
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">2</div>
+        <div class="slide-title">Welcome: You're Not Stuck. You're Ready to Elevate.</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>If you've been doing the work but not getting the recognition... if you've been moving but not advancing... if you've been leading but feeling invisible - this module is your breakthrough moment.</li>
+                <li>Let's look at the reality: 67% of Women of Color report feeling stuck in their careers. We're 3 times more likely to be overlooked for advancement.</li>
+                <li>But here's what I want you to know: You're not stuck. The system wasn't designed for us - but we can learn to navigate it strategically.</li>
+                <li>Today, we change the narrative. Today, we build your roadmap.</li>
+            </ul>
+        </div>
+        <div class="key-message">
+            <strong>Key Message:</strong> Being stuck isn't a personal failure - it's often a systemic challenge that requires strategic navigation.
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">3</div>
+        <div class="slide-title">Objectives: What You'll Gain</div>
+        <span class="slide-duration">1-2 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>By the end of this module, you will accomplish three things:</li>
+                <li><strong>First, Diagnose Your Plateau.</strong> You'll identify exactly what type of plateau you're experiencing and the root causes holding you back.</li>
+                <li><strong>Second, Build Your Growth Roadmap.</strong> You'll create a strategic 90-day plan with clear milestones and accountability checkpoints.</li>
+                <li><strong>Third, Take Your First Moves.</strong> You'll leave with three concrete actions you can execute in the next 14 days to build momentum.</li>
+                <li>This isn't just theory - you'll leave with completed worksheets and a clear action plan.</li>
+            </ul>
+        </div>
+        <div class="transition-note">
+            Transition: "Let's start by understanding why the old approach isn't working..."
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 2: SLIDES 4-8 -->
+<!-- ============================================ -->
+
+<div class="section-header">
+    <span>Section 2</span>
+    The Challenge & Framework (Slides 4-8)
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">4</div>
+        <div class="slide-title">The Challenge: Working Hard ≠ Moving Up</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Here's the uncomfortable truth: You've been told to put your head down and deliver. But excellence alone doesn't create advancement.</li>
+                <li>Let me break down the three gaps that keep high performers stuck:</li>
+                <li><strong>The Visibility Gap:</strong> Your work speaks for itself - but it's speaking to the wrong people, or not at all. If decision-makers don't know your name, they can't advocate for you.</li>
+                <li><strong>The Hustle Trap:</strong> More work won't get you promoted. I've seen women take on more and more, thinking that's the path forward. It's not. Strategic positioning will get you further than working harder.</li>
+                <li><strong>The Access Problem:</strong> Without sponsors in the room, opportunity finds someone else. You need people with power who are willing to spend their political capital on your behalf.</li>
+            </ul>
+        </div>
+        <div class="key-message">
+            <strong>Key Message:</strong> Performance is the baseline. Promotion requires visibility, positioning, and sponsorship.
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">5</div>
+        <div class="slide-title">Framework: The Three Career Plateaus</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Every plateau falls into one of three categories. Understanding yours is the first step to breaking through.</li>
+                <li><strong>Skill Plateau:</strong> You've maxed out your current capabilities. Growth requires new skills, experiences, or credentials to reach the next level.</li>
+                <li><strong>Role Plateau:</strong> Your position has a ceiling. There's no room to grow - limited scope or organizational constraints are blocking advancement.</li>
+                <li><strong>Identity Plateau:</strong> This one is internal. Imposter syndrome, perfectionism, or playing small are holding you back from stepping into your power.</li>
+                <li>Most people experience a combination of these - but there's usually one primary plateau that's driving the others.</li>
+                <li>Let's explore each one so you can identify where you are.</li>
+            </ul>
+        </div>
+        <div class="transition-note">
+            Transition: "Let's start with the Skill Plateau..."
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">6</div>
+        <div class="slide-title">Deep Dive: Skill Plateau</div>
+        <span class="slide-duration">2 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>The Skill Plateau happens when your expertise brought you here, but it won't take you there.</li>
+                <li><strong>Signs you're here:</strong> You're known as "the expert" but you keep getting passed over for leadership. Your strengths feel outdated or too narrow. You lack exposure to strategic work. Your comfort zone has become a ceiling.</li>
+                <li><strong>The breakthrough:</strong> Identify 2-3 skills needed for your next role. Seek stretch assignments, not just promotions. Build cross-functional exposure. Reposition your brand around future value, not just past achievements.</li>
+                <li>Ask yourself: Am I known for what I've done, or what I can do next?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">7</div>
+        <div class="slide-title">Deep Dive: Role Plateau</div>
+        <span class="slide-duration">2 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>The Role Plateau happens when the role itself has no runway - it's not your performance.</li>
+                <li><strong>Signs you're here:</strong> Your manager has nowhere to go either. The org is flat or restructuring. Budget constraints limit new positions. You've outgrown the scope but can't expand.</li>
+                <li><strong>The breakthrough:</strong> Explore lateral moves with growth potential. Consider adjacent departments or functions. Build visibility outside your team. And sometimes, you need to know when it's time to pivot externally.</li>
+                <li>This plateau often requires the hardest realization: the opportunity you want may not exist in your current environment.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">8</div>
+        <div class="slide-title">Deep Dive: Identity Plateau</div>
+        <span class="slide-duration">2 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>The Identity Plateau is when the barrier isn't skill or opportunity - it's self-perception.</li>
+                <li><strong>Signs you're here:</strong> Imposter syndrome despite your track record. Perfectionism that delays action. Fear of visibility or failure. Shrinking to fit instead of standing out.</li>
+                <li><strong>The breakthrough:</strong> Challenge the internal narrative. Take "messy action" - done beats perfect. Build evidence of your capability. Step into visibility before you feel ready.</li>
+                <li>I want you to really sit with this one. Many of us have internalized messages about who gets to lead, who gets to be visible, who gets to take up space. Those messages are not facts - they're stories we can rewrite.</li>
+            </ul>
+        </div>
+        <div class="key-message">
+            <strong>Key Message:</strong> The identity plateau is often the hardest to see because it feels like truth, not limitation.
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 3: SLIDES 9-13 -->
+<!-- ============================================ -->
+
+<div class="section-header">
+    <span>Section 3</span>
+    Self-Assessment & Patterns (Slides 9-13)
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">9</div>
+        <div class="slide-title">Quote / Reflection</div>
+        <span class="slide-duration">1 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>I want you to pause and really take this in:</li>
+                <li><em>"The ceiling you're hitting isn't made of glass. It's made of stories you've been told - and stories you tell yourself."</em></li>
+                <li>Some of those stories came from the world around us. Some we created to protect ourselves. But they're still just stories.</li>
+                <li>And stories can be rewritten.</li>
+            </ul>
+        </div>
+        <div class="transition-note">
+            Transition: "Now let's dig into what's specifically driving YOUR plateau..."
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">10</div>
+        <div class="slide-title">Root Causes: What's Driving Your Plateau?</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Beyond the three plateau types, there are specific root causes that keep us stuck. See which of these resonate:</li>
+                <li><strong>Unclear Target:</strong> No defined "next best role" or direction makes it impossible to move strategically. If you don't know where you're going, you can't build a path.</li>
+                <li><strong>Unclear Value Proposition:</strong> You can't articulate your unique value or what you bring that others don't.</li>
+                <li><strong>Low Visibility:</strong> Working hard but decision-makers don't know your name or your impact.</li>
+                <li><strong>Weak Sponsorship:</strong> No one with power is advocating for you when opportunities arise.</li>
+                <li><strong>Over-Functioning:</strong> So busy doing everyone's work that there's no bandwidth for your own growth.</li>
+                <li><strong>Fear and Avoidance:</strong> Avoiding the conversations, risks, or visibility that advancement requires.</li>
+                <li>As I read through these, which ones hit home for you?</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">11</div>
+        <div class="slide-title">Self-Assessment: Plateau Diagnostic</div>
+        <span class="slide-duration">8-10 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Now it's time to get honest about where you are.</li>
+                <li>Pull up your <strong>Plateau Diagnostic</strong> worksheet. This is for your eyes only - so be completely honest with yourself.</li>
+                <li>In Part 1, you'll check all statements that feel true right now. Don't overthink it - go with your gut.</li>
+                <li>In Part 2, notice which category has the most checkmarks - that's your primary plateau zone.</li>
+                <li>I'm going to give you about 5-7 minutes to complete this. Pause the video now and come back when you're done.</li>
+            </ul>
+        </div>
+        <div class="participant-action">
+            <h4>Pause for Worksheet</h4>
+            <p>Direct participants to complete the <span class="worksheet-name">Plateau Diagnostic</span> worksheet.<span class="time">5-7 min</span></p>
+            <p style="margin-top: 8px; font-style: italic;">"Pause the video now and complete your Plateau Diagnostic. Be honest - this is just for you. Come back when you're done."</p>
+        </div>
+        <div class="transition-note">
+            After pause: "Welcome back. Now that you know your plateau type, let's look at the patterns that keep us stuck..."
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">12</div>
+        <div class="slide-title">Pattern Recognition: The Stuck Loop</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Most plateaus follow a predictable pattern. Breaking free starts with recognizing yours.</li>
+                <li>Here's how the Stuck Loop works: A <strong>Trigger</strong> happens, which creates a <strong>Thought</strong>, which creates an <strong>Emotion</strong>, which drives a <strong>Behavior</strong>, which produces an <strong>Outcome</strong> - and that outcome reinforces the original pattern.</li>
+                <li>Let me give you an example: You're asked to present to leadership. The thought is "I'll mess this up." That creates anxiety. So you over-prepare, speak fast, keep it safe. The outcome? It's "fine" but you remain invisible. And that reinforces the original doubt.</li>
+                <li>The loop continues until we consciously interrupt it.</li>
+                <li>In a moment, you're going to identify YOUR stuck loop.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">13</div>
+        <div class="slide-title">Reflection: Map Your Stuck Loop</div>
+        <span class="slide-duration">8-10 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Now it's your turn. Pull up your <strong>Stuck Loop</strong> worksheet.</li>
+                <li>You're going to do three things:</li>
+                <li><strong>Step 1: Identify Your Loop.</strong> What trigger, thought, emotion, behavior, and outcome keep repeating in your career?</li>
+                <li><strong>Step 2: Design Your New Choice.</strong> What new thought or behavior could interrupt this pattern? Where can you make a different decision?</li>
+                <li><strong>Step 3: Name Your Support.</strong> What reminder, tool, or accountability would help you make that different choice?</li>
+                <li>Take 5-7 minutes for this. Be specific - vague answers won't help you break the pattern.</li>
+            </ul>
+        </div>
+        <div class="participant-action">
+            <h4>Pause for Worksheet</h4>
+            <p>Direct participants to complete the <span class="worksheet-name">Stuck Loop</span> worksheet.<span class="time">5-7 min</span></p>
+            <p style="margin-top: 8px; font-style: italic;">"Pause the video and map out your stuck loop. Identify the pattern, design a new choice, and name what support you need. Come back when you're ready."</p>
+        </div>
+        <div class="transition-note">
+            After pause: "Welcome back. Now that you understand your plateau and your patterns, let's build your roadmap forward..."
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 4: SLIDES 14-15 -->
+<!-- ============================================ -->
+
+<div class="section-header">
+    <span>Section 4</span>
+    Strategic Planning (Slides 14-15)
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">14</div>
+        <div class="slide-title">Strategic Planning: Your Career Growth Roadmap</div>
+        <span class="slide-duration">3-4 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Now we're going to build your Career Growth Roadmap - a structured approach to move from where you are to where you want to be.</li>
+                <li>This roadmap has six steps, and they need to be done in order:</li>
+                <li><strong>Step 1 - North Star:</strong> Define your "next best role" and what success looks like. This is your destination.</li>
+                <li><strong>Step 2 - Current Reality:</strong> An honest assessment of where you are right now and what's blocking progress.</li>
+                <li><strong>Step 3 - Strengths & Gaps:</strong> What do you leverage? What do you need to develop for the next level?</li>
+                <li><strong>Step 4 - 90-Day Goals:</strong> Break this down into 30-day, 60-day, and 90-day milestones with clear success measures.</li>
+                <li><strong>Step 5 - First Moves:</strong> Concrete actions for the next 14 days to build momentum.</li>
+                <li><strong>Step 6 - Accountability:</strong> Who will hold you to this and how often will you check in?</li>
+                <li>This document becomes your north star for the year.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">15</div>
+        <div class="slide-title">Deep Work: Build Your Roadmap</div>
+        <span class="slide-duration">25-30 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>This is the deep work. Pull up your <strong>Career Growth Roadmap</strong> worksheet.</li>
+                <li>As you work through it, keep these questions in mind:</li>
+                <li>What is my next best role? What must be true in 6-12 months? What are my top 3 strengths? What 2 gaps must I close? What 3 actions can I start this week?</li>
+                <li>A few reminders as you work:</li>
+                <li>Be specific - "get promoted" isn't a goal. Make it measurable - how will you know you've succeeded?</li>
+                <li>Focus on what you can influence. Name real barriers - they're data, not excuses.</li>
+                <li>This is the most important worksheet in the module. Take your time - I recommend 25-30 minutes.</li>
+            </ul>
+        </div>
+        <div class="participant-action">
+            <h4>Pause for Worksheet</h4>
+            <p>Direct participants to complete the <span class="worksheet-name">Career Growth Roadmap</span> worksheet.<span class="time">25-30 min</span></p>
+            <p style="margin-top: 8px; font-style: italic;">"This is the heart of the module. Pause the video and work through your entire Career Growth Roadmap. Take your time - be specific and honest. This document will guide your year. Come back when you've completed all sections."</p>
+        </div>
+        <div class="transition-note">
+            After pause: "Welcome back. You now have a strategic roadmap. Let's talk about the relationships that will help you execute it..."
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 5: SLIDES 16-18 -->
+<!-- ============================================ -->
+
+<div class="section-header">
+    <span>Section 5</span>
+    Relationships & Momentum (Slides 16-18)
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">16</div>
+        <div class="slide-title">Relationship Capital: Map Your Network</div>
+        <span class="slide-duration">8-10 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Before building your network, you need to take stock. Who currently influences your growth?</li>
+                <li>Your <strong>Relationship Baseline Map</strong> helps you identify six categories of relationships:</li>
+                <li><strong>Manager/Direct Leader:</strong> Who directly influences your development and reviews?</li>
+                <li><strong>Key Stakeholders:</strong> 2-3 people whose opinion shapes your reputation.</li>
+                <li><strong>Potential Sponsors:</strong> Who has power and might advocate for you behind closed doors?</li>
+                <li><strong>Mentors:</strong> Who provides guidance, wisdom, or career advice?</li>
+                <li><strong>Peer Allies:</strong> Trusted peers you collaborate with and lean on.</li>
+                <li><strong>External Community:</strong> Networks and groups outside your organization.</li>
+                <li>Take a few minutes to map your current network. This baseline will reveal gaps and opportunities.</li>
+            </ul>
+        </div>
+        <div class="participant-action">
+            <h4>Pause for Worksheet</h4>
+            <p>Direct participants to complete the <span class="worksheet-name">Relationship Baseline Map</span> worksheet.<span class="time">5-7 min</span></p>
+            <p style="margin-top: 8px; font-style: italic;">"Pause the video and complete your Relationship Baseline Map. Just capture who's currently in your network - we'll work on building it later in the program. Come back when you're done."</p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">17</div>
+        <div class="slide-title">Momentum: The 14-Day Sprint</div>
+        <span class="slide-duration">5-7 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Momentum starts with small, visible moves. Your first actions should be achievable wins that create forward motion.</li>
+                <li>Here's how to use your next 14 days:</li>
+                <li><strong>First, Schedule Your First Moves.</strong> Block time for the 3 actions from your roadmap. Make them non-negotiable appointments with yourself.</li>
+                <li><strong>Second, Track Evidence of Impact.</strong> Document wins, feedback, and visibility moments. You'll need this evidence later - start collecting it now.</li>
+                <li><strong>Third, Schedule One Strategic Conversation.</strong> A manager check-in, sponsor touchpoint, or stakeholder meeting. Just one.</li>
+                <li>Pull up your <strong>14-Day Momentum Planner</strong>. Transfer your first moves from your Career Growth Roadmap and schedule them.</li>
+            </ul>
+        </div>
+        <div class="participant-action">
+            <h4>Pause for Worksheet</h4>
+            <p>Direct participants to complete the <span class="worksheet-name">14-Day Momentum Planner</span> worksheet.<span class="time">5-7 min</span></p>
+            <p style="margin-top: 8px; font-style: italic;">"Pause the video and fill out your 14-Day Momentum Planner. Transfer your first moves from your Career Growth Roadmap and assign specific dates. Momentum requires commitment. Come back when you're done."</p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">18</div>
+        <div class="slide-title">Quote / Reflection</div>
+        <span class="slide-duration">1 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Before we wrap up, I want to leave you with this:</li>
+                <li><em>"You don't have to be ready. You have to be willing to start before you feel prepared."</em></li>
+                <li>Perfection is not the goal. Action is.</li>
+                <li>You don't need to have it all figured out. You just need to take the first step.</li>
+            </ul>
+        </div>
+        <div class="transition-note">
+            Transition: "Let's recap what we've covered..."
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- SECTION 6: SLIDES 19-21 -->
+<!-- ============================================ -->
+
+<div class="section-header">
+    <span>Section 6</span>
+    Summary & Next Steps (Slides 19-21)
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">19</div>
+        <div class="slide-title">Key Takeaways</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Let's recap the four key takeaways from today:</li>
+                <li><strong>1. Plateaus Are Diagnosable.</strong> Skill, Role, or Identity - knowing your type unlocks the right strategy. You can't fix what you can't name.</li>
+                <li><strong>2. Hard Work Alone Won't Get You There.</strong> Strategic positioning, visibility, and sponsorship matter as much as performance. Excellence is the baseline, not the differentiator.</li>
+                <li><strong>3. Patterns Repeat Until Interrupted.</strong> Your stuck loop will continue until you make a different choice. Awareness is the first step to change.</li>
+                <li><strong>4. Momentum Beats Planning.</strong> 14 days of action creates more clarity than 90 days of thinking. Start before you're ready.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">20</div>
+        <div class="slide-title">Before Next Session: Your Homework</div>
+        <span class="slide-duration">2-3 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>Before our next session, you have four homework assignments:</li>
+                <li><strong>1. Complete Your Career Growth Roadmap.</strong> If you didn't finish all sections during this session, complete them this week. This is your north star.</li>
+                <li><strong>2. Execute Your First 3 Actions.</strong> Complete the first moves from your 14-day momentum planner. No excuses - these are non-negotiable.</li>
+                <li><strong>3. Schedule One Conversation.</strong> Book a meeting with your manager, sponsor, or key stakeholder. Just one strategic conversation.</li>
+                <li><strong>4. Document One Win.</strong> Capture at least one accomplishment or impact moment this period. Start building your evidence bank now.</li>
+                <li>These aren't optional. The work you do between sessions is where the real transformation happens.</li>
+            </ul>
+        </div>
+        <div class="key-message">
+            <strong>Reminder:</strong> The magic isn't in the module - it's in the action you take afterward.
+        </div>
+    </div>
+</div>
+
+<div class="slide-block">
+    <div class="slide-header">
+        <div class="slide-number">21</div>
+        <div class="slide-title">Conclusion: Your Breakthrough Starts Now</div>
+        <span class="slide-duration">1-2 min</span>
+    </div>
+    <div class="slide-content">
+        <div class="talking-points">
+            <h4>Talking Points</h4>
+            <ul>
+                <li>You now have everything you need:</li>
+                <li>You have the diagnosis - you know what type of plateau you're facing and what's driving it.</li>
+                <li>You have the roadmap - a strategic plan with clear milestones and first moves.</li>
+                <li>You have the momentum planner - specific actions scheduled for the next 14 days.</li>
+                <li>The only thing left is action.</li>
+                <li>Your breakthrough doesn't happen someday. It starts now. It starts with the first move you make when this video ends.</li>
+                <li>I'll see you in February for Module 2: Strategic Positioning for Promotion. Until then - take action.</li>
+                <li>You've got this.</li>
+            </ul>
+        </div>
+        <div class="key-message">
+            <strong>Closing:</strong> "Your breakthrough starts now. I'll see you next month. Take action."
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    Facilitator Guide | Module 1: Break Through Career Plateaus | Executive Leadership Lab<br>
+    Coaching Women of Color | 12-Month Program
+</div>
+
+</body>
+</html>
