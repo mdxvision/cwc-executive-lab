@@ -260,6 +260,15 @@
 
         .activity-meta { display: inline-block; margin-top: 40px; padding: 12px 24px; border: 1px solid var(--border); border-radius: 4px; font-size: 13px; color: var(--text-muted); }
 
+        /* Roadmap Steps */
+        .roadmap-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; text-align: left; }
+        .roadmap-step { display: flex; align-items: flex-start; gap: 16px; padding: 24px; border: 1px solid var(--border); border-radius: 4px; position: relative; }
+        .roadmap-step::after { content: '→'; position: absolute; right: -18px; top: 50%; transform: translateY(-50%); color: var(--accent-warm); font-size: 20px; font-weight: bold; }
+        .roadmap-step:nth-child(3)::after, .roadmap-step:nth-child(6)::after { display: none; }
+        .step-number { width: 36px; height: 36px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: white; flex-shrink: 0; }
+        .step-content h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 6px; }
+        .step-content p { font-size: 14px; color: var(--text-light); margin: 0; line-height: 1.5; }
+
         .keyboard-hint { position: fixed; bottom: 112px; left: 50%; transform: translateX(-50%); font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
         .keyboard-hint kbd { display: inline-block; padding: 2px 6px; border: 1px solid var(--border); border-radius: 3px; font-family: inherit; font-size: 11px; margin: 0 2px; }
 
@@ -308,6 +317,16 @@
             /* Grid adjustments */
             .cards-grid { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; }
             .cards-grid.two-col { grid-template-columns: 1fr; }
+
+            /* Roadmap responsive */
+            .roadmap-steps { grid-template-columns: 1fr; gap: 16px; margin-top: 32px; }
+            .roadmap-step { padding: 20px; }
+            .roadmap-step::after { display: none; }
+            .roadmap-step::before { content: '↓'; position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); color: var(--accent-warm); font-size: 16px; font-weight: bold; z-index: 10; }
+            .roadmap-step:last-child::before { display: none; }
+            .step-number { width: 32px; height: 32px; font-size: 14px; }
+            .step-content h4 { font-size: 15px; }
+            .step-content p { font-size: 13px; }
             .card { padding: 24px; }
             .card h4 { font-size: 16px; }
             .card p { font-size: 14px; }
@@ -650,14 +669,14 @@
             <div class="slide-content">
                 <span class="section-label">Strategic Planning</span>
                 <h2>Your Career Growth Roadmap</h2>
-                <p>A structured approach to move from where you are to where you want to be. This becomes your personal north star.</p>
-                <div class="cards-grid two-col">
-                    <div class="card"><h4>North Star</h4><p>Define your "next best role" and what success looks like</p></div>
-                    <div class="card"><h4>Current Reality</h4><p>Honest assessment of where you are and what's blocking progress</p></div>
-                    <div class="card"><h4>Strengths & Gaps</h4><p>What to leverage and what to develop for the next level</p></div>
-                    <div class="card"><h4>90-Day Goals</h4><p>2-3 focused objectives with clear success measures</p></div>
-                    <div class="card"><h4>First Moves</h4><p>Concrete actions for the next 14 days to build momentum</p></div>
-                    <div class="card"><h4>Accountability</h4><p>Who will hold you to this and how often will you check in</p></div>
+                <p>A structured approach to move from where you are to where you want to be. Follow these six steps in order.</p>
+                <div class="roadmap-steps">
+                    <div class="roadmap-step"><div class="step-number">1</div><div class="step-content"><h4>North Star</h4><p>Define your "next best role" and what success looks like</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">2</div><div class="step-content"><h4>Current Reality</h4><p>Honest assessment of where you are and what's blocking progress</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">3</div><div class="step-content"><h4>Strengths & Gaps</h4><p>What to leverage and what to develop for the next level</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">4</div><div class="step-content"><h4>90-Day Goals</h4><p>2-3 focused objectives with clear success measures</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">5</div><div class="step-content"><h4>First Moves</h4><p>Concrete actions for the next 14 days to build momentum</p></div></div>
+                    <div class="roadmap-step"><div class="step-number">6</div><div class="step-content"><h4>Accountability</h4><p>Who will hold you to this and how often will you check in</p></div></div>
                 </div>
             </div>
         </div>
