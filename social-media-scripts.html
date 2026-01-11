@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Video Scripts | Executive Leadership Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1A1A1A;
+            --accent: #2A7B8C;
+            --accent-warm: #D4A574;
+            --text: #333333;
+            --text-light: #666666;
+            --bg: #FAF8F5;
+            --bg-warm: #F5F2ED;
+            --border: #E5E0D8;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            padding: 48px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media print { body { padding: 24px; } }
+
+        .header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 3px solid var(--primary);
+        }
+        .header h1 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        .header p { font-size: 14px; color: var(--text-light); }
+
+        .intro-box {
+            background: var(--bg-warm);
+            padding: 24px;
+            margin-bottom: 40px;
+            border-left: 4px solid var(--accent);
+        }
+        .intro-box h3 {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+        .intro-box p { font-size: 14px; color: var(--text-light); margin-bottom: 8px; }
+
+        .script-category {
+            margin-bottom: 48px;
+        }
+        .category-header {
+            background: var(--primary);
+            color: var(--bg);
+            padding: 16px 24px;
+            margin-bottom: 24px;
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .category-header span {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .script-block {
+            border: 1px solid var(--border);
+            margin-bottom: 24px;
+            background: white;
+        }
+        .script-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            background: var(--bg-warm);
+            border-bottom: 1px solid var(--border);
+        }
+        .script-title {
+            font-family: 'Source Serif 4', Georgia, serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .script-meta {
+            display: flex;
+            gap: 12px;
+        }
+        .script-duration {
+            font-size: 12px;
+            color: white;
+            background: var(--accent);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+        .script-platform {
+            font-size: 12px;
+            color: white;
+            background: var(--accent-warm);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .script-content {
+            padding: 24px;
+        }
+        .hook {
+            background: #FFF8E7;
+            border-left: 4px solid var(--accent-warm);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .hook-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .script-body {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+        .script-body p {
+            margin-bottom: 16px;
+        }
+        .pause {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 13px;
+        }
+        .emphasis {
+            background: linear-gradient(180deg, transparent 60%, rgba(212, 165, 116, 0.3) 60%);
+        }
+
+        .cta {
+            background: var(--primary);
+            color: var(--bg);
+            padding: 16px 20px;
+            font-size: 14px;
+        }
+        .cta-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent-warm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .tips-box {
+            background: var(--bg-warm);
+            border: 1px solid var(--border);
+            padding: 20px 24px;
+            margin-top: 12px;
+        }
+        .tips-box h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .tips-box ul {
+            margin-left: 20px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        .tips-box li {
+            margin-bottom: 6px;
+        }
+
+        .hashtags {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        .footer {
+            margin-top: 48px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Social Media Video Scripts</h1>
+    <p>Executive Leadership Lab | Promotional Content for Coaching Women of Color</p>
+</div>
+
+<div class="intro-box">
+    <h3>How to Use These Scripts</h3>
+    <p>Each script is designed for a specific platform and length. Feel free to personalize with your own stories and adapt the language to match your voice.</p>
+    <p><strong>Recording tips:</strong> Look directly at the camera, speak conversationally, and don't be afraid to show emotion. Authenticity converts better than polish.</p>
+</div>
+
+<!-- ============================================ -->
+<!-- SHORT-FORM HOOKS (15-30 seconds) -->
+<!-- ============================================ -->
+
+<div class="script-category">
+    <div class="category-header">
+        <span>Short-Form</span>
+        Quick Hooks (15-30 seconds)
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Hard Truth Hook</div>
+            <div class="script-meta">
+                <span class="script-duration">15-20 sec</span>
+                <span class="script-platform">Reels / TikTok</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Working hard won't get you promoted."
+            </div>
+            <div class="script-body">
+                <p>I know that's not what you want to hear. But 67% of Women of Color report feeling stuck in their careers - despite outperforming their peers.</p>
+                <p>The problem isn't your work ethic. It's your strategy.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "The Executive Leadership Lab teaches you the strategy. Link in bio."
+            </div>
+            <div class="hashtags">
+                #WomenOfColorInLeadership #CareerStrategy #ExecutivePresence #LeadershipDevelopment #WOCLeaders
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Question Hook</div>
+            <div class="script-meta">
+                <span class="script-duration">20-25 sec</span>
+                <span class="script-platform">Reels / TikTok</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Have you ever been the most qualified person in the room... and still got passed over?"
+            </div>
+            <div class="script-body">
+                <p><span class="pause">[Pause, let it land]</span></p>
+                <p>Yeah. Me too.</p>
+                <p>That's exactly why I created the Executive Leadership Lab - a 12-month program specifically for Women of Color who are done being overlooked.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "If you're ready to stop waiting and start positioning, the link is in my bio."
+            </div>
+            <div class="hashtags">
+                #CareerAdvancement #WomenOfColor #LeadershipCoaching #BreakTheCeiling #ExecutiveLeadership
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Stat Hook</div>
+            <div class="script-meta">
+                <span class="script-duration">15-20 sec</span>
+                <span class="script-platform">Reels / TikTok / LinkedIn</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Women of Color are 3 times more likely to be overlooked for promotion than their white counterparts."
+            </div>
+            <div class="script-body">
+                <p><span class="pause">[Let it sit for a beat]</span></p>
+                <p>Not because of performance. Because of visibility, positioning, and access.</p>
+                <p>The Executive Leadership Lab changes that.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "12 months. Real strategy. Link in bio."
+            </div>
+            <div class="hashtags">
+                #DiversityInLeadership #WOCAtWork #CareerGrowth #LeadershipMatters #EquityInLeadership
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Pattern Interrupt</div>
+            <div class="script-meta">
+                <span class="script-duration">20-25 sec</span>
+                <span class="script-platform">Reels / TikTok</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Stop taking on more work hoping someone will notice."
+            </div>
+            <div class="script-body">
+                <p>They won't.</p>
+                <p>What they WILL notice is when you start showing up strategically. When you position yourself for the opportunities you want. When you stop shrinking and start taking up space.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "That's what we teach in the Executive Leadership Lab. Link in bio to learn more."
+            </div>
+            <div class="hashtags">
+                #CareerStrategy #StopShrinking #WomenLeaders #ExecutivePresence #OwnYourCareer
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- MEDIUM-FORM (45-60 seconds) -->
+<!-- ============================================ -->
+
+<div class="script-category">
+    <div class="category-header">
+        <span>Medium-Form</span>
+        Value Content (45-60 seconds)
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Three Plateaus</div>
+            <div class="script-meta">
+                <span class="script-duration">45-60 sec</span>
+                <span class="script-platform">Reels / TikTok / LinkedIn</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "If you're feeling stuck in your career, it's one of three things."
+            </div>
+            <div class="script-body">
+                <p><strong>Number one: Skill Plateau.</strong> Your expertise got you here, but it won't get you there. You need new capabilities for the next level.</p>
+                <p><strong>Number two: Role Plateau.</strong> The job itself has a ceiling. It's not you - it's the position.</p>
+                <p><strong>Number three: Identity Plateau.</strong> Imposter syndrome, perfectionism, playing small. The barrier is internal.</p>
+                <p>Most Women of Color I work with are dealing with all three - but there's usually one that's driving the others.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "In the Executive Leadership Lab, we diagnose YOUR plateau and build a strategic plan to break through. Link in bio."
+            </div>
+            <div class="hashtags">
+                #CareerPlateau #LeadershipDevelopment #WomenOfColorLeaders #CareerCoaching #BreakThrough
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Visibility Problem</div>
+            <div class="script-meta">
+                <span class="script-duration">45-60 sec</span>
+                <span class="script-platform">Reels / LinkedIn</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Your work speaks for itself." <span class="pause">[Pause]</span> "...No, it doesn't."
+            </div>
+            <div class="script-body">
+                <p>I used to believe that too. Put your head down, deliver excellence, and the right people will notice.</p>
+                <p>Here's the truth: If decision-makers don't know your name, they can't advocate for you. If they don't see your impact, you don't exist when opportunities come up.</p>
+                <p>Visibility isn't bragging. It's survival.</p>
+                <p>And for Women of Color, who are already fighting against bias, strategic visibility isn't optional - it's essential.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "The Executive Leadership Lab teaches you how to be visible without feeling like you're selling yourself. Link in bio."
+            </div>
+            <div class="hashtags">
+                #VisibilityMatters #WomenInLeadership #CareerVisibility #SelfAdvocacy #ExecutivePresence
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">What They Don't Teach You</div>
+            <div class="script-meta">
+                <span class="script-duration">45-60 sec</span>
+                <span class="script-platform">Reels / TikTok / LinkedIn</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Here's what no one tells you about getting promoted..."
+            </div>
+            <div class="script-body">
+                <p>It's not about being the best at your job. It's about three things:</p>
+                <p><strong>One:</strong> Being visible to the right people.</p>
+                <p><strong>Two:</strong> Having sponsors who will advocate for you when you're not in the room.</p>
+                <p><strong>Three:</strong> Positioning yourself for opportunities before they're announced.</p>
+                <p>Performance is the baseline. Strategy is what gets you promoted.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "That's exactly what we cover in the Executive Leadership Lab - 12 months of strategic positioning for Women of Color. Link in bio."
+            </div>
+            <div class="hashtags">
+                #PromotionStrategy #CareerSecrets #LeadershipTips #WOCLeadership #GetPromoted
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- LONGER-FORM (90-120 seconds) -->
+<!-- ============================================ -->
+
+<div class="script-category">
+    <div class="category-header">
+        <span>Longer-Form</span>
+        Story-Based Content (90-120 seconds)
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Personal Story</div>
+            <div class="script-meta">
+                <span class="script-duration">90-120 sec</span>
+                <span class="script-platform">LinkedIn / YouTube Shorts / Reels</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "I was the most qualified person on my team. And I kept getting passed over."
+            </div>
+            <div class="script-body">
+                <p><span class="pause">[Adapt with your personal story, or use this template]</span></p>
+                <p>I had the degrees. The experience. The results. But every time a leadership opportunity came up, it went to someone else.</p>
+                <p>For years, I thought the answer was to work harder. Take on more. Prove myself again and again.</p>
+                <p>But here's what I finally realized: The problem wasn't my performance. It was my strategy.</p>
+                <p>I wasn't visible to the people who made decisions. I didn't have sponsors advocating for me behind closed doors. And honestly? I was shrinking to fit instead of taking up space.</p>
+                <p>When I started approaching my career strategically - building relationships, increasing visibility, positioning myself for opportunities - everything changed.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "That's why I created the Executive Leadership Lab. Because every Woman of Color deserves access to the strategy that actually works. 12 months of coaching, community, and curriculum designed specifically for us. Link in bio to learn more."
+            </div>
+            <div class="hashtags">
+                #MyStory #WomenOfColorLeaders #LeadershipJourney #CareerTransformation #ExecutiveLeadershipLab
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Program Overview</div>
+            <div class="script-meta">
+                <span class="script-duration">90-120 sec</span>
+                <span class="script-platform">LinkedIn / Instagram / YouTube</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Let me tell you what 12 months in the Executive Leadership Lab looks like."
+            </div>
+            <div class="script-body">
+                <p>This isn't another course that sits in your inbox. This is a complete leadership transformation.</p>
+                <p><strong>Month 1:</strong> We diagnose your career plateau and build your strategic roadmap.</p>
+                <p><strong>Month 2:</strong> We work on strategic positioning for promotion - how to be seen as leadership material.</p>
+                <p>Then we go deep on executive presence, navigating bias, amplifying your voice, building your board of advisors, leading teams, having difficult conversations, and mapping out your future.</p>
+                <p>Every month includes live training, worksheets you'll actually use, and a community of ambitious Women of Color who get it.</p>
+                <p>By the end of 12 months, you won't just feel more confident - you'll have a completely different relationship with your career.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "If you're ready to stop waiting for permission and start positioning yourself for the career you deserve, the Executive Leadership Lab is for you. Link in bio."
+            </div>
+            <div class="hashtags">
+                #LeadershipProgram #ExecutiveLeadershipLab #WomenOfColor #CareerInvestment #LeadershipTransformation
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The "This Is For You If..." Script</div>
+            <div class="script-meta">
+                <span class="script-duration">60-90 sec</span>
+                <span class="script-platform">All Platforms</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "The Executive Leadership Lab is for you if..."
+            </div>
+            <div class="script-body">
+                <p>You're tired of being the best-kept secret at your company.</p>
+                <p>You've been told to "wait your turn" one too many times.</p>
+                <p>You know you're capable of more, but you're not sure how to get there.</p>
+                <p>You want to lead, but not at the cost of your identity or your peace.</p>
+                <p>You're done shrinking to make other people comfortable.</p>
+                <p><span class="pause">[Pause]</span></p>
+                <p>This program was built for Women of Color who are ready to stop playing small and start playing strategic.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "12 months. Real strategy. A community that gets it. Link in bio."
+            </div>
+            <div class="hashtags">
+                #ThisIsForYou #WOCLeaders #LeadershipReady #StopPlayingSmall #ExecutiveLeadershipLab
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- LINKEDIN SPECIFIC -->
+<!-- ============================================ -->
+
+<div class="script-category">
+    <div class="category-header">
+        <span>LinkedIn Specific</span>
+        Professional Positioning (60-90 seconds)
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Industry Problem</div>
+            <div class="script-meta">
+                <span class="script-duration">60-90 sec</span>
+                <span class="script-platform">LinkedIn Video</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Companies say they want diverse leadership. But here's what they're not doing..."
+            </div>
+            <div class="script-body">
+                <p>They're not providing the strategic development that Women of Color actually need.</p>
+                <p>Generic leadership programs don't address the unique challenges we face - navigating bias, building visibility in spaces that weren't designed for us, finding sponsors who will actually advocate.</p>
+                <p>That's the gap the Executive Leadership Lab fills.</p>
+                <p>It's a 12-month program designed specifically for Women of Color in leadership - with strategy that acknowledges our reality, not theory that ignores it.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "If you're a Woman of Color ready to accelerate your leadership journey, I'd love to tell you more. Link in the comments or DM me."
+            </div>
+            <div class="hashtags">
+                #DiverseLeadership #WomenOfColorInBusiness #LeadershipDevelopment #InclusiveLeadership #ExecutiveCoaching
+            </div>
+        </div>
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">The Sponsorship Gap</div>
+            <div class="script-meta">
+                <span class="script-duration">60-75 sec</span>
+                <span class="script-platform">LinkedIn Video</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="hook">
+                <div class="hook-label">Opening Hook</div>
+                "Here's why mentorship isn't enough."
+            </div>
+            <div class="script-body">
+                <p>Mentors give you advice. Sponsors give you access.</p>
+                <p>A mentor says "here's how to prepare for leadership." A sponsor says "I'm putting your name forward for this role."</p>
+                <p>Research shows that Women of Color are over-mentored and under-sponsored. We get plenty of advice - but not enough people with power advocating for us when we're not in the room.</p>
+                <p>In the Executive Leadership Lab, we teach you how to identify, cultivate, and activate sponsors who will actually move your career forward.</p>
+            </div>
+            <div class="cta">
+                <div class="cta-label">Call to Action</div>
+                "Because you don't just need guidance. You need advocacy. Link in comments to learn more."
+            </div>
+            <div class="hashtags">
+                #Sponsorship #MentorshipVsSponsorship #CareerAdvocacy #WomenOfColorLeaders #LeadershipStrategy
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ============================================ -->
+<!-- TESTIMONIAL REQUEST FRAMEWORK -->
+<!-- ============================================ -->
+
+<div class="script-category">
+    <div class="category-header">
+        <span>Bonus</span>
+        Testimonial Prompts for Participants
+    </div>
+
+    <div class="script-block">
+        <div class="script-header">
+            <div class="script-title">Questions to Ask Participants</div>
+            <div class="script-meta">
+                <span class="script-platform">For collecting testimonials</span>
+            </div>
+        </div>
+        <div class="script-content">
+            <div class="script-body">
+                <p><strong>Before/After Questions:</strong></p>
+                <p>1. "Where were you in your career before the Executive Leadership Lab?"</p>
+                <p>2. "What's different now?"</p>
+                <p>3. "What's one specific thing you learned that changed how you show up at work?"</p>
+                <p style="margin-top: 20px;"><strong>Impact Questions:</strong></p>
+                <p>4. "Have you had any wins since starting the program? A promotion, a raise, a new opportunity?"</p>
+                <p>5. "How has your confidence changed?"</p>
+                <p>6. "What would you tell someone who's on the fence about joining?"</p>
+                <p style="margin-top: 20px;"><strong>Quick Sound Bites:</strong></p>
+                <p>7. "In one sentence, what is the Executive Leadership Lab?"</p>
+                <p>8. "Finish this sentence: Before ELL, I felt ___. Now I feel ___."</p>
+            </div>
+            <div class="tips-box">
+                <h4>Tips for Great Testimonials</h4>
+                <ul>
+                    <li>Record on Zoom or have them send selfie videos</li>
+                    <li>Authentic > polished - raw emotion converts</li>
+                    <li>Specifics beat generalities ("I got promoted" > "I feel more confident")</li>
+                    <li>Keep clips to 15-30 seconds for social media use</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================ -->
+<!-- TIPS BOX -->
+<!-- ============================================ -->
+
+<div class="intro-box" style="margin-top: 48px;">
+    <h3>General Recording Tips</h3>
+    <p><strong>Delivery:</strong></p>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li>Look directly into the camera lens (not the screen)</li>
+        <li>Speak slightly slower than feels natural</li>
+        <li>Pause after important points - let them land</li>
+        <li>Show emotion - passion converts</li>
+        <li>It's okay to stumble - authenticity > perfection</li>
+    </ul>
+    <p><strong>Technical:</strong></p>
+    <ul style="margin-left: 20px; margin-bottom: 12px;">
+        <li>Natural lighting facing you (window light is great)</li>
+        <li>Phone at eye level (stack books if needed)</li>
+        <li>Quiet space with minimal background noise</li>
+        <li>Vertical format for Reels/TikTok, horizontal for LinkedIn/YouTube</li>
+    </ul>
+    <p><strong>Posting Strategy:</strong></p>
+    <ul style="margin-left: 20px;">
+        <li>Post different versions across platforms</li>
+        <li>Repurpose longer content into shorter clips</li>
+        <li>Add captions - most people watch without sound</li>
+        <li>Include a clear CTA in every post</li>
+    </ul>
+</div>
+
+<div class="footer">
+    Social Media Video Scripts | Executive Leadership Lab | Coaching Women of Color<br>
+    12-Month Leadership Development Program
+</div>
+
+</body>
+</html>
